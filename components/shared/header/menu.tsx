@@ -17,8 +17,12 @@ const Menu = () => {
       </nav>
       <nav className="md:hidden">
         <Sheet>
-          <SheetTrigger className="align-middle">
-            <EllipsisVertical />
+          <SheetTrigger
+            className="align-middle"
+            aria-label="Open Menu"
+            style={{ cursor: "pointer" }}
+          >
+            <EllipsisVertical className="hover:text-kenzeramaPink" />
           </SheetTrigger>
           <SheetContent className="flex flex-col items-start p-12">
             <SheetTitle className="text-kenzeramaPink font-cinzel font-normal">
