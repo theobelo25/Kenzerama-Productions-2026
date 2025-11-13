@@ -4,7 +4,7 @@ import Link from "next/link";
 const PageLinks = () => {
   return (
     <>
-      <Button asChild variant={"ghost"} className="hover:text-kenzeramaPink">
+      <Button asChild variant={"ghost"} className="hover:text-kenzerama-pink">
         <Link
           href="/our-team"
           className="font-questrial uppercase tracking-widest text-xs"
@@ -12,7 +12,7 @@ const PageLinks = () => {
           Our Team
         </Link>
       </Button>
-      <Button asChild variant={"ghost"} className="hover:text-kenzeramaPink">
+      <Button asChild variant={"ghost"} className="hover:text-kenzerama-pink">
         <Link
           href="/wedding-films"
           className="font-questrial uppercase tracking-widest text-xs "
@@ -20,7 +20,7 @@ const PageLinks = () => {
           Wedding Films
         </Link>
       </Button>
-      <Button asChild variant={"ghost"} className="hover:text-kenzeramaPink">
+      <Button asChild variant={"ghost"} className="hover:text-kenzerama-pink">
         <Link
           href="/investment"
           className="font-questrial uppercase tracking-widest text-xs"
@@ -28,15 +28,15 @@ const PageLinks = () => {
           Investment
         </Link>
       </Button>
-      <Button asChild variant={"ghost"} className="hover:text-kenzeramaPink">
+      <Button asChild variant={"ghost"} className="hover:text-kenzerama-pink">
         <Link
           href="/blog"
-          className="font-questrial uppercase tracking-widest text-xs hover:text-kenzeramaPink"
+          className="font-questrial uppercase tracking-widest text-x"
         >
           Blog
         </Link>
       </Button>
-      <Button asChild variant={"ghost"} className="hover:text-kenzeramaPink">
+      <Button asChild variant={"ghost"} className="hover:text-kenzerama-pink">
         <Link
           href="/contact-us"
           className="font-questrial uppercase tracking-widest text-xs"

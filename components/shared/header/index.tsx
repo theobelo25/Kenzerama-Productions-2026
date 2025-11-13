@@ -5,11 +5,11 @@ import Menu from "./menu";
 
 const Header = () => {
   return (
-    <header className="w-full fixed z-100 bg-white py-2 px-10 ">
+    <header className="w-screen fixed z-100 bg-white py-2 px-10 ">
       <div className="flex-between">
         <div className="flex-start">
           <Link href="/" className="flex-start">
-            <span className="hidden lg:block text-2xl text-kenzeramaPink font-cinzel">
+            <span className="hidden lg:block text-2xl text-kenzerama-pink font-cinzel">
               {APP_NAME}
             </span>
           </Link>

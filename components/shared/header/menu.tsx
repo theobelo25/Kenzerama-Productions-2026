@@ -22,10 +22,10 @@ const Menu = () => {
             aria-label="Open Menu"
             style={{ cursor: "pointer" }}
           >
-            <EllipsisVertical className="hover:text-kenzeramaPink" />
+            <EllipsisVertical className="hover:text-kenzerama-pink" />
           </SheetTrigger>
           <SheetContent className="flex flex-col items-start p-12">
-            <SheetTitle className="text-kenzeramaPink font-cinzel font-normal">
+            <SheetTitle className="text-kenzerama-pink font-cinzel font-normal">
               Kenzerama Productions
             </SheetTitle>
             <SheetDescription></SheetDescription>

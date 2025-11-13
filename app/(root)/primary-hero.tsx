@@ -1,6 +1,6 @@
 import VideoComponent from "@/components/video-component";
-import homepageHeroTeaser from "@/videos/homepage_hero_teaser.mp4";
-import SiteTitle from "./motion/site-title";
+import homepageHeroTeaser from "@/videos/homepage_hero_video.mp4";
+import SiteTitle from "../../components/motion/site-title";
 import { APP_DESCRIPTION_SHORT, APP_NAME } from "@/lib/constants";
 
 const PrimaryHero = () => {

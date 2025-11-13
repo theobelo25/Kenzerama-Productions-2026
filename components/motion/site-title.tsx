@@ -8,7 +8,7 @@ const SiteTitle = ({ title, eyebrow }: { title: string; eyebrow: string }) => {
   const [showEyebrow, setShowEyebrow] = useState(false);
 
   return (
-    <h1 className="relative z-2 m-5 md:m-15 lg:m-25 text-kenzeramaPink md:text-2xl lg:text-4xl font-cinzel uppercase">
+    <h1 className="relative z-2 m-5 md:m-15 lg:m-25 text-kenzerama-pink md:text-2xl lg:text-4xl font-cinzel uppercase">
       <span className="sr-only">
         {title} - {eyebrow}
       </span>
