@@ -7,20 +7,20 @@ import Link from "next/link";
 const WhoWeAre = () => {
   return (
     <section className="bg-background-grey py-10">
-      <div className="wrapper grid grid-cols-5">
+      <div className="wrapper grid grid-cols-1 md:grid-cols-5">
         <VideoComponent
           video={whoWeAreVideo}
-          classNames="aspect-video-portrait col-span-1 rounded-sm overflow-hidden"
+          classNames="aspect-video-portrait col-span-1 md:col-span-2 lg:col-span-1 rounded-sm overflow-hidden mb-10 md:mb-0"
         />
-        <div className="flex flex-col items-end col-span-4 pl-30">
-          <h2 className="text-right text-white text-2xl font-playfair-display mb-15">
+        <div className="flex flex-col items-end md:col-span-3 lg:col-span-4  md:pl-10 lg:pl-30 space-y-10 md:space-y-15">
+          <h2 className="text-right text-white text-2xl font-playfair-display">
             Who is{" "}
             <span className="text-kenzerama-pink font-cinzel text-4xl">
               {APP_NAME}{" "}
             </span>
             ?
           </h2>
-          <p className="text-white font-questrial mb-20">
+          <p className="text-white font-questrial">
             Your wedding day is a beautiful chapter in your love story — and at
             Kenzerama Productions, we’re here to capture every heartfelt moment
             with artistry and care. From the quiet, stolen glances to the joyous

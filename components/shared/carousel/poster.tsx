@@ -17,7 +17,9 @@ const Poster = ({
           {venue}
         </span>
         <div className="flex flex-col items-center font-cinzel">
-          <span className="text-2xl text-center font-cinzel">{name}</span>
+          <span className="text-2xl text-center font-cinzel text-kenzerama-pink">
+            {name}
+          </span>
           <span>{date.getFullYear()}</span>
         </div>
       </CardContent>

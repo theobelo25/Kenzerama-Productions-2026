@@ -6,7 +6,7 @@ import { APP_DESCRIPTION_SHORT, APP_NAME } from "@/lib/constants";
 const PrimaryHero = () => {
   return (
     <section className="flex flex-col justify-center w-full max-h-screen overflow-hidden py-10">
-      <div className="relative flex items-end aspect-video overflow-hidden mx-10">
+      <div className="relative flex items-end aspect-video overflow-hidden md:mx-10">
         <SiteTitle title={APP_NAME} eyebrow={APP_DESCRIPTION_SHORT} />
         <VideoComponent
           video={homepageHeroTeaser}

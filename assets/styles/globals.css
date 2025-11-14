@@ -157,6 +157,10 @@
   @apply font-bold text-xl lg:text-2xl;
 }
 
+@utility pink-title-underline {
+  @apply relative after:content-[''] after:absolute after:left-[50%] after:-translate-x-[50%]  after:-bottom-1 after:bg-kenzerama-pink after:w-[275px] after:h-px;
+}
+
 h1 {
   position: relative;
   z-index: 2;
@@ -180,6 +184,19 @@ h1 {
     black 25%,
     black 75%,
     transparent 97%
+  );
+  mask-image: var(--fade-mask);
+  -webkit-mask-image: var(--fade-mask);
+}
+
+.fade-horizontal-sm {
+  --fade-mask: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent 1%,
+    black 5%,
+    black 95%,
+    transparent 99%
   );
   mask-image: var(--fade-mask);
   -webkit-mask-image: var(--fade-mask);

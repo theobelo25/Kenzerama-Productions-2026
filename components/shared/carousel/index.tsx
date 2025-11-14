@@ -18,6 +18,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
+import InstagramPost from "./instagram-post";
 
 const TEMP_WEDDINGS = [
   {
@@ -64,7 +65,17 @@ const TEMP_WEDDINGS = [
   },
 ];
 
-const CarouselComponent = ({ type }: { type: "poster" | "default" }) => {
+const TEMP_POSTS = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+
+const CarouselComponent = ({
+  type = "default",
+}: {
+  type: "poster" | "instagram" | "default";
+}) => {
+  const data = [];
+  if (type === "poster") data.push(...TEMP_WEDDINGS);
+  if (type === "instagram") data.push(...TEMP_POSTS);
+
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
 
@@ -81,17 +92,23 @@ const CarouselComponent = ({ type }: { type: "poster" | "default" }) => {
   return (
     <>
       <Carousel
-        className="m-auto fade-horizontal"
+        className="m-auto fade-horizontal-sm md:fade-horizontal"
         opts={{
-          align: "start",
           loop: true,
         }}
       >
-        <CarouselContent>
-          {TEMP_WEDDINGS.map((w, index) => (
-            <CarouselItem key={index} className="basis-1/5">
-              <div className="px-3">
-                <Poster data={w} />
+        <CarouselContent className="px-10">
+          {data.map((w, index) => (
+            <CarouselItem
+              key={index}
+              className="basis-1/1 md:basis-1/3 lg:basis-1/5"
+            >
+              <div className="md:px-1 lg:px-2">
+                {type === "poster" ? (
+                  <Poster data={w} />
+                ) : type === "instagram" ? (
+                  <InstagramPost data={w} />
+                ) : null}
               </div>
             </CarouselItem>
           ))}

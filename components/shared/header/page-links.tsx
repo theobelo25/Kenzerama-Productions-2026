@@ -6,7 +6,7 @@ const PageLinks = () => {
     <>
       <Button asChild variant={"ghost"} className="hover:text-kenzerama-pink">
         <Link
-          href="/our-team"
+          href="/our-videographers"
           className="font-questrial uppercase tracking-widest text-xs"
         >
           Our Team
@@ -14,7 +14,7 @@ const PageLinks = () => {
       </Button>
       <Button asChild variant={"ghost"} className="hover:text-kenzerama-pink">
         <Link
-          href="/wedding-films"
+          href="/wedding-videography"
           className="font-questrial uppercase tracking-widest text-xs "
         >
           Wedding Films
@@ -22,7 +22,7 @@ const PageLinks = () => {
       </Button>
       <Button asChild variant={"ghost"} className="hover:text-kenzerama-pink">
         <Link
-          href="/investment"
+          href="/videography-packages"
           className="font-questrial uppercase tracking-widest text-xs"
         >
           Investment
