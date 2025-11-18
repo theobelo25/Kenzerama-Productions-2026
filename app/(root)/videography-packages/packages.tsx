@@ -82,18 +82,19 @@ const TEMP_EXTRAS = [
 const Packages = () => {
   return (
     <section className="pb-10 wrapper flex flex-col items-center">
-      <h2 className="pink-title-underline text-center mb-8">
-        Wedding Packages
-      </h2>
+      <h2 className="h2-subheading mb-10">Wedding Packages</h2>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8">
         {TEMP_PACKAGES.map((packageItem, index) => (
-          <PackageItem key={index} packageItem={packageItem} />
+          <PackageItem
+            key={packageItem.includes[0] + index}
+            packageItem={packageItem}
+          />
         ))}
       </ul>
-      <h2 className="pink-title-underline text-center my-8">Extras</h2>
+      <h2 className="mt-5 mb-10 h2-subheading">Extras</h2>
       <ul className="max-md:w-full grid grid-cols-1 md:grid-cols-2 gap-2">
-        {TEMP_EXTRAS.map((extraItem, index) => (
-          <ExtraItem key={index} extraItem={extraItem} />
+        {TEMP_EXTRAS.map((extraItem) => (
+          <ExtraItem key={extraItem.title} extraItem={extraItem} />
         ))}
       </ul>
     </section>

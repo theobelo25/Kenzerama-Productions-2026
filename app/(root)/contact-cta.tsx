@@ -3,10 +3,10 @@ import Link from "next/link";
 
 const ContactCta = () => {
   return (
-    <section className="bg-kenzerama-pink">
+    <section className="bg-kenzerama-pink-light">
       <div className="wrapper flex justify-center items-center">
         <h2 className="font-playfair-display text-2xl text-white mr-10">
-          Let's Connect
+          Let&apos;s Connect
         </h2>
         <Button
           asChild

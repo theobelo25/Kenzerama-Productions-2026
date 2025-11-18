@@ -30,7 +30,10 @@ const Menu = () => {
             </SheetTitle>
             <SheetDescription></SheetDescription>
             <PageLinks />
-            <ContactLinks />
+            <h2 className="text-normal text-kenzerama-pink">
+              Reach out to us!
+            </h2>
+            <ContactLinks iconSize={16} />
           </SheetContent>
         </Sheet>
       </nav>

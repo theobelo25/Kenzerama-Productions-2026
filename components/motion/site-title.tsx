@@ -24,7 +24,10 @@ const SiteTitle = ({ title, eyebrow }: { title: string; eyebrow: string }) => {
         {title.split("").map((c, i) => {
           if (c === " ") return <br key={i} />;
           return (
-            <motion.span key={i} variants={SITE_TITLE_ANIMATION as Variants}>
+            <motion.span
+              key={i + c}
+              variants={SITE_TITLE_ANIMATION as Variants}
+            >
               {c}
             </motion.span>
           );

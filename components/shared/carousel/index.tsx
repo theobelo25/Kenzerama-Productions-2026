@@ -1,14 +1,7 @@
 "use client";
 import { MouseEventHandler, useRef } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import Poster from "./poster";
-import CB from "@/public/images/C&B-Poster-colorized.webp";
-import JR from "@/public/images/j&r-poster-colorized.webp";
-import OJ from "@/public/images/o&j-poster-colorized.webp";
-import YM from "@/public/images/y&m-poster-colorized.webp";
-import KM from "@/public/images/k&m-poster-colorized.webp";
-import KD from "@/public/images/k&d-poster-colorized.webp";
-import AK from "@/public/images/a&k-poster-colorized.webp";
+import { cn } from "@/lib/utils";
 
 import {
   Carousel,
@@ -18,64 +11,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
-import InstagramPost from "./instagram-post";
+import { Film } from "@/types";
 
-const TEMP_WEDDINGS = [
-  {
-    name: "Caroline & Brennen",
-    image: CB,
-    date: new Date(),
-    venue: "Kingston, On",
-  },
-  {
-    name: "Jennika & Ryan",
-    image: JR,
-    date: new Date(),
-    venue: "Hart House",
-  },
-  {
-    name: "Olivia & Jacob",
-    image: OJ,
-    date: new Date(),
-    venue: "Three Feathers Terrace",
-  },
-  {
-    name: "Yasmine & Michael",
-    image: YM,
-    date: new Date(),
-    venue: "Arlington Estate",
-  },
-  {
-    name: "Krista & Mitch",
-    image: KM,
-    date: new Date(),
-    venue: "Huntsville",
-  },
-  {
-    name: "Kristina & Dan",
-    image: KD,
-    date: new Date(),
-    venue: "Ricarda's",
-  },
-  {
-    name: "Annie & Knickoy",
-    image: AK,
-    date: new Date(),
-    venue: "Liuna Station",
-  },
-];
-
-const TEMP_POSTS = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-
-const CarouselComponent = ({
-  type = "default",
-}: {
-  type: "poster" | "instagram" | "default";
-}) => {
-  const data = [];
-  if (type === "poster") data.push(...TEMP_WEDDINGS);
-  if (type === "instagram") data.push(...TEMP_POSTS);
-
+const CarouselComponent = ({ featuredFilms }: { featuredFilms: Film[] }) => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
 
@@ -98,17 +36,13 @@ const CarouselComponent = ({
         }}
       >
         <CarouselContent className="px-10">
-          {data.map((w, index) => (
+          {featuredFilms.map((film) => (
             <CarouselItem
-              key={index}
+              key={film.slug}
               className="basis-1/1 md:basis-1/3 lg:basis-1/5"
             >
               <div className="md:px-1 lg:px-2">
-                {type === "poster" ? (
-                  <Poster data={w} />
-                ) : type === "instagram" ? (
-                  <InstagramPost data={w} />
-                ) : null}
+                <Poster film={film} />
               </div>
             </CarouselItem>
           ))}
@@ -116,7 +50,16 @@ const CarouselComponent = ({
         <CarouselPrevious ref={prevRef} className="hidden" />
         <CarouselNext ref={nextRef} className="hidden" />
       </Carousel>
-      <div className="flex justify-between w-[375px] m-auto p-10">
+      <div
+        className={cn(
+          "flex justify-between w-[375px] m-auto p-10",
+          featuredFilms.length <= 3
+            ? "md:hidden"
+            : featuredFilms.length <= 5
+            ? "lg:hidden"
+            : ""
+        )}
+      >
         <Button
           value={"prev"}
           variant={"outline"}

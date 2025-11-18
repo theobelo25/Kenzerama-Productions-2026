@@ -3,8 +3,15 @@ import Image from "next/image";
 import { APP_NAME } from "@/lib/constants";
 import Menu from "./menu";
 import logo from "@/public/images/logo.webp";
+import { headers } from "next/headers";
+import BlogMenu from "./blog-menu";
+import { getFeaturedPost } from "@/lib/actions/posts.actions";
 
-const Header = () => {
+const Header = async () => {
+  const headersList = await headers();
+  const pathname = headersList.get("x-current-path");
+  const featuredPost = await getFeaturedPost();
+
   return (
     <header className="w-screen fixed z-100 bg-white py-2 px-10 ">
       <div className="flex-between">
@@ -26,6 +33,7 @@ const Header = () => {
           <Menu />
         </nav>
       </div>
+      {pathname?.includes("/blog") && <BlogMenu featuredPost={featuredPost} />}
     </header>
   );
 };

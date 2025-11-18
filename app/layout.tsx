@@ -1,17 +1,7 @@
 import type { Metadata } from "next";
-import {
-  Open_Sans,
-  Cinzel,
-  Playfair_Display,
-  Questrial,
-} from "next/font/google";
+import { Cinzel, Playfair_Display, Questrial } from "next/font/google";
 import "@/assets/styles/globals.css";
 import { APP_NAME, APP_DESCRIPTION, SERVER_URL } from "@/lib/constants";
-
-const openSans = Open_Sans({
-  variable: "--font-open-sans",
-  subsets: ["latin"],
-});
 
 const cinzel = Cinzel({
   variable: "--font-cinzel",
@@ -44,10 +34,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`
-          ${openSans.variable} 
           ${cinzel.variable} 
           ${playfairDisplay.variable} 
           ${questrial.variable} 

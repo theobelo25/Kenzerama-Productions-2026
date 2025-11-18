@@ -15,7 +15,7 @@ const WhoWeAre = () => {
         <div className="flex flex-col items-end md:col-span-3 lg:col-span-4  md:pl-10 lg:pl-30 space-y-10 md:space-y-15">
           <h2 className="text-right text-white text-2xl font-playfair-display">
             Who is{" "}
-            <span className="text-kenzerama-pink font-cinzel text-4xl">
+            <span className="text-kenzerama-pink-light font-cinzel text-4xl">
               {APP_NAME}{" "}
             </span>
             ?
@@ -35,7 +35,7 @@ const WhoWeAre = () => {
             variant={"outline"}
             className="w-[60%] min-w-[300px] ml-auto"
           >
-            <Link href="/about-us">Find out more about us!</Link>
+            <Link href="/our-videographers">Find out more about us!</Link>
           </Button>
         </div>
       </div>

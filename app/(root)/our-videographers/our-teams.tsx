@@ -1,5 +1,5 @@
-import KT from "@/public/images/kenz-and-theo-about.webp";
-import MJ from "@/public/images/mitch-and-joel-about.webp";
+import KT from "@/public/images/about/kenz-and-theo-about.webp";
+import MJ from "@/public/images/about/mitch-and-joel-about.webp";
 import Image from "next/image";
 
 const TEAMS_TEMP = [
@@ -22,9 +22,7 @@ const TEAMS_TEMP = [
 const OurTeams = () => {
   return (
     <section className="wrapper py-10 space-y-10">
-      <h2 className="mb-15 text-center text-xl pink-title-underline font-playfair-display">
-        Our Teams
-      </h2>
+      <h2 className="mb-15 h2-subheading">Our Teams</h2>
       {TEAMS_TEMP.map((team) => (
         <div
           key={team.name}
@@ -34,6 +32,12 @@ const OurTeams = () => {
             src={team.image}
             alt={team.name}
             className="col-span-1 md:col-span-3 lg:col-span-2 order-(--order) rounded-lg"
+            width={0}
+            height={0}
+            sizes="50vw, 100vw"
+            fetchPriority="high"
+            placeholder="blur"
+            loading="eager"
           />
           <div className="flex flex-col justify-center col-span-1 md:col-span-4 lg:col-span-5 space-y-4">
             <h3 className="font-cinzel text-2xl text-kenzerama-pink">

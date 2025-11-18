@@ -1,8 +1,27 @@
 import { withNextVideo } from "next-video/process";
 import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  transpilePackages: ["next-mdx-remote"],
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "image.mux.com",
+        pathname: "**",
+      },
+    ],
+  },
+  experimental: {
+    esmExternals: true, // prefer native ESM deps
+    turbopackRemoveUnusedExports: true,
+    inlineCss: true,
+    mdxRs: true,
+  },
 };
 
-export default withNextVideo(nextConfig);
+const withMDX = createMDX({});
+
+export default withMDX(withNextVideo(nextConfig));

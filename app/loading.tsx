@@ -1,5 +1,5 @@
 import Image from "next/image";
-import loader from "@/assets/loader.gif";
+import loader from "@/assets/fade-stagger-circles.svg";
 
 const LoadingPage = () => {
   return (
@@ -12,7 +12,16 @@ const LoadingPage = () => {
         width: "100vw",
       }}
     >
-      <Image src={loader} height={150} width={150} alt="Loading..." />
+      <Image
+        src={loader}
+        alt="Loading..."
+        width={0}
+        height={0}
+        sizes="50vw, 100vw"
+        className="absolute inset-0 z-0"
+        fetchPriority="high"
+        loading="eager"
+      />
     </div>
   );
 };

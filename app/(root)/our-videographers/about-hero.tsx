@@ -1,11 +1,9 @@
 import { APP_NAME } from "@/lib/constants";
-import bgImage from "@/public/images/message-from-kenzerama-bg.webp";
+import bgImage from "@/public/images/about/message-from-kenzerama-bg.webp";
 import Image from "next/image";
 import PageTitle from "../page-title";
 
 const AboutHero = () => {
-  console.log(bgImage);
-
   return (
     <>
       <PageTitle title="About Us" />
@@ -35,6 +33,12 @@ const AboutHero = () => {
               src={bgImage}
               alt={"background image"}
               className="absolute inset-0 -z-2"
+              width={0}
+              height={0}
+              sizes="50vw, 100vw"
+              fetchPriority="high"
+              placeholder="blur"
+              loading="eager"
             />
           </div>
         </div>

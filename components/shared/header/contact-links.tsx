@@ -1,34 +1,58 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Instagram, Youtube, Mail, Phone } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-const ContactLinks = () => {
+const ContactLinks = ({
+  className,
+  iconSize = 16,
+}: {
+  className?: string;
+  iconSize: number;
+}) => {
   return (
-    <>
-      <h2 className="text-normal text-kenzerama-pink">Reach out to us!</h2>
-      <div className="flex space-x-5 pl-1">
-        <Button asChild variant={"ghost"} className="hover:text-kenzerama-pink">
-          <Link href="/insta">
-            <Instagram />
-          </Link>
-        </Button>
-        <Button asChild variant={"ghost"} className="hover:text-kenzerama-pink">
-          <Link href="/you">
-            <Youtube />
-          </Link>
-        </Button>
-        <Button asChild variant={"ghost"} className="hover:text-kenzerama-pink">
-          <Link href="/mail">
-            <Mail />
-          </Link>
-        </Button>
-        <Button asChild variant={"ghost"} className="hover:text-kenzerama-pink">
-          <Link href="/phone">
-            <Phone />
-          </Link>
-        </Button>
-      </div>
-    </>
+    <div className={cn("flex gap-8 pl-1", className)}>
+      <Button
+        asChild
+        variant={"ghost"}
+        className="hover:text-kenzerama-pink p-4 [--spacing:1]"
+      >
+        <Link href="/insta w-fit h-fit">
+          <span className="sr-only">Instagram</span>
+          <Instagram size={iconSize} />
+        </Link>
+      </Button>
+      <Button
+        asChild
+        variant={"ghost"}
+        className="hover:text-kenzerama-pink p-4 [--spacing:1]"
+      >
+        <Link href="/you">
+          <span className="sr-only">Youtube</span>
+          <Youtube size={iconSize} />
+        </Link>
+      </Button>
+      <Button
+        asChild
+        variant={"ghost"}
+        className="hover:text-kenzerama-pink p-4 [--spacing:1]"
+      >
+        <Link href="/mail">
+          <span className="sr-only">Mail</span>
+          <Mail size={iconSize} />
+        </Link>
+      </Button>
+      <Button
+        asChild
+        variant={"ghost"}
+        className="hover:text-kenzerama-pink [--spacing:1]"
+      >
+        <Link href="/phone" className="pt-4">
+          <span className="sr-only">Phone</span>
+          <Phone size={iconSize} />
+        </Link>
+      </Button>
+    </div>
   );
 };
 

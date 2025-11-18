@@ -1,8 +1,9 @@
 import Video from "next-video";
 import { cn } from "@/lib/utils";
 import type { Asset } from "next-video/dist/assets.js";
+import { getPoster } from "@/lib/actions/mux.actions";
 
-const VideoComponent = ({
+const VideoComponent = async ({
   video,
   autoplay = true,
   muted = true,
@@ -29,6 +30,7 @@ const VideoComponent = ({
         playsInline={playsInline}
         controls={controls}
         className="object-contain"
+        poster={`https://image.mux.com/${video.providerMetadata?.mux.playbackId}/thumbnail.webp?width=300&time=0`}
       />
     </div>
   );
