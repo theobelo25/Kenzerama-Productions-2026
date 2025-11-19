@@ -5,7 +5,7 @@ import Testimonials from "./testimonials";
 import Instagram from "./instagram";
 import ContactCta from "./contact-cta";
 
-const Homepage = () => {
+const Homepage = async () => {
   return (
     <>
       <PrimaryHero />

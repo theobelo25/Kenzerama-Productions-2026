@@ -18,7 +18,7 @@ const ContactUsPage = () => {
         className="w-full h-[873px]"
       />
       <div>
-        <h2 className="h2-subheading">Or try another way!</h2>
+        <h2 className="h2-subheading mb-10">Or try another way!</h2>
         <ContactLinks className="justify-center mb-10" iconSize={30} />
       </div>
       <Instagram />

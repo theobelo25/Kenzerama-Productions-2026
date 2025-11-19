@@ -28,12 +28,16 @@ const Vendors = ({ vendors }: { vendors: Vendor[] }) => {
                   variant={"outline"}
                   className="w-full flex flex-row justify-between"
                 >
-                  <Link href={vendor.url}>
+                  <a
+                    href={vendor.url}
+                    target="_blank"
+                    rel="noopenner noreferrer"
+                  >
                     <span className="w-full">
                       {vendor.name} - {vendor.title}
                     </span>
                     <ExternalLink />
-                  </Link>
+                  </a>
                 </Button>
               ) : (
                 <Button variant={"outline"}>{vendor.name}</Button>

@@ -63,7 +63,7 @@ const CarouselComponent = ({ featuredFilms }: { featuredFilms: Film[] }) => {
         <Button
           value={"prev"}
           variant={"outline"}
-          className="w-[90px]"
+          className="w-[90px] cursor-pointer"
           onClick={handleClick}
         >
           Previous
@@ -71,7 +71,7 @@ const CarouselComponent = ({ featuredFilms }: { featuredFilms: Film[] }) => {
         <Button
           value={"next"}
           variant={"outline"}
-          className="w-[90px]"
+          className="w-[90px] cursor-pointer"
           onClick={handleClick}
         >
           Next

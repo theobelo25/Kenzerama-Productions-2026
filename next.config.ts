@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
         hostname: "image.mux.com",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "scontent.cdninstagram.com",
+        pathname: "**",
+      },
     ],
   },
   experimental: {

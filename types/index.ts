@@ -41,3 +41,12 @@ export type Film = {
   };
   date: Date;
 };
+
+export type InstagramPost = {
+  caption: string;
+  id: string;
+  media_url: string;
+  permalink: string;
+  thumbnail_url: string;
+  timestamp: string;
+};

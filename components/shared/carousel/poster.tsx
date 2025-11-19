@@ -15,7 +15,10 @@ const Poster = ({
   film: Film;
 }) => {
   return (
-    <Link href={`/blog/films/${slug}`}>
+    <Link
+      href={`/blog/films/${slug}`}
+      className="[--scale-value:1] hover:[--scale-value:1.02]"
+    >
       <Card className="relative aspect-poster overflow-hidden rounded-none">
         <Image
           src={poster.image}
@@ -23,7 +26,7 @@ const Poster = ({
           width={0}
           height={0}
           sizes="50vw,100vw"
-          className="absolute inset-0 z-0"
+          className="absolute transition-transform inset-0 z-0 scale-(--scale-value)"
           fetchPriority="high"
           placeholder="blur"
           loading="eager"

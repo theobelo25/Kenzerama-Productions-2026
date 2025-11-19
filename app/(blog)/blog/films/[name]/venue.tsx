@@ -13,7 +13,12 @@ import { ExternalLink } from "lucide-react";
 
 const VenueComponent = ({ venue }: { venue: Venue }) => {
   return (
-    <Link href={venue.url ? venue.url : "#"} className="col-span-3">
+    <a
+      href={venue.url ? venue.url : "#"}
+      target="_blank"
+      rel="noopenner noreferrer"
+      className="col-span-3"
+    >
       <Card className="relative col-span-3 overflow-hidden bg-transparent">
         <Image
           src={venue.image}
@@ -48,7 +53,7 @@ const VenueComponent = ({ venue }: { venue: Venue }) => {
           )}
         </CardFooter>
       </Card>
-    </Link>
+    </a>
   );
 };
 

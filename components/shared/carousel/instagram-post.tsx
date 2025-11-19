@@ -1,19 +1,31 @@
+"use client";
 import { Card, CardContent } from "@/components/ui/card";
-import Image, { StaticImageData } from "next/image";
-import logo from "@/public/images/logo.webp";
+import Image from "next/image";
+import type { InstagramPost } from "@/types";
+import HoverVideoPlayer from "react-hover-video-player";
 
-const InstagramPost = ({
-  data,
-}: {
-  data: { name: string; date: Date; venue: string; image: StaticImageData };
-}) => {
+const InstagramPostComponent = ({ post }: { post: InstagramPost }) => {
   return (
-    <Card className="aspect-square rounded-lg overflow-hidden">
-      <Image src={logo} alt={"temp"} className="" />
-      <div className="" />
-      <CardContent className=""></CardContent>
-    </Card>
+    <a href={post.permalink} target="_blank" rel="noopenner noreferrer">
+      <Card className="aspect-square rounded-lg border-none overflow-hidden py-0 gap-0 block bg-black">
+        <CardContent className="px-0">
+          <HoverVideoPlayer
+            videoSrc={post.media_url}
+            pausedOverlay={
+              <Image
+                src={post.thumbnail_url}
+                alt={"temp"}
+                className="w-full h-full"
+                height={0}
+                width={0}
+                sizes="100vw"
+              />
+            }
+          />
+        </CardContent>
+      </Card>
+    </a>
   );
 };
 
-export default InstagramPost;
+export default InstagramPostComponent;

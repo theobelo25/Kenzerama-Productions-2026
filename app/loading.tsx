@@ -18,7 +18,6 @@ const LoadingPage = () => {
         width={0}
         height={0}
         sizes="50vw, 100vw"
-        className="absolute inset-0 z-0"
         fetchPriority="high"
         loading="eager"
       />

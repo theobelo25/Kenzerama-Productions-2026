@@ -31,6 +31,7 @@
     "next-video": "^2.5.1",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "react-hover-video-player": "^10.0.2",
     "react-iframe": "^1.8.5",
     "tailwind-merge": "^3.4.0"
   },
