@@ -1,7 +1,5 @@
 import Header from "@/components/shared/header";
 import Footer from "@/components/footer";
-import BlogMenu from "@/components/shared/header/blog-menu";
-import { headers } from "next/headers";
 
 export default async function RootLayout({
   children,
@@ -9,10 +7,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex h-screen flex-col">
-      <Header />
-      <main className="flex-1">{children}</main>
-      <Footer />
+    <div className="flex h-screen flex-col ">
+      {/* <Header /> */}
+      <main className="flex-1 pt-[76px]">{children}</main>
+      {/* <Footer /> */}
     </div>
   );
 }

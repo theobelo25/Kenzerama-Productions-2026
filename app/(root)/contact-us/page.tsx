@@ -1,10 +1,11 @@
+import PageTransition from "@/components/motion/page-transition";
 import Instagram from "../instagram";
 import PageTitle from "../page-title";
 import ContactLinks from "@/components/shared/header/contact-links";
 
 const ContactUsPage = () => {
   return (
-    <>
+    <PageTransition>
       <PageTitle title="Contact Us" />
       <p className="wrapper text-center font-questrial">
         We are so excited to hear more about your wedding, and what you have
@@ -22,7 +23,7 @@ const ContactUsPage = () => {
         <ContactLinks className="justify-center mb-10" iconSize={30} />
       </div>
       <Instagram />
-    </>
+    </PageTransition>
   );
 };
 

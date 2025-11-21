@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/link-component";
 import Image from "next/image";
 import { APP_NAME } from "@/lib/constants";
 import Menu from "./menu";
@@ -18,8 +18,8 @@ const Header = async () => {
   const { data } = latestInstagram;
 
   return (
-    <header className="w-screen fixed z-9 bg-white py-2 px-10 ">
-      <div className="flex-between">
+    <header className="w-screen fixed z-9 bg-white transition-disabled">
+      <div className="flex-between wrapper">
         <div className="flex-start">
           <Link href="/" className="flex-start">
             <Image

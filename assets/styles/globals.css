@@ -210,3 +210,13 @@ h1 {
 .prose {
   max-width: 85ch;
 }
+
+::view-transition-group(disabled),
+::view-transition-old(disabled),
+::view-transition-new(disabled) {
+  animation-duration: 0s !important;
+}
+
+.transition-disabled {
+  view-transition-name: disabled;
+}

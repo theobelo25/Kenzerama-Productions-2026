@@ -24,6 +24,7 @@ const nextConfig: NextConfig = {
     turbopackRemoveUnusedExports: true,
     inlineCss: true,
     mdxRs: true,
+    viewTransition: true,
   },
 };
 

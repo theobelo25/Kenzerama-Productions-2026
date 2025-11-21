@@ -8,7 +8,6 @@ import {
 import { Film, Post } from "@/types";
 import Poster from "@/components/shared/carousel/poster";
 import FeaturedPostMenuItem from "@/components/shared/header/featured-post-menu-item";
-import { shuffle } from "@/lib/utils";
 
 const SORT_ORDERS = ["newest", "oldest"];
 
@@ -125,109 +124,113 @@ const SearchPage = async (props: {
   }
 
   return (
-    <div className="wrapper grid md:grid-cols-5 md:gap-5">
-      <div className="filter-links">
-        {/* Type Links */}
-        <div className="text-xl mb-2 mt-3">Post Type</div>
-        <div>
-          <ul className="space-y-1">
-            <li>
-              <Link
-                href={getFilterUrl({ t: "all" })}
-                className={`${(type === "all" || type === "") && "font-bold"}`}
-              >
-                Any
-              </Link>
-            </li>
-            {types.map((typeText) => (
-              <li key={typeText}>
+    <>
+      <div className="wrapper grid md:grid-cols-5 md:gap-5">
+        <div className="filter-links flex space-x-5 md:col-span-1 md:flex-col">
+          {/* Type Links */}
+          <div className="text-xl mb-2 mt-3">
+            <h2>Post Type</h2>
+            <ul className="space-y-1">
+              <li>
                 <Link
+                  href={getFilterUrl({ t: "all" })}
                   className={`${
-                    type === typeText.toLowerCase() && "font-bold"
+                    (type === "all" || type === "") && "font-bold"
                   }`}
-                  href={getFilterUrl({ t: typeText.toLowerCase() })}
                 >
-                  {typeText}
+                  Any
                 </Link>
               </li>
-            ))}
-          </ul>
-        </div>
-        {/* Category Links */}
-        <div className="text-xl mb-2 mt-3">Category</div>
-        <div>
-          <ul className="space-y-1">
-            <li>
-              <Link
-                href={getFilterUrl({ c: "all" })}
-                className={`${
-                  (category === "all" || category === "") && "font-bold"
-                }`}
-              >
-                Any
-              </Link>
-            </li>
-            {categories.map((categoryText) => (
-              <li key={categoryText}>
+              {types.map((typeText) => (
+                <li key={typeText}>
+                  <Link
+                    className={`${
+                      type === typeText.toLowerCase() && "font-bold"
+                    }`}
+                    href={getFilterUrl({ t: typeText.toLowerCase() })}
+                  >
+                    {typeText}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* Category Links */}
+          <div className="text-xl mb-2 mt-3">
+            <h2>Category</h2>
+            <ul className="space-y-1">
+              <li>
                 <Link
-                  className={`${category === categoryText && "font-bold"}`}
-                  href={getFilterUrl({ c: categoryText })}
+                  href={getFilterUrl({ c: "all" })}
+                  className={`${
+                    (category === "all" || category === "") && "font-bold"
+                  }`}
                 >
-                  {categoryText}
+                  Any
                 </Link>
               </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <div className="md:col-span-4 space-y-4">
-        <div className="flex-between flex-col my-4 md:flex-row">
-          <div className="flex items-center">
-            {q !== "all" && q !== "" && "Query: " + q + ", "}
-            {type !== "all" && type !== "" && "Type: " + type + ", "}
-            {category !== "all" &&
-              category !== "" &&
-              "Category: " + category + ", "}
-            &nbsp;
-            {(q !== "all" && q !== "") ||
-            (category !== "all" && category !== "") ||
-            (type !== "all" && type !== "") ? (
-              <Button variant={"link"} asChild>
-                <Link href={"/search"}>Clear</Link>
-              </Button>
-            ) : null}
-          </div>
-          <div>
-            Sort by{" "}
-            {SORT_ORDERS.map((s) => (
-              <Link
-                key={s}
-                className={`mx-2${sort == s && " font-bold"}`}
-                href={getFilterUrl({ s })}
-              >
-                {s}
-              </Link>
-            ))}
+              {categories.map((categoryText) => (
+                <li key={categoryText}>
+                  <Link
+                    className={`${category === categoryText && "font-bold"}`}
+                    href={getFilterUrl({ c: categoryText })}
+                  >
+                    {categoryText}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          {results.length === 0 && <div>No results found</div>}
-          {results.map((result) => {
-            if (result.type === "film") {
-              return <Poster key={result.slug} film={result as Film} />;
-            } else if (result.type === "post") {
-              return (
-                <FeaturedPostMenuItem
-                  key={result.slug}
-                  post={result as Post}
-                  className="aspect-poster"
-                />
-              );
-            }
-          })}
+        <div className="md:col-span-4 space-y-4">
+          <div className="flex-between flex-col my-4 md:flex-row">
+            <div className="flex items-center">
+              {q !== "all" && q !== "" && "Query: " + q + ", "}
+              {type !== "all" && type !== "" && "Type: " + type + ", "}
+              {category !== "all" &&
+                category !== "" &&
+                "Category: " + category + ", "}
+              &nbsp;
+              {(q !== "all" && q !== "") ||
+              (category !== "all" && category !== "") ||
+              (type !== "all" && type !== "") ? (
+                <Button variant={"link"} asChild>
+                  <Link href={"/search"}>Clear</Link>
+                </Button>
+              ) : null}
+            </div>
+            <div>
+              Sort by{" "}
+              {SORT_ORDERS.map((s) => (
+                <Link
+                  key={s}
+                  className={`mx-2${sort == s && " font-bold"}`}
+                  href={getFilterUrl({ s })}
+                >
+                  {s}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+            {results.length === 0 && <div>No results found</div>}
+            {results.map((result) => {
+              if (result.type === "film") {
+                return <Poster key={result.slug} film={result as Film} />;
+              } else if (result.type === "post") {
+                return (
+                  <FeaturedPostMenuItem
+                    key={result.slug}
+                    post={result as Post}
+                    className="aspect-poster"
+                  />
+                );
+              }
+            })}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
