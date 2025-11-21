@@ -1,9 +1,5 @@
 import Header from "@/components/shared/header";
 import Footer from "@/components/footer";
-import Sidebar from "./sidebar";
-import { SidebarProvider } from "@/components/ui/sidebar";
-import BlogMenu from "@/components/shared/header/blog-menu";
-
 export default function BlogLayout({
   children,
 }: Readonly<{
@@ -12,14 +8,8 @@ export default function BlogLayout({
   return (
     <div className="flex h-screen flex-col">
       <Header />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 pt-[120px] md:pt-[102px]">{children}</main>
       <Footer />
     </div>
   );
 }
-
-// Blog PAge Ideas
-// Second Header for Category Browsing
-// Recently Viewed
-// Related Articles
-// Link to google reviews? (Can I get them from API?)

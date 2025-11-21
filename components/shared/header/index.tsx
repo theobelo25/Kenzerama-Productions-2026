@@ -6,14 +6,19 @@ import logo from "@/public/images/logo.webp";
 import { headers } from "next/headers";
 import BlogMenu from "./blog-menu";
 import { getFeaturedPost } from "@/lib/actions/posts.actions";
+import { getFeaturedFilms } from "@/lib/actions/film.actions";
+import { getLatestPost } from "@/lib/actions/api.actions";
 
 const Header = async () => {
   const headersList = await headers();
   const pathname = headersList.get("x-current-path");
   const featuredPost = await getFeaturedPost();
+  const featuredFilms = await getFeaturedFilms();
+  const latestInstagram = await getLatestPost();
+  const { data } = latestInstagram;
 
   return (
-    <header className="w-screen fixed z-100 bg-white py-2 px-10 ">
+    <header className="w-screen fixed z-9 bg-white py-2 px-10 ">
       <div className="flex-between">
         <div className="flex-start">
           <Link href="/" className="flex-start">
@@ -33,7 +38,13 @@ const Header = async () => {
           <Menu />
         </nav>
       </div>
-      {pathname?.includes("/blog") && <BlogMenu featuredPost={featuredPost} />}
+      {(pathname?.includes("blog") || pathname?.includes("search")) && (
+        <BlogMenu
+          featuredPost={featuredPost}
+          featuredFilm={featuredFilms[0]}
+          latestInstagram={data}
+        />
+      )}
     </header>
   );
 };

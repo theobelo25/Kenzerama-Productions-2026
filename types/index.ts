@@ -15,17 +15,24 @@ export type Vendor = {
 };
 
 export type Post = {
+  type: string;
   slug: string;
   publishDate: Date;
   title: string;
+  author: string;
   description: string;
   tags: string[];
+  category: string;
+  isFeatured: boolean;
+  layout: string;
+  heroImage: string;
 };
 
 export type Film = {
   id: number;
   isFeatured: boolean;
   type: string;
+  category: string;
   slug: string;
   title: string;
   poster: {
@@ -40,6 +47,7 @@ export type Film = {
     vendors: Vendor[];
   };
   date: Date;
+  publishDate: Date;
 };
 
 export type InstagramPost = {
@@ -50,3 +58,5 @@ export type InstagramPost = {
   thumbnail_url: string;
   timestamp: string;
 };
+
+export type PostMetadata = {};

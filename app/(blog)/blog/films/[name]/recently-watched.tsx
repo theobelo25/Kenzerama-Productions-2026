@@ -7,9 +7,9 @@ const RecentlyWatched = async () => {
   const recentlyWatched = filmData.filter((film) => slugs.includes(film.slug));
 
   return (
-    <section className="wrapper">
+    <section className="wrapper [--display-controls:hidden]">
       <h2 className="h2-subheading mb-10">Recently Viewed</h2>
-      <CarouselComponent featuredFilms={recentlyWatched} />
+      <CarouselComponent posts={recentlyWatched} />
     </section>
   );
 };

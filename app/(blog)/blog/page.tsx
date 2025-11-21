@@ -12,7 +12,7 @@ const BlogPage = async () => {
   return (
     <>
       <PageTitle title="Our Blog" />
-      <FeaturedPosts featuredPost={featuredPost} />
+      <FeaturedPosts featuredPost={featuredPost} featuredPosts={[]} />
       <FeaturedWeddings />
       <ContactCta />
       <Instagram />

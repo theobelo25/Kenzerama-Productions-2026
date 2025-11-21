@@ -206,3 +206,7 @@ h1 {
   mask-image: var(--fade-mask);
   -webkit-mask-image: var(--fade-mask);
 }
+
+.prose {
+  max-width: 85ch;
+}

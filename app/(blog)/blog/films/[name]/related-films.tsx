@@ -14,7 +14,7 @@ const RelatedFilms = ({ currentFilm }: { currentFilm: Film }) => {
   return (
     <section className="wrapper">
       <h2 className="h2-subheading mb-10">Related Films</h2>
-      <CarouselComponent featuredFilms={randomRelated} />
+      <CarouselComponent posts={randomRelated} />
     </section>
   );
 };

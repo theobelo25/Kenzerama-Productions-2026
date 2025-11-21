@@ -12,42 +12,36 @@ import {
 import Link from "next/link";
 import FeaturedPostMenuItem from "./featured-post-menu-item";
 import Poster from "../carousel/poster";
-import CB from "@/public/images/posters/c&b-Poster-colorized.webp";
-import { Post } from "@/types";
-import { Asset } from "next-video/dist/assets.js";
-
-const FEATURED_FILM = {
-  name: "Caroline & Brennan",
-  date: new Date(),
-  venue: "Kingston, On",
-  image: CB,
-};
+import { Film, InstagramPost, Post } from "@/types";
+import InstagramPostComponent from "../carousel/instagram-post";
+import Search from "./search";
 
 const BlogMenu = ({
   featuredPost,
   featuredFilm,
+  latestInstagram,
 }: {
   featuredPost: Post;
-  featuredFilm: Asset;
+  featuredFilm: Film;
+  latestInstagram: InstagramPost;
 }) => {
   const isMobile = useIsMobile();
 
   return (
-    <NavigationMenu viewport={isMobile} className="max-w-full h-[50px]">
-      <NavigationMenuList className="flex-wrap">
+    <NavigationMenu
+      viewport={isMobile}
+      className="max-w-full h-[76px] md:h-[50px]"
+    >
+      <NavigationMenuList className="flex-wrap space-x-2">
         <NavigationMenuItem>
           <NavigationMenuTrigger>Films</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-3">
-                <NavigationMenuLink asChild>
-                  <Link className="h-full w-full" href="/">
-                    <span className="w-full text-center font-playfair-display uppercase">
-                      Featured Film
-                    </span>
-                    <Poster data={FEATURED_FILM} />
-                  </Link>
-                </NavigationMenuLink>
+          <NavigationMenuContent className="p-5">
+            <ul className="grid gap-x-3 gap-y-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_1fr]">
+              <li className="row-span-4">
+                <span className="w-full text-center font-playfair-display uppercase">
+                  Featured Film
+                </span>
+                <Poster film={featuredFilm} />
               </li>
               <ListItem href="/search?type=film" title="See All Films">
                 View all wedding films.
@@ -55,26 +49,26 @@ const BlogMenu = ({
               <ListItem href="/docs/installation" title="Random Film">
                 Randomly select one of our wedding films to watch
               </ListItem>
+              {latestInstagram && (
+                <li className="relative row-span-2 font-cinzel text-2xl text-center text-kenzerama-pink-light">
+                  <span className="absolute z-10 w-full left-0 top-3 ">
+                    Follow us on
+                  </span>
+                  <InstagramPostComponent post={latestInstagram} />
+                  <span className="absolute w-full z-10 left-0 bottom-3 ">
+                    Instagram!
+                  </span>
+                </li>
+              )}
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Blog</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_.75fr]">
+          <NavigationMenuContent className="p-5">
+            <ul className="grid gap-x-3 gap-y-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_.75fr]">
               <li className="row-span-3">
-                <NavigationMenuLink asChild className="p-0 bg-transparent">
-                  <Link
-                    className="h-full w-full rounded-md"
-                    href={`/blog/${featuredPost.slug}`}
-                  >
-                    <FeaturedPostMenuItem
-                      title={featuredPost.title}
-                      description={featuredPost.description}
-                      publishDate={featuredPost.publishDate}
-                    />
-                  </Link>
-                </NavigationMenuLink>
+                <FeaturedPostMenuItem post={featuredPost} />
               </li>
               <ListItem
                 href={`/search?type=post`}
@@ -86,8 +80,18 @@ const BlogMenu = ({
               <ListItem href="/" title="Random Post" className="row-span-1">
                 Randomly select one of our blog posts to read
               </ListItem>
+              <ListItem
+                href="/contact-us"
+                title="Contact Us"
+                className="row-span-1"
+              >
+                Let us know what you think!
+              </ListItem>
             </ul>
           </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <Search />
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

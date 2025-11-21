@@ -30,10 +30,12 @@ export const filmData = [
   {
     id: 1,
     isFeatured: true,
-    type: "Wedding",
+    type: "film",
+    category: "Wedding",
     slug: "caroline-and-brennen",
     title: "Caroline & Brennen",
     date: new Date("2024-10-11"),
+    publishDate: new Date("2025-11-19"),
     poster: {
       image: BC,
       alt: "Caroline & Brennen in a dramatic dip kiss, standing on the steps of their church, being cheered on by their family and friends.",
@@ -61,10 +63,12 @@ export const filmData = [
   {
     id: 2,
     isFeatured: true,
-    type: "Wedding",
+    type: "film",
+    category: "Wedding",
     slug: "jennika-and-ryan",
     title: "Jennika & Ryan",
     date: new Date("2023-09-16"),
+    publishDate: new Date("2025-11-19"),
     poster: {
       image: JR,
       alt: "Jennika facing away from the camera infront of a window inside Hart House, beautifully backlit with sun shining through her long veil.",
@@ -127,10 +131,12 @@ export const filmData = [
   {
     id: 3,
     isFeatured: true,
-    type: "Wedding",
+    type: "film",
+    category: "Wedding",
     slug: "olivia-and-jacob",
     title: "Olivia & Jacob",
     date: new Date("2024-09-27"),
+    publishDate: new Date("2025-11-19"),
     poster: {
       image: OJ,
       alt: "Olivia & Jacob facing away from the camera as they walk out for a romantic moment on the dock.",
@@ -208,10 +214,12 @@ export const filmData = [
   {
     id: 4,
     isFeatured: true,
-    type: "Wedding",
+    type: "film",
+    category: "Wedding",
     slug: "yasmin-and-michael",
     title: "Yasmin & Michael",
     date: new Date("2022-10-07"),
+    publishDate: new Date("2025-11-19"),
     poster: {
       image: YM,
       alt: "Yasmin & Michael from behind,cheering as they run into their reception hall during their grand entrance.",
@@ -284,10 +292,12 @@ export const filmData = [
   {
     id: 5,
     isFeatured: true,
-    type: "Wedding",
+    type: "film",
+    category: "Elopement",
     slug: "krista-and-mitch",
     title: "Krista & Mitch",
     date: new Date("2024-10-04"),
+    publishDate: new Date("2025-11-19"),
     poster: {
       image: KM,
       alt: "Krista & Mitch sitting for a quient moment on the dock after their ceremony.",
@@ -325,10 +335,12 @@ export const filmData = [
   {
     id: 6,
     isFeatured: true,
-    type: "Wedding",
+    type: "film",
+    category: "Wedding",
     slug: "kristina-and-dan",
     title: "Kristina & Dan",
     date: new Date("2024-11-02"),
+    publishDate: new Date("2025-11-19"),
     poster: {
       image: KD,
       alt: "Kristina & Dan spraying champagne in the middle of Spadina Ave in Toronto.",
@@ -401,10 +413,12 @@ export const filmData = [
   {
     id: 7,
     isFeatured: true,
-    type: "Wedding",
+    type: "film",
+    category: "Wedding",
     slug: "annie-and-knickoy",
     title: "Annie & Knickoy",
     date: new Date("2023-09-03"),
+    publishDate: new Date("2025-11-19"),
     poster: {
       image: AK,
       alt: "Annie & Knickoy standing outside of Liuna Station at the end of the night, enjoying a moment of peace and quiet, and a sip of champagne.",
@@ -482,10 +496,12 @@ export const filmData = [
   {
     id: 8,
     isFeatured: false,
-    type: "Wedding",
+    type: "film",
+    category: "Wedding",
     slug: "mackenzie-and-davis",
     title: "Mackenzie & Davis",
     date: new Date("2023-09-03"),
+    publishDate: new Date("2025-11-19"),
     poster: {
       image: AK,
       alt: "Annie & Knickoy standing outside of Liuna Station at the end of the night, enjoying a moment of peace and quiet, and a sip of champagne.",
@@ -513,10 +529,12 @@ export const filmData = [
   {
     id: 8,
     isFeatured: false,
-    type: "Wedding",
+    type: "film",
+    category: "Wedding",
     slug: "palavi-and-geoff",
     title: "Palavi & Geoff",
     date: new Date("2023-09-03"),
+    publishDate: new Date("2025-11-19"),
     poster: {
       image: AK,
       alt: "Annie & Knickoy standing outside of Liuna Station at the end of the night, enjoying a moment of peace and quiet, and a sip of champagne.",

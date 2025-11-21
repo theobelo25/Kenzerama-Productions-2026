@@ -1,7 +1,7 @@
 "use client";
 import { MouseEventHandler, useRef } from "react";
 import Poster from "./poster";
-import { cn } from "@/lib/utils";
+import { cn, isBlogPost, isFilm, isInstagram } from "@/lib/utils";
 
 import {
   Carousel,
@@ -11,11 +11,22 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
-import { Film } from "@/types";
+import { Film, InstagramPost, Post } from "@/types";
+import { usePathname } from "next/navigation";
+import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
+import InstagramPostComponent from "./instagram-post";
+import FeaturedPostMenuItem from "../header/featured-post-menu-item";
 
-const CarouselComponent = ({ featuredFilms }: { featuredFilms: Film[] }) => {
+const CarouselComponent = ({
+  posts,
+}: {
+  posts: Film[] | InstagramPost[] | Post[];
+}) => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
+  const path = usePathname();
+  const isBlog = path.includes("blog");
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     const target = e.target as HTMLButtonElement;
@@ -27,6 +38,8 @@ const CarouselComponent = ({ featuredFilms }: { featuredFilms: Film[] }) => {
     }
   };
 
+  console.log(posts);
+
   return (
     <>
       <Carousel
@@ -36,26 +49,50 @@ const CarouselComponent = ({ featuredFilms }: { featuredFilms: Film[] }) => {
         }}
       >
         <CarouselContent className="px-10">
-          {featuredFilms.map((film) => (
-            <CarouselItem
-              key={film.slug}
-              className="basis-1/1 md:basis-1/3 lg:basis-1/5"
-            >
-              <div className="md:px-1 lg:px-2">
-                <Poster film={film} />
-              </div>
-            </CarouselItem>
-          ))}
+          {posts.map((post) => {
+            if (isFilm(post)) {
+              return (
+                <CarouselItem
+                  key={post.slug}
+                  className="basis-1/1 md:basis-1/3 lg:basis-1/5"
+                >
+                  <div className="md:px-1 lg:px-2">
+                    <Poster film={post} />
+                  </div>
+                </CarouselItem>
+              );
+            } else if (isInstagram(post)) {
+              return (
+                <CarouselItem
+                  key={post.id}
+                  className="basis-1/1 md:basis-1/3 lg:basis-1/5"
+                >
+                  <InstagramPostComponent post={post} />
+                </CarouselItem>
+              );
+            } else if (isBlogPost(post)) {
+              return (
+                <CarouselItem
+                  key={post.slug}
+                  className="basis-1/1 md:basis-1/3 lg:basis-1/5"
+                >
+                  <FeaturedPostMenuItem post={post} />
+                </CarouselItem>
+              );
+            }
+          })}
         </CarouselContent>
         <CarouselPrevious ref={prevRef} className="hidden" />
         <CarouselNext ref={nextRef} className="hidden" />
       </Carousel>
       <div
         className={cn(
-          "flex justify-between w-[375px] m-auto p-10",
-          featuredFilms.length <= 3
+          "grid grid-cols-1 md:grid-cols-6 gap-2 py-10 wrapper",
+          posts.length <= 1
+            ? "hidden"
+            : posts.length <= 3
             ? "md:hidden"
-            : featuredFilms.length <= 5
+            : posts.length <= 5
             ? "lg:hidden"
             : ""
         )}
@@ -63,15 +100,37 @@ const CarouselComponent = ({ featuredFilms }: { featuredFilms: Film[] }) => {
         <Button
           value={"prev"}
           variant={"outline"}
-          className="w-[90px] cursor-pointer"
+          className={cn(
+            "grid-cols-1 self-center cursor-pointer",
+            "md:col-start-2"
+          )}
           onClick={handleClick}
         >
           Previous
         </Button>
+        <div
+          className={cn(
+            "order-3 md:order-2 mt-5 md:mt-0 col-span-1 md:col-span-2 md:col-start-3",
+            path.includes("blog/films") ? " hidden!" : ""
+          )}
+        >
+          {isBlog && !isInstagram(posts[0]) && (
+            <Link href={`/search/`}>
+              <Card className="h-full py-3">
+                <CardContent className="flex justify-center items-center h-full text-2xl font-playfair-display text-kenzerama-pink">
+                  View all Films
+                </CardContent>
+              </Card>
+            </Link>
+          )}
+        </div>
         <Button
           value={"next"}
           variant={"outline"}
-          className="w-[90px] cursor-pointer"
+          className={cn(
+            "grid-cols-1 self-center cursor-pointer",
+            "md:col-start-5"
+          )}
           onClick={handleClick}
         >
           Next

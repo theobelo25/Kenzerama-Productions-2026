@@ -1,3 +1,4 @@
+import { Film, InstagramPost, Post } from "@/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -68,3 +69,67 @@ export function getRandomItems<T>(arr: T[], numItems: number) {
   // Return the first numItems elements of the shuffled array
   return shuffled.slice(0, numItems);
 }
+
+// Format errors
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export function formatError(error: any) {
+  return typeof error.message === "string"
+    ? error.message
+    : JSON.stringify(error.message);
+}
+
+export function findStringInObject(obj: any, targetString: string) {
+  // Base case: if the current value is a string, check for a match
+  if (typeof obj === "string") {
+    return obj.includes(targetString); // Or use a regular expression for more complex matching
+  }
+
+  // Recursive case: if it's an object or array, iterate and recurse
+  if (typeof obj === "object" && obj !== null) {
+    for (const key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        if (findStringInObject(obj[key], targetString)) {
+          return true; // Found a match in a nested property
+        }
+      }
+    }
+  }
+
+  // No match found in this branch
+  return false;
+}
+
+export function shuffle(array: any) {
+  let currentIndex = array.length;
+
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+    // Pick a remaining element...
+    const randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+}
+export function isValidDate(d: any) {
+  return d instanceof Date && !isNaN(d);
+}
+
+export function isFilm(obj: any): obj is Film {
+  return typeof obj === "object" && obj !== null && obj.type === "film";
+}
+
+export function isInstagram(obj: any): obj is InstagramPost {
+  return typeof obj === "object" && obj !== null && obj.media_url;
+}
+
+export function isBlogPost(obj: any): obj is Post {
+  return typeof obj === "object" && obj !== null && obj.type === "post";
+}
+/* eslint-enable @typescript-eslint/no-explicit-any */

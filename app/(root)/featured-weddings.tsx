@@ -7,7 +7,7 @@ const FeaturedWeddings = async () => {
   return (
     <section>
       <h2 className="relative h2-subheading mb-10">Featured Weddings</h2>
-      <Carousel featuredFilms={featuredFilms} />
+      <Carousel posts={featuredFilms} />
     </section>
   );
 };

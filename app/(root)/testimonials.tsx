@@ -77,7 +77,7 @@ const Testimonials = () => {
             <Image src={testimonials[currentPosition].image} alt={"TENP"} />
           </motion.div>
         </AnimatePresence>
-        <div className="flex justify-between items-center col-span-1 md:col-span-5 md:pt-10 w-full md:min-w-[400px] md:w-[50%] m-auto">
+        <div className="flex justify-between items-center col-span-1 md:col-span-5 md:pt-10 w-full md:min-w-[400px] md:w-[50%] m-auto mt-5">
           <Button
             variant={"outline"}
             onClick={handlePrev}
