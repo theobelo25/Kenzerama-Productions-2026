@@ -2,14 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import type { Vendor } from "@/types";
 import { ExternalLink } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
 import logo from "@/public/images/logo.webp";
 import { APP_NAME } from "@/lib/constants";
 
 const Vendors = ({ vendors }: { vendors: Vendor[] }) => {
   return (
-    <Card className="relative col-span-2 bg-transparent overflow-hidden">
+    <Card className="relative col-span-2 md:col-span-3 bg-transparent overflow-hidden">
       <Image
         src={logo}
         alt={`${APP_NAME} logo`}

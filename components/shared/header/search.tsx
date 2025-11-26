@@ -14,7 +14,7 @@ import { SearchIcon } from "lucide-react";
 const Search = () => {
   return (
     <form action="/search" method="GET">
-      <div className="flex space-x-2">
+      <div className="flex justify-center items-center space-x-2 md:p-0 max-sm:wrapper">
         <Select name="type" defaultValue="all">
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="All" />

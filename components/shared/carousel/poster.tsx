@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import type { Film } from "@/types";
-import Link from "next/link";
+import Link from "@/components/link-component";
 
 const Poster = ({
   film: {

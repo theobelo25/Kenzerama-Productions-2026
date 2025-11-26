@@ -8,7 +8,6 @@ import {
 import Image from "next/image";
 import type { Venue } from "@/types";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 
 const VenueComponent = ({ venue }: { venue: Venue }) => {
@@ -23,7 +22,7 @@ const VenueComponent = ({ venue }: { venue: Venue }) => {
         <Image
           src={venue.image}
           alt={venue.name}
-          className="absolute left-[50%] top-[50%] -translate-[50%] h-auto w-full -z-2 object-fit"
+          className="absolute left-[50%] top-[50%] -translate-[50%] h-full w-auto -z-2 object-cover"
           width={0}
           height={0}
           sizes="50vw, 100vw"

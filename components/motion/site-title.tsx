@@ -22,7 +22,7 @@ const SiteTitle = ({ title, eyebrow }: { title: string; eyebrow: string }) => {
         aria-hidden
       >
         {title.split("").map((c, i) => {
-          if (c === " ") return <br key={i} />;
+          if (c === " ") return <br key={i + c} />;
           return (
             <motion.span
               key={i + c}

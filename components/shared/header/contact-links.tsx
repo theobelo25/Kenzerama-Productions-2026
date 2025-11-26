@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import Link from "@/components/link-component";
 import { Instagram, Youtube, Mail, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 

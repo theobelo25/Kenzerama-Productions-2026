@@ -2,7 +2,7 @@ import { APP_NAME } from "@/lib/constants";
 import VideoComponent from "../../components/video-component";
 import whoWeAreVideo from "@/videos/homepage_about.mp4";
 import { Button } from "../../components/ui/button";
-import Link from "next/link";
+import Link from "@/components/link-component";
 
 const WhoWeAre = () => {
   return (

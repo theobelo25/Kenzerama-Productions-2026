@@ -12,7 +12,7 @@ import logo from "@/public/images/logo.webp";
 import { APP_NAME } from "@/lib/constants";
 import { Post } from "@/types";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
+import Link from "@/components/link-component";
 
 const FeaturedPostMenuItem = ({
   post,
@@ -24,12 +24,14 @@ const FeaturedPostMenuItem = ({
   const { title, description, publishDate, slug } = post;
 
   return (
-    <Link className="h-full w-full rounded-md" href={`/blog/${slug}`}>
+    <Link
+      className={cn("h-full w-full rounded-md col-span-2", className)}
+      href={`/blog/${slug}`}
+    >
       <Card
-        className={cn(
-          "relative hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground rounded-sm overflow-hidden",
-          className
-        )}
+        className={
+          "py-2 md:py-auto relative hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground rounded-sm overflow-hidden flex-col justify-between aspect-square"
+        }
       >
         <Image
           src={logo}
@@ -43,9 +45,9 @@ const FeaturedPostMenuItem = ({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <article className="space-y-2">
-            <h1>{title}</h1>
-            <p>{description}</p>
+          <article className="flex flex-col justify-between">
+            <h1 className="text-xs md:text-base">{title}</h1>
+            {/* <p>{description}</p> */}
           </article>
         </CardContent>
         <CardFooter>{formatDateTime(publishDate).dateOnly}</CardFooter>

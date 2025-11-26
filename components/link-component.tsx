@@ -7,10 +7,12 @@ const LinkComponent = ({
   href,
   children,
   className,
+  setOpen,
 }: {
   href: string;
   children: React.ReactNode;
   className?: string;
+  setOpen?: (open: boolean) => void;
 }) => {
   const router = useTransitionRouter();
 
@@ -19,7 +21,8 @@ const LinkComponent = ({
       href={href}
       onClick={(e) => {
         e.preventDefault();
-        console.log("click");
+        if (setOpen) setOpen(false);
+
         router.push(href, {
           onTransitionReady: pageAnimation,
         });

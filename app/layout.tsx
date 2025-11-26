@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import { Cinzel, Playfair_Display, Questrial } from "next/font/google";
 import "@/assets/styles/globals.css";
-import { APP_NAME, APP_DESCRIPTION, SERVER_URL } from "@/lib/constants";
+import {
+  APP_NAME,
+  APP_DESCRIPTION,
+  SERVER_URL,
+  CAPTCHA_SITE_KEY,
+} from "@/lib/constants";
 import { ViewTransitions } from "next-view-transitions";
-import Footer from "@/components/footer";
-import Header from "@/components/shared/header";
+import { ReCaptchaProvider } from "next-recaptcha-v3";
 
 const cinzel = Cinzel({
   variable: "--font-cinzel",
@@ -48,9 +52,9 @@ export default function RootLayout({
           antialiased
         `}
         >
-          <Header />
-          {children}
-          <Footer />
+          <ReCaptchaProvider reCaptchaKey={CAPTCHA_SITE_KEY}>
+            {children}
+          </ReCaptchaProvider>
         </body>
       </html>
     </ViewTransitions>

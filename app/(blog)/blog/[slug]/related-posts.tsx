@@ -1,7 +1,7 @@
 import { Post } from "@/types";
 import { getRelatedPosts } from "@/lib/actions/posts.actions";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import Link from "@/components/link-component";
 import Carousel from "@/components/shared/carousel";
 
 const RelatedPosts = async ({ post }: { post: Post }) => {

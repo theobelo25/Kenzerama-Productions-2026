@@ -29,3 +29,12 @@ export const SITE_TITLE_ANIMATION = {
     },
   },
 };
+
+// GOOGLE API
+export const CAPTCHA_SITE_KEY =
+  process.env.RECAPTCHA_SITE_KEY || "6LchOd4pAAAAAH3VPlfgbgyYoycRlge3Jm2oVKkK";
+
+// STUDIO NINJA
+export const SN_SRC_URL =
+  process.env.SN_SRC_URL ||
+  "https://app.studioninja.co/contactform/parser/0a800fc8-8f39-10c1-818f-50b910fc57ec/0a800fc8-8f39-10c1-818f-5111dbd46467";

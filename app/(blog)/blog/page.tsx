@@ -5,15 +5,17 @@ import Instagram from "@/app/(root)/instagram";
 import ContactCta from "@/app/(root)/contact-cta";
 import { getAllPosts, getFeaturedPost } from "@/lib/actions/posts.actions";
 import PageTransition from "@/components/motion/page-transition";
+import { getRandomItems } from "@/lib/utils";
 
 const BlogPage = async () => {
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
+  const randPosts = getRandomItems(posts, 3);
   const featuredPost = await getFeaturedPost();
 
   return (
     <PageTransition>
       <PageTitle title="Our Blog" />
-      <FeaturedPosts featuredPost={featuredPost} featuredPosts={[]} />
+      <FeaturedPosts featuredPost={featuredPost} featuredPosts={randPosts} />
       <FeaturedWeddings />
       <ContactCta />
       <Instagram />

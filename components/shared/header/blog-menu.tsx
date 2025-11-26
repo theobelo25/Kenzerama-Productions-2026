@@ -9,7 +9,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import Link from "next/link";
+import Link from "@/components/link-component";
 import FeaturedPostMenuItem from "./featured-post-menu-item";
 import Poster from "../carousel/poster";
 import { Film, InstagramPost, Post } from "@/types";
@@ -30,13 +30,13 @@ const BlogMenu = ({
   return (
     <NavigationMenu
       viewport={isMobile}
-      className="max-w-full h-[76px] md:h-[50px]"
+      className="max-w-full h-auto md:h-[70px]"
     >
-      <NavigationMenuList className="flex-wrap space-x-2">
-        <NavigationMenuItem>
+      <NavigationMenuList className="flex-wrap space-x-2 items-center">
+        <NavigationMenuItem className="p-2 md:p-5">
           <NavigationMenuTrigger>Films</NavigationMenuTrigger>
           <NavigationMenuContent className="p-5">
-            <ul className="grid gap-x-3 gap-y-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_1fr]">
+            <ul className="grid gap-x-3 gap-y-2 w-full md:w-[400px] lg:w-[500px] grid-cols-[1fr_1fr] items-center">
               <li className="row-span-4">
                 <span className="w-full text-center font-playfair-display uppercase">
                   Featured Film
@@ -63,10 +63,10 @@ const BlogMenu = ({
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem>
+        <NavigationMenuItem className="p-2 md:p-5">
           <NavigationMenuTrigger>Blog</NavigationMenuTrigger>
           <NavigationMenuContent className="p-5">
-            <ul className="grid gap-x-3 gap-y-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_.75fr]">
+            <ul className="grid gap-x-3 gap-y-2 w-full md:w-[400px] lg:w-[500px] grid-cols-[1fr_.75fr]">
               <li className="row-span-3">
                 <FeaturedPostMenuItem post={featuredPost} />
               </li>

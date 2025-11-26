@@ -59,7 +59,7 @@ const FrequentlyAskedQuestions = () => {
       <h2 className="mb-15 h2-subheading">Frequently Asked Questions</h2>
       <Accordion type="single" collapsible defaultValue="item-1">
         {TEMP_FAQS.map((faq, index) => (
-          <AccordionItem key={index} value={`item-${index + 1}`}>
+          <AccordionItem key={faq.question} value={`item-${index + 1}`}>
             <AccordionTrigger className="font-playfair-display text-lg hover:text-kenzerama-pink hover:no-underline">
               {faq.question}
             </AccordionTrigger>

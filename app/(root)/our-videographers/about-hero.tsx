@@ -32,7 +32,7 @@ const AboutHero = () => {
             <Image
               src={bgImage}
               alt={"background image"}
-              className="absolute inset-0 -z-2"
+              className="aspect-video absolute top-[50%] left-[50%] -z-2 -translate-[50%] object-cover h-full"
               width={0}
               height={0}
               sizes="50vw, 100vw"

@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Film, InstagramPost, Post } from "@/types";
 import { usePathname } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
-import Link from "next/link";
+import Link from "@/components/link-component";
 import InstagramPostComponent from "./instagram-post";
 import FeaturedPostMenuItem from "../header/featured-post-menu-item";
 
@@ -38,8 +38,6 @@ const CarouselComponent = ({
     }
   };
 
-  console.log(posts);
-
   return (
     <>
       <Carousel
@@ -54,7 +52,7 @@ const CarouselComponent = ({
               return (
                 <CarouselItem
                   key={post.slug}
-                  className="basis-1/1 md:basis-1/3 lg:basis-1/5"
+                  className="basis-1/1 min-[450px]:basis-1/2 md:basis-1/3 lg:basis-1/5"
                 >
                   <div className="md:px-1 lg:px-2">
                     <Poster film={post} />
@@ -65,7 +63,7 @@ const CarouselComponent = ({
               return (
                 <CarouselItem
                   key={post.id}
-                  className="basis-1/1 md:basis-1/3 lg:basis-1/5"
+                  className="basis-1/1 sm:basis-1/3 lg:basis-1/5"
                 >
                   <InstagramPostComponent post={post} />
                 </CarouselItem>
@@ -87,14 +85,14 @@ const CarouselComponent = ({
       </Carousel>
       <div
         className={cn(
-          "grid grid-cols-1 md:grid-cols-6 gap-2 py-10 wrapper",
-          posts.length <= 1
+          "grid md:grid-flow-col grid-cols-1 md:grid-cols-6 gap-2 py-10 wrapper",
+          (posts.length <= 1
             ? "hidden"
             : posts.length <= 3
             ? "md:hidden"
             : posts.length <= 5
             ? "lg:hidden"
-            : ""
+            : "") + (isInstagram(posts[0]) ? " pb-0" : "")
         )}
       >
         <Button
@@ -108,22 +106,25 @@ const CarouselComponent = ({
         >
           Previous
         </Button>
-        <div
-          className={cn(
-            "order-3 md:order-2 mt-5 md:mt-0 col-span-1 md:col-span-2 md:col-start-3",
-            path.includes("blog/films") ? " hidden!" : ""
-          )}
-        >
-          {isBlog && !isInstagram(posts[0]) && (
-            <Link href={`/search/`}>
-              <Card className="h-full py-3">
-                <CardContent className="flex justify-center items-center h-full text-2xl font-playfair-display text-kenzerama-pink">
-                  View all Films
-                </CardContent>
-              </Card>
-            </Link>
-          )}
-        </div>
+        {!isInstagram(posts[0]) && (
+          <div
+            className={cn(
+              "order-3 md:order-2 mt-5 md:mt-0 col-span-1 md:col-span-2 md:col-start-3",
+              path.includes("blog/films") ? " hidden!" : ""
+            )}
+          >
+            {isBlog && (
+              <Link href={`/search/`}>
+                <Card className="h-full py-3">
+                  <CardContent className="flex justify-center items-center h-full text-2xl font-playfair-display text-kenzerama-pink">
+                    View all Films
+                  </CardContent>
+                </Card>
+              </Link>
+            )}
+          </div>
+        )}
+
         <Button
           value={"next"}
           variant={"outline"}

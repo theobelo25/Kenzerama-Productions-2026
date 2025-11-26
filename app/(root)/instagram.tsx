@@ -6,7 +6,6 @@ import CarouselComponent from "@/components/shared/carousel";
 const Instagram = async () => {
   const response = await getInstagramPosts();
   const instagramPosts = response?.data.slice(0, 5);
-  console.log(instagramPosts);
 
   return (
     <section className="bg-background-grey py-10">
@@ -15,13 +14,6 @@ const Instagram = async () => {
           Follow us on Instagram!
         </h2>
         <CarouselComponent posts={instagramPosts} />
-        {/* <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3">
-          {instagramPosts.map((post: InstagramPost) => (
-            <li key={post.id}>
-              <InstagramPostComponent post={post} />
-            </li>
-          ))}
-        </ul> */}
       </div>
     </section>
   );

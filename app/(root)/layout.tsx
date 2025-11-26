@@ -8,9 +8,9 @@ export default async function RootLayout({
 }>) {
   return (
     <div className="flex h-screen flex-col ">
-      {/* <Header /> */}
+      <Header />
       <main className="flex-1 pt-[76px]">{children}</main>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

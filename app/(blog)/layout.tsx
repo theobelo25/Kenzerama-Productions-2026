@@ -8,7 +8,7 @@ export default function BlogLayout({
   return (
     <div className="flex h-screen flex-col">
       <Header />
-      <main className="flex-1 pt-[120px] md:pt-[102px]">{children}</main>
+      <main className="flex-1 pt-[180px] md:pt-[126px]">{children}</main>
       <Footer />
     </div>
   );

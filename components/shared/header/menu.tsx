@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sheet,
   SheetContent,
@@ -8,15 +10,19 @@ import {
 import PageLinks from "./page-links";
 import ContactLinks from "./contact-links";
 import { EllipsisVertical } from "lucide-react";
+import { useState } from "react";
+import LinkComponent from "@/components/link-component";
 
 const Menu = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="flex justify-end gap-3">
       <nav className="hidden md:flex w-full gap-1">
         <PageLinks />
       </nav>
       <nav className="md:hidden">
-        <Sheet>
+        <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger
             className="align-middle"
             aria-label="Open Menu"
@@ -26,10 +32,12 @@ const Menu = () => {
           </SheetTrigger>
           <SheetContent className="flex flex-col items-start p-12">
             <SheetTitle className="text-kenzerama-pink font-cinzel font-normal">
-              Kenzerama Productions
+              <LinkComponent href="/" setOpen={setOpen}>
+                Kenzerama Productions
+              </LinkComponent>
             </SheetTitle>
             <SheetDescription></SheetDescription>
-            <PageLinks />
+            <PageLinks setOpen={setOpen} />
             <h2 className="text-normal text-kenzerama-pink">
               Reach out to us!
             </h2>

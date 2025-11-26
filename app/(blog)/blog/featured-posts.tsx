@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/link-component";
 import {
   Card,
   CardContent,
@@ -12,6 +12,7 @@ import logo from "@/public/images/logo.webp";
 import Image from "next/image";
 import { APP_NAME } from "@/lib/constants";
 import Tags from "./tags";
+import FeaturedPostMenuItem from "@/components/shared/header/featured-post-menu-item";
 
 const FeaturedPosts = ({
   featuredPost,
@@ -52,14 +53,15 @@ const FeaturedPosts = ({
           </article>
         </Link>
       </div>
-      <div className="w-full grid grid-cols-6 gap-2">
+      <div className="w-full grid grid-cols-4 md:grid-cols-6 gap-2">
         {featuredPostsTrimmed.map((post) => (
-          <div
+          <FeaturedPostMenuItem
             key={post.slug}
-            className="col-span-1 aspect-square bg-amber-300 rounded-sm"
-          ></div>
+            post={post}
+            className="col-span-2 md:col-span-2 lg:col-span-1"
+          />
         ))}
-        <div className="col-span-2 rounded-sm">
+        <div className="col-span-4 md:col-span-2 rounded-sm">
           <Link href={`/search/`}>
             <Card className="h-full">
               <CardContent className="flex justify-center items-center h-full text-2xl font-playfair-display text-kenzerama-pink">

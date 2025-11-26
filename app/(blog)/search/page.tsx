@@ -8,6 +8,8 @@ import {
 import { Film, Post } from "@/types";
 import Poster from "@/components/shared/carousel/poster";
 import FeaturedPostMenuItem from "@/components/shared/header/featured-post-menu-item";
+import { motion } from "motion/react";
+import Results from "./results";
 
 const SORT_ORDERS = ["newest", "oldest"];
 
@@ -129,7 +131,7 @@ const SearchPage = async (props: {
         <div className="filter-links flex space-x-5 md:col-span-1 md:flex-col">
           {/* Type Links */}
           <div className="text-xl mb-2 mt-3">
-            <h2>Post Type</h2>
+            <h2 className="text-kenzerama-pink">Post Type</h2>
             <ul className="space-y-1">
               <li>
                 <Link
@@ -157,7 +159,7 @@ const SearchPage = async (props: {
           </div>
           {/* Category Links */}
           <div className="text-xl mb-2 mt-3">
-            <h2>Category</h2>
+            <h2 className="text-kenzerama-pink">Category</h2>
             <ul className="space-y-1">
               <li>
                 <Link
@@ -212,22 +214,7 @@ const SearchPage = async (props: {
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-            {results.length === 0 && <div>No results found</div>}
-            {results.map((result) => {
-              if (result.type === "film") {
-                return <Poster key={result.slug} film={result as Film} />;
-              } else if (result.type === "post") {
-                return (
-                  <FeaturedPostMenuItem
-                    key={result.slug}
-                    post={result as Post}
-                    className="aspect-poster"
-                  />
-                );
-              }
-            })}
-          </div>
+          <Results results={results} />
         </div>
       </div>
     </>

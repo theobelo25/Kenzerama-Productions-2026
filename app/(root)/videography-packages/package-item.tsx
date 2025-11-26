@@ -22,8 +22,8 @@ const PackageItem = ({
           </CardHeader>
           <CardContent>
             <ul>
-              {includes.map((include) => (
-                <li key={include}>{include}</li>
+              {includes.map((include, index) => (
+                <li key={title + include + index}>{include}</li>
               ))}
             </ul>
           </CardContent>
