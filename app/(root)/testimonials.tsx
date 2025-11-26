@@ -4,23 +4,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-
 import { testimonialData } from "@/data/testimonials";
-
-const ANIMATION_VARIANTS = {
-  initial: (direction: string) => ({
-    x: direction === "next" ? 10 : -10,
-    opacity: 0,
-  }),
-  animate: {
-    x: 0,
-    opacity: 1,
-  },
-  exit: (direction: string) => ({
-    x: direction === "next" ? -10 : 10,
-    opacity: 0,
-  }),
-};
+import { ANIMATION_VARIANTS } from "@/lib/constants";
 
 const Testimonials = () => {
   const [currentPosition, setCurrentPosition] = useState(0);

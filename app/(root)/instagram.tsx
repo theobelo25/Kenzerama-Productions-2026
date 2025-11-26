@@ -1,6 +1,4 @@
 import { getInstagramPosts } from "@/lib/actions/api.actions";
-import { InstagramPost } from "@/types";
-import InstagramPostComponent from "@/components/shared/carousel/instagram-post";
 import CarouselComponent from "@/components/shared/carousel";
 
 const Instagram = async () => {

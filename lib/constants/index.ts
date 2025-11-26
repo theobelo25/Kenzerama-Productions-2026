@@ -38,3 +38,20 @@ export const CAPTCHA_SITE_KEY =
 export const SN_SRC_URL =
   process.env.SN_SRC_URL ||
   "https://app.studioninja.co/contactform/parser/0a800fc8-8f39-10c1-818f-50b910fc57ec/0a800fc8-8f39-10c1-818f-5111dbd46467";
+
+// APP CONSTANTS
+export const SORT_ORDERS = ["newest", "oldest"];
+export const ANIMATION_VARIANTS = {
+  initial: (direction: string) => ({
+    x: direction === "next" ? 10 : -10,
+    opacity: 0,
+  }),
+  animate: {
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: string) => ({
+    x: direction === "next" ? -10 : 10,
+    opacity: 0,
+  }),
+};

@@ -6,12 +6,8 @@ import {
   getPostCategories,
 } from "@/lib/actions/posts.actions";
 import { Film, Post } from "@/types";
-import Poster from "@/components/shared/carousel/poster";
-import FeaturedPostMenuItem from "@/components/shared/header/featured-post-menu-item";
-import { motion } from "motion/react";
 import Results from "./results";
-
-const SORT_ORDERS = ["newest", "oldest"];
+import { SORT_ORDERS } from "@/lib/constants";
 
 export async function generateMetadata(props: {
   searchParams: Promise<{

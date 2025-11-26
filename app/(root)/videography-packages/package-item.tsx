@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import {
   Card,
   CardContent,
@@ -6,7 +5,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Car } from "lucide-react";
 
 const PackageItem = ({
   packageItem: { title, includes, price },

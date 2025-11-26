@@ -1,6 +1,6 @@
 "use client";
 import { Film, Post } from "@/types";
-import { motion, AnimatePresence, stagger } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import Poster from "@/components/shared/carousel/poster";
 import FeaturedPostMenuItem from "@/components/shared/header/featured-post-menu-item";
 

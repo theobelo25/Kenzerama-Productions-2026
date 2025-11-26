@@ -21,7 +21,7 @@ const FeaturedPostMenuItem = ({
   post: Post;
   className?: string;
 }) => {
-  const { title, description, publishDate, slug } = post;
+  const { title, publishDate, slug } = post;
 
   return (
     <Link
@@ -47,7 +47,6 @@ const FeaturedPostMenuItem = ({
         <CardContent>
           <article className="flex flex-col justify-between">
             <h1 className="text-xs md:text-base">{title}</h1>
-            {/* <p>{description}</p> */}
           </article>
         </CardContent>
         <CardFooter>{formatDateTime(publishDate).dateOnly}</CardFooter>
