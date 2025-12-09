@@ -1,11 +1,11 @@
 // Posters
-import BC from "@/public/images/posters/c&b-Poster-colorized.webp";
-import JR from "@/public/images/posters/j&r-poster-colorized.webp";
-import OJ from "@/public/images/posters/o&j-poster-colorized.webp";
-import YM from "@/public/images/posters/y&m-poster-colorized.webp";
-import KM from "@/public/images/posters/k&m-poster-colorized.webp";
-import KD from "@/public/images/posters/k&d-poster-colorized.webp";
-import AK from "@/public/images/posters/a&k-poster-colorized.webp";
+import BC from "@/public/images/posters/C&B-Poster.webp";
+import JR from "@/public/images/posters/j&r-poster.webp";
+import OJ from "@/public/images/posters/o&j-poster.webp";
+import YM from "@/public/images/posters/y&m-poster.webp";
+import KM from "@/public/images/posters/k&m-poster.webp";
+import KD from "@/public/images/posters/k&d-poster.webp";
+import AK from "@/public/images/posters/a&k-poster.webp";
 
 // Venues
 import deltaKingstonWaterfront from "@/public/images/venues/delta-kingston-waterfront.webp";
@@ -19,7 +19,7 @@ import millerLashHouse from "@/public/images/venues/miller-lash-house.webp";
 
 // Videos
 import bandc from "@/videos/b_and_c_main.mp4";
-import jandr from "@/videos/j_and_r_main.mp4";
+// import jandr from "@/videos/j_and_r_main.mp4";
 import oandj from "@/videos/o_and_j_main.mp4";
 import yandm from "@/videos/y_and_m_main.mp4";
 import kandm from "@/videos/k_and_m_main.mp4";
@@ -60,74 +60,74 @@ export const filmData = [
       ],
     },
   },
-  {
-    id: 2,
-    isFeatured: true,
-    type: "film",
-    category: "Wedding",
-    slug: "jennika-and-ryan",
-    title: "Jennika & Ryan",
-    date: new Date("2023-09-16"),
-    publishDate: new Date("2025-11-19"),
-    poster: {
-      image: JR,
-      alt: "Jennika facing away from the camera infront of a window inside Hart House, beautifully backlit with sun shining through her long veil.",
-    },
-    video: jandr,
-    tags: ["video"],
-    description:
-      "Jennika & Ryan’s wedding at Hart House in Toronto was the perfect blend of elegance and romance. Their ceremony took place in the stunning Hart House courtyard, surrounded by ivy-covered walls and historic charm. After the vows, we wandered through the University of Toronto campus to capture timeless portraits against its iconic architecture. Their wedding film is a graceful tribute to a day filled with love, laughter, and classic Toronto beauty.",
-    details: {
-      venue: {
-        name: "Hart House",
-        location: "Toronto, On",
-        url: "https://harthouse.ca/spaces/weddings",
-        image: hartHouse,
-      },
-      vendors: [
-        {
-          name: "Beautique Events",
-          title: "Planner",
-          url: "https://www.beautiqueevents.com/",
-        },
-        {
-          name: "Emily Michelson",
-          title: "Photographer",
-          url: "https://emilymichelson.com/",
-        },
-        {
-          name: "Riverside Flower Shop",
-          title: "Florals",
-          url: "https://www.riversideflowershopsu.com/",
-        },
-        {
-          name: "Sounds of Joy Toronto",
-          title: "Musicians",
-          url: "https://www.instagram.com/soundsofjoyto.weddingmusic/?hl=en",
-        },
-        {
-          name: "The Marrying Lady",
-          title: "Officiant",
-          url: "https://www.sheisthemarryinglady.com/",
-        },
-        {
-          name: "Maximum Music",
-          title: "DJ",
-          url: "https://maximumdj.com/",
-        },
-        {
-          name: "Cakes By Robert",
-          title: "Cake",
-          url: "https://www.cakesbyrobert.com/",
-        },
-        {
-          name: "Lea-Ann Belter",
-          title: "Dress",
-          url: "https://lea-annbelter.com/",
-        },
-      ],
-    },
-  },
+  // {
+  //   id: 2,
+  //   isFeatured: true,
+  //   type: "film",
+  //   category: "Wedding",
+  //   slug: "jennika-and-ryan",
+  //   title: "Jennika & Ryan",
+  //   date: new Date("2023-09-16"),
+  //   publishDate: new Date("2025-11-19"),
+  //   poster: {
+  //     image: JR,
+  //     alt: "Jennika facing away from the camera infront of a window inside Hart House, beautifully backlit with sun shining through her long veil.",
+  //   },
+  //   video: jandr,
+  //   tags: ["video"],
+  //   description:
+  //     "Jennika & Ryan’s wedding at Hart House in Toronto was the perfect blend of elegance and romance. Their ceremony took place in the stunning Hart House courtyard, surrounded by ivy-covered walls and historic charm. After the vows, we wandered through the University of Toronto campus to capture timeless portraits against its iconic architecture. Their wedding film is a graceful tribute to a day filled with love, laughter, and classic Toronto beauty.",
+  //   details: {
+  //     venue: {
+  //       name: "Hart House",
+  //       location: "Toronto, On",
+  //       url: "https://harthouse.ca/spaces/weddings",
+  //       image: hartHouse,
+  //     },
+  //     vendors: [
+  //       {
+  //         name: "Beautique Events",
+  //         title: "Planner",
+  //         url: "https://www.beautiqueevents.com/",
+  //       },
+  //       {
+  //         name: "Emily Michelson",
+  //         title: "Photographer",
+  //         url: "https://emilymichelson.com/",
+  //       },
+  //       {
+  //         name: "Riverside Flower Shop",
+  //         title: "Florals",
+  //         url: "https://www.riversideflowershopsu.com/",
+  //       },
+  //       {
+  //         name: "Sounds of Joy Toronto",
+  //         title: "Musicians",
+  //         url: "https://www.instagram.com/soundsofjoyto.weddingmusic/?hl=en",
+  //       },
+  //       {
+  //         name: "The Marrying Lady",
+  //         title: "Officiant",
+  //         url: "https://www.sheisthemarryinglady.com/",
+  //       },
+  //       {
+  //         name: "Maximum Music",
+  //         title: "DJ",
+  //         url: "https://maximumdj.com/",
+  //       },
+  //       {
+  //         name: "Cakes By Robert",
+  //         title: "Cake",
+  //         url: "https://www.cakesbyrobert.com/",
+  //       },
+  //       {
+  //         name: "Lea-Ann Belter",
+  //         title: "Dress",
+  //         url: "https://lea-annbelter.com/",
+  //       },
+  //     ],
+  //   },
+  // },
   {
     id: 3,
     isFeatured: true,
@@ -168,46 +168,46 @@ export const filmData = [
           title: "DJ",
           url: "https://www.soireedjs.com/",
         },
-        {
-          name: "Melanie Cakes",
-          title: "Cake",
-          url: "https://www.melaniescakes.ca/",
-        },
+        // {
+        //   name: "Melanie Cakes",
+        //   title: "Cake",
+        //   url: "https://www.melaniescakes.ca/",
+        // },
         {
           name: "Mid Valley Garden",
           title: "Florals",
           url: "https://www.midvalleygardens.com/",
         },
-        {
-          name: "Bubbly Walls",
-          title: "Champagne Tower",
-          url: "https://canvasrebel.com/",
-        },
-        {
-          name: "Casal Catering",
-          title: "Catering",
-          url: "https://casalcatering.ca/",
-        },
+        // {
+        //   name: "Bubbly Walls",
+        //   title: "Champagne Tower",
+        //   url: "https://canvasrebel.com/",
+        // },
+        // {
+        //   name: "Casal Catering",
+        //   title: "Catering",
+        //   url: "https://casalcatering.ca/",
+        // },
         {
           name: "Ceremony Bridal Studio",
           title: "Dress + Veil",
           url: "https://ceremonybarrie.com/",
         },
-        {
-          name: "Dancefloor Dynamic",
-          title: "Dance Floor",
-          url: "https://dancefloordynamics.com/",
-        },
-        {
-          name: "Made and True",
-          title: "Wedding Signs",
-          url: "https://madeandtrue.com/",
-        },
-        {
-          name: "Forever Paper Co.",
-          title: "Invites + Table Menus",
-          url: "https://foreverpaperco.co.uk/",
-        },
+        // {
+        //   name: "Dancefloor Dynamic",
+        //   title: "Dance Floor",
+        //   url: "https://dancefloordynamics.com/",
+        // },
+        // {
+        //   name: "Made and True",
+        //   title: "Wedding Signs",
+        //   url: "https://madeandtrue.com/",
+        // },
+        // {
+        //   name: "Forever Paper Co.",
+        //   title: "Invites + Table Menus",
+        //   url: "https://foreverpaperco.co.uk/",
+        // },
       ],
     },
   },
@@ -256,31 +256,26 @@ export const filmData = [
           title: "Suit",
           url: "https://www.ridolfishirts.com/",
         },
-        {
-          name: "Toronto Floor Wraps",
-          title: "Floor Wrap",
-          url: "https://www.torontofloorwraps.com/",
-        },
+        // {
+        //   name: "Toronto Floor Wraps",
+        //   title: "Floor Wrap",
+        //   url: "https://www.torontofloorwraps.com/",
+        // },
         {
           name: "Robin Ellingwood",
           title: "Officiant",
           url: "https://www.gtaweddingofficiant.ca/",
         },
-        {
-          name: "bbBlanc",
-          title: "DJ",
-          url: "https://www.bbblanc.com/",
-        },
-        {
-          name: "Craft Photography",
-          title: "Photo Booth",
-          url: "https://craftphotos.ca/",
-        },
-        {
-          name: "Royal Orchid Florist",
-          title: "Florist",
-          url: "https://www.facebook.com/RoyalOrchidFlorist/#",
-        },
+        // {
+        //   name: "bbBlanc",
+        //   title: "DJ",
+        //   url: "https://www.bbblanc.com/",
+        // },
+        // {
+        //   name: "Craft Photography",
+        //   title: "Photo Booth",
+        //   url: "https://craftphotos.ca/",
+        // },
         {
           name: "Royal Orchid Florist",
           title: "Florist",
@@ -367,46 +362,46 @@ export const filmData = [
           title: "Photographer",
           url: "https://jenniferseestudios.com/",
         },
-        {
-          name: "Sutton Place Hotel",
-          title: "Hotel",
-          url: "https://www.suttonplace.com/toronto/",
-        },
+        // {
+        //   name: "Sutton Place Hotel",
+        //   title: "Hotel",
+        //   url: "https://www.suttonplace.com/toronto/",
+        // },
         {
           name: "Fable Floral Design",
           title: "Florals",
           url: "https://fablefloraldesign.com/",
         },
-        {
-          name: "Toronto Floor Wraps",
-          title: "Floor Wrap",
-          url: "https://www.torontofloorwraps.com/",
-        },
-        {
-          name: "Gervais Party Rentals",
-          title: "Rentals",
-          url: "https://www.gervaisrentals.com/",
-        },
+        // {
+        //   name: "Toronto Floor Wraps",
+        //   title: "Floor Wrap",
+        //   url: "https://www.torontofloorwraps.com/",
+        // },
+        // {
+        //   name: "Gervais Party Rentals",
+        //   title: "Rentals",
+        //   url: "https://www.gervaisrentals.com/",
+        // },
         {
           name: "True Ceremonies",
           title: "Officiant",
           url: "https://www.trueceremonies.com/",
         },
-        {
-          name: "Lavish Cupcakes",
-          title: "Cake",
-          url: "https://www.lavishcupcakes.com/",
-        },
+        // {
+        //   name: "Lavish Cupcakes",
+        //   title: "Cake",
+        //   url: "https://www.lavishcupcakes.com/",
+        // },
         {
           name: "Stolen Hearts Bridal",
           title: "Dress",
           url: "https://www.stolenheartsbridal.com/",
         },
-        {
-          name: "Indochino",
-          title: "Suit",
-          url: "https://www.indochino.com/",
-        },
+        // {
+        //   name: "Indochino",
+        //   title: "Suit",
+        //   url: "https://www.indochino.com/",
+        // },
       ],
     },
   },
@@ -435,11 +430,11 @@ export const filmData = [
         image: liunaStation,
       },
       vendors: [
-        {
-          name: "Dundurn Castle",
-          title: "Park",
-          url: "https://www.hamilton.ca/things-do/hamilton-civic-museums/dundurn-national-historic-site",
-        },
+        // {
+        //   name: "Dundurn Castle",
+        //   title: "Park",
+        //   url: "https://www.hamilton.ca/things-do/hamilton-civic-museums/dundurn-national-historic-site",
+        // },
         {
           name: "Frances Morency Photography",
           title: "Photographer",
@@ -450,41 +445,41 @@ export const filmData = [
           title: "Planner",
           url: "https://www.experience818events.com/",
         },
-        {
-          name: "BLUNT Hair & Co",
-          title: "Hair",
-          url: "https://www.blunthairco.com/",
-        },
-        {
-          name: "Two Chicks and some Lip Stick",
-          title: "Makeup",
-          url: "https://www.instagram.com/twochicksandsomelipstick/?hl=en",
-        },
+        // {
+        //   name: "BLUNT Hair & Co",
+        //   title: "Hair",
+        //   url: "https://www.blunthairco.com/",
+        // },
+        // {
+        //   name: "Two Chicks and some Lip Stick",
+        //   title: "Makeup",
+        //   url: "https://www.instagram.com/twochicksandsomelipstick/?hl=en",
+        // },
         {
           name: "Chez Jordan Oakville",
           title: "Dress",
           url: "https://www.chezjordanoakville.com/",
         },
-        {
-          name: "Andrew's Formals",
-          title: "Suit",
-          url: "http://andrewsformals-com.securec96.ezhostingserver.com/",
-        },
+        // {
+        //   name: "Andrew's Formals",
+        //   title: "Suit",
+        //   url: "http://andrewsformals-com.securec96.ezhostingserver.com/",
+        // },
         {
           name: "Chris Kidc Stewart",
           title: "DJ",
           url: "https://www.instagram.com/djkidc7/?hl=en",
         },
-        {
-          name: "Passion Letterpress",
-          title: "Invitations",
-          url: "https://passionletterpress.com/",
-        },
-        {
-          name: "Nothing Sweeter Than You & Co.",
-          title: "Cake",
-          url: "https://www.instagram.com/nothingsweeterthanyoucakes/?hl=en",
-        },
+        // {
+        //   name: "Passion Letterpress",
+        //   title: "Invitations",
+        //   url: "https://passionletterpress.com/",
+        // },
+        // {
+        //   name: "Nothing Sweeter Than You & Co.",
+        //   title: "Cake",
+        //   url: "https://www.instagram.com/nothingsweeterthanyoucakes/?hl=en",
+        // },
         {
           name: "JunePlum by Patois",
           title: "Late Night Food",
@@ -493,110 +488,110 @@ export const filmData = [
       ],
     },
   },
-  {
-    id: 8,
-    isFeatured: false,
-    type: "film",
-    category: "Wedding",
-    slug: "mackenzie-and-davis",
-    title: "Mackenzie & Davis",
-    date: new Date("2023-09-03"),
-    publishDate: new Date("2025-11-19"),
-    poster: {
-      image: AK,
-      alt: "Annie & Knickoy standing outside of Liuna Station at the end of the night, enjoying a moment of peace and quiet, and a sip of champagne.",
-    },
-    video: aandk,
-    tags: ["video"],
-    description:
-      "Annie & Knickoy knew after dating for over 8 years that they wanted to have a short engagement. They planned their wedding in under six months, and not one detail was missed. With family flying in from all over the world for this celebration, they wanted to create a WOW factor for their guests. From steel pan drums playing during cocktail hour to a delicious midnight buffet of Jamaican patties, their guests danced the night away until the wee hours of the morning!",
-    details: {
-      venue: {
-        name: "The Arlington Estate",
-        location: "Vaughan, On",
-        url: "https://thearlingtonestate.com/",
-        image: arlingtonEstate,
-      },
-      vendors: [
-        {
-          name: "Dundurn Castle",
-          title: "Park",
-          url: "https://www.hamilton.ca/things-do/hamilton-civic-museums/dundurn-national-historic-site",
-        },
-      ],
-    },
-  },
-  {
-    id: 8,
-    isFeatured: false,
-    type: "film",
-    category: "Wedding",
-    slug: "palavi-and-geoff",
-    title: "Palavi & Geoff",
-    date: new Date("2023-09-03"),
-    publishDate: new Date("2025-11-19"),
-    poster: {
-      image: AK,
-      alt: "Annie & Knickoy standing outside of Liuna Station at the end of the night, enjoying a moment of peace and quiet, and a sip of champagne.",
-    },
-    video: aandk,
-    tags: ["video"],
-    description:
-      "Annie & Knickoy knew after dating for over 8 years that they wanted to have a short engagement. They planned their wedding in under six months, and not one detail was missed. With family flying in from all over the world for this celebration, they wanted to create a WOW factor for their guests. From steel pan drums playing during cocktail hour to a delicious midnight buffet of Jamaican patties, their guests danced the night away until the wee hours of the morning!",
-    details: {
-      venue: {
-        name: "Miller Lash House",
-        location: "Scarborough, On",
-        url: "https://www.millerlashhouse.ca/",
-        image: millerLashHouse,
-      },
-      vendors: [
-        {
-          name: "Emily Li Photography",
-          title: "Photographer",
-          url: "https://emilyliphotography.com/",
-        },
-        {
-          name: "Purpletree Photography",
-          title: "Photographer",
-          url: "https://www.purpletree.ca/",
-        },
-        {
-          name: "JT Wedding Events",
-          title: "Planner",
-          url: "https://www.jtweddingevents.com/",
-        },
-        {
-          name: "khushwin Dhaliwal",
-          title: "Hair",
-          url: "https://khushwindhair.as.me/schedule/8272df94",
-        },
-        {
-          name: "Jeige Beauty",
-          title: "Hair",
-          url: "https://www.instagram.com/jeigebeauty/?hl=en",
-        },
-        {
-          name: "MUAVEE Makeup Studio",
-          title: "Makeup",
-          url: "https://muavee.com/",
-        },
-        {
-          name: "Styled By Luxshanaa",
-          title: "Saree",
-          url: "https://styledbyluxshanaa.com/",
-        },
-        {
-          name: "Mandeep Gandhi Music",
-          title: "DJ / Live Entertainment",
-          url: "https://www.instagram.com/mandeepgandhimusic/?hl=en",
-        },
-        {
-          name: "DJ Harman",
-          title: "DJ",
-          url: "https://www.instagram.com/djharman__/?hl=en",
-        },
-      ],
-    },
-  },
+  // {
+  //   id: 8,
+  //   isFeatured: false,
+  //   type: "film",
+  //   category: "Wedding",
+  //   slug: "mackenzie-and-davis",
+  //   title: "Mackenzie & Davis",
+  //   date: new Date("2023-09-03"),
+  //   publishDate: new Date("2025-11-19"),
+  //   poster: {
+  //     image: AK,
+  //     alt: "Annie & Knickoy standing outside of Liuna Station at the end of the night, enjoying a moment of peace and quiet, and a sip of champagne.",
+  //   },
+  //   video: aandk,
+  //   tags: ["video"],
+  //   description:
+  //     "Annie & Knickoy knew after dating for over 8 years that they wanted to have a short engagement. They planned their wedding in under six months, and not one detail was missed. With family flying in from all over the world for this celebration, they wanted to create a WOW factor for their guests. From steel pan drums playing during cocktail hour to a delicious midnight buffet of Jamaican patties, their guests danced the night away until the wee hours of the morning!",
+  //   details: {
+  //     venue: {
+  //       name: "The Arlington Estate",
+  //       location: "Vaughan, On",
+  //       url: "https://thearlingtonestate.com/",
+  //       image: arlingtonEstate,
+  //     },
+  //     vendors: [
+  //       {
+  //         name: "Dundurn Castle",
+  //         title: "Park",
+  //         url: "https://www.hamilton.ca/things-do/hamilton-civic-museums/dundurn-national-historic-site",
+  //       },
+  //     ],
+  //   },
+  // },
+  // {
+  //   id: 8,
+  //   isFeatured: false,
+  //   type: "film",
+  //   category: "Wedding",
+  //   slug: "palavi-and-geoff",
+  //   title: "Palavi & Geoff",
+  //   date: new Date("2023-09-03"),
+  //   publishDate: new Date("2025-11-19"),
+  //   poster: {
+  //     image: AK,
+  //     alt: "Annie & Knickoy standing outside of Liuna Station at the end of the night, enjoying a moment of peace and quiet, and a sip of champagne.",
+  //   },
+  //   video: aandk,
+  //   tags: ["video"],
+  //   description:
+  //     "Annie & Knickoy knew after dating for over 8 years that they wanted to have a short engagement. They planned their wedding in under six months, and not one detail was missed. With family flying in from all over the world for this celebration, they wanted to create a WOW factor for their guests. From steel pan drums playing during cocktail hour to a delicious midnight buffet of Jamaican patties, their guests danced the night away until the wee hours of the morning!",
+  //   details: {
+  //     venue: {
+  //       name: "Miller Lash House",
+  //       location: "Scarborough, On",
+  //       url: "https://www.millerlashhouse.ca/",
+  //       image: millerLashHouse,
+  //     },
+  //     vendors: [
+  //       {
+  //         name: "Emily Li Photography",
+  //         title: "Photographer",
+  //         url: "https://emilyliphotography.com/",
+  //       },
+  //       {
+  //         name: "Purpletree Photography",
+  //         title: "Photographer",
+  //         url: "https://www.purpletree.ca/",
+  //       },
+  //       {
+  //         name: "JT Wedding Events",
+  //         title: "Planner",
+  //         url: "https://www.jtweddingevents.com/",
+  //       },
+  //       {
+  //         name: "khushwin Dhaliwal",
+  //         title: "Hair",
+  //         url: "https://khushwindhair.as.me/schedule/8272df94",
+  //       },
+  //       {
+  //         name: "Jeige Beauty",
+  //         title: "Hair",
+  //         url: "https://www.instagram.com/jeigebeauty/?hl=en",
+  //       },
+  //       {
+  //         name: "MUAVEE Makeup Studio",
+  //         title: "Makeup",
+  //         url: "https://muavee.com/",
+  //       },
+  //       {
+  //         name: "Styled By Luxshanaa",
+  //         title: "Saree",
+  //         url: "https://styledbyluxshanaa.com/",
+  //       },
+  //       {
+  //         name: "Mandeep Gandhi Music",
+  //         title: "DJ / Live Entertainment",
+  //         url: "https://www.instagram.com/mandeepgandhimusic/?hl=en",
+  //       },
+  //       {
+  //         name: "DJ Harman",
+  //         title: "DJ",
+  //         url: "https://www.instagram.com/djharman__/?hl=en",
+  //       },
+  //     ],
+  //   },
+  // },
 ];

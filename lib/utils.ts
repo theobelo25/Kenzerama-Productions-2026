@@ -118,7 +118,7 @@ export function shuffle(array: any) {
   return array;
 }
 export function isValidDate(d: any) {
-  return d instanceof Date && !isNaN(d);
+  return d instanceof Date && !isNaN(Number(d));
 }
 
 export function isFilm(obj: any): obj is Film {

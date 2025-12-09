@@ -31,7 +31,7 @@ const PageLinks = ({ setOpen }: { setOpen?: (open: boolean) => void }) => {
           Investment
         </Link>
       </Button>
-      <Button asChild variant={"ghost"} className="hover:text-kenzerama-pink">
+      {/* <Button asChild variant={"ghost"} className="hover:text-kenzerama-pink">
         <Link
           href="/blog"
           className="font-questrial uppercase tracking-widest text-x"
@@ -39,7 +39,7 @@ const PageLinks = ({ setOpen }: { setOpen?: (open: boolean) => void }) => {
         >
           Blog
         </Link>
-      </Button>
+      </Button> */}
       <Button asChild variant={"ghost"} className="hover:text-kenzerama-pink">
         <Link
           href="/contact-us"

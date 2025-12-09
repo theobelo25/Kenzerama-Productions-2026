@@ -1,7 +1,6 @@
 import Video from "next-video";
 import { cn } from "@/lib/utils";
 import type { Asset } from "next-video/dist/assets.js";
-import { getPoster } from "@/lib/actions/mux.actions";
 
 const VideoComponent = async ({
   video,

@@ -17,37 +17,41 @@ const ContactLinks = ({
         variant={"ghost"}
         className="hover:text-kenzerama-pink p-4 [--spacing:1]"
       >
-        <Link href="/insta w-fit h-fit">
+        <a
+          href="https://www.instagram.com/kenzerama_productions/?hl=en"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <span className="sr-only">Instagram</span>
           <Instagram size={iconSize} />
-        </Link>
+        </a>
       </Button>
-      <Button
+      {/* <Button
         asChild
         variant={"ghost"}
         className="hover:text-kenzerama-pink p-4 [--spacing:1]"
       >
-        <Link href="/you">
+        <a href="/you" target="_blank" rel="noopener noreferrer">
           <span className="sr-only">Youtube</span>
           <Youtube size={iconSize} />
-        </Link>
-      </Button>
+        </a>
+      </Button> */}
       <Button
         asChild
         variant={"ghost"}
         className="hover:text-kenzerama-pink p-4 [--spacing:1]"
       >
-        <Link href="/mail">
+        <a href="mailto:mackenzie@kenzeramaproductions.com">
           <span className="sr-only">Mail</span>
           <Mail size={iconSize} />
-        </Link>
+        </a>
       </Button>
       <Button
         asChild
         variant={"ghost"}
         className="hover:text-kenzerama-pink [--spacing:1]"
       >
-        <Link href="/phone" className="pt-4">
+        <Link href="tel:14166060379" className="pt-4">
           <span className="sr-only">Phone</span>
           <Phone size={iconSize} />
         </Link>

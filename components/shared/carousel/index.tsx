@@ -1,10 +1,17 @@
 "use client";
-import { MouseEventHandler, useRef } from "react";
+import {
+  MouseEventHandler,
+  useEffect,
+  useEffectEvent,
+  useRef,
+  useState,
+} from "react";
 import Poster from "./poster";
 import { cn, isBlogPost, isFilm, isInstagram } from "@/lib/utils";
 
 import {
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -23,6 +30,8 @@ const CarouselComponent = ({
 }: {
   posts: Film[] | InstagramPost[] | Post[];
 }) => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [active, setActive] = useState(0);
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const path = usePathname();
@@ -30,6 +39,7 @@ const CarouselComponent = ({
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     const target = e.target as HTMLButtonElement;
+    console.log(target);
 
     if (target.value === "prev") {
       prevRef.current?.click();
@@ -38,21 +48,37 @@ const CarouselComponent = ({
     }
   };
 
+  const setActiveSlide = useEffectEvent(() =>
+    setActive(api!.selectedScrollSnap())
+  );
+
+  useEffect(() => {
+    if (api) {
+      api.on("select", () => {
+        setActiveSlide();
+      });
+    }
+  }, [api]);
+
   return (
     <>
       <Carousel
-        className="m-auto fade-horizontal-sm md:fade-horizontal"
+        className="m-auto fade-horizontal-sm md:fade-horizontal px-5"
         opts={{
           loop: true,
         }}
+        setApi={setApi}
       >
         <CarouselContent className="px-10">
-          {posts.map((post) => {
+          {posts.map((post, index) => {
             if (isFilm(post)) {
               return (
                 <CarouselItem
                   key={post.slug}
-                  className="basis-1/1 min-[450px]:basis-1/2 md:basis-1/3 lg:basis-1/5"
+                  className={cn(
+                    "basis-1/1 min-[450px]:basis-1/2 md:basis-1/2 lg:basis-1/4",
+                    active !== index ? "inactive" : ""
+                  )}
                 >
                   <div className="md:px-1 lg:px-2">
                     <Poster film={post} />

@@ -38,13 +38,13 @@ const Header = async () => {
           <Menu />
         </nav>
       </div>
-      {(pathname?.includes("blog") || pathname?.includes("search")) && (
+      {/* {(pathname?.includes("blog") || pathname?.includes("search")) && (
         <BlogMenu
           featuredPost={featuredPost}
           featuredFilm={featuredFilms[0]}
           latestInstagram={data}
         />
-      )}
+      )} */}
     </header>
   );
 };

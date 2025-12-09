@@ -7,7 +7,7 @@ const PageTransition = (props: HTMLMotionProps<"div">) => {
     <motion.div
       {...props}
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      whileInView={{ opacity: 1 }}
       transition={{ delay: 0.5 }}
     />
   );

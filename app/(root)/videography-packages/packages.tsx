@@ -11,6 +11,7 @@ const Packages = () => {
           <PackageItem
             key={packageItem.includes[0] + index}
             packageItem={packageItem}
+            index={index}
           />
         ))}
       </ul>

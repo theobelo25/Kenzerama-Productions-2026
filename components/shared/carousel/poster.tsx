@@ -40,10 +40,6 @@ const Poster = ({
             <span className="text-2xl text-center font-cinzel text-kenzerama-pink-light">
               {title}
             </span>
-            <span>
-              {date.toLocaleString("default", { month: "long" })}{" "}
-              {date.getFullYear()}
-            </span>
           </div>
         </CardContent>
       </Card>

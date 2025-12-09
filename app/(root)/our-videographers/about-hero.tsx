@@ -18,13 +18,15 @@ const AboutHero = () => {
               </span>
             </h2>
             <p className="text-right text-white text-xs md:text-base lg:text-2xl font-questrial w-[80%]">
-              Welcome, and thank you for considering Kenzerama Productions to be
-              part of your wedding day! As the owners, we’re truly honored to be
-              invited into such a personal and meaningful moment in your lives.
-              We believe every love story deserves to be captured with care,
-              creativity, and authenticity, and it’s our passion to turn your
-              memories into a film you’ll cherish forever. We can’t wait to hear
-              your story and help bring your vision to life.
+              Over the last sixteen years, our team has been crafting the art of
+              cinematic storytelling through each and every one of our wedding
+              films. Through the use of our candid and creative approach to
+              shooting with an editorial flair, each one of our films represents
+              a personalized story of your relationship together. No two
+              weddings are alike, so your wedding film shouldn&apos;t be either.
+              Let&apos;s create something as uniquely beautiful as your love
+              story. We can&apos;t wait to hear your story, and help bring your
+              vision to life.
               <br />
               <br />- Kenzie & Theo
             </p>

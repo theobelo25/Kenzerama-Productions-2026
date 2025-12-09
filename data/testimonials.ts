@@ -1,7 +1,7 @@
-import TG from "@/public/images/testimonials/t-and-g-review-image.webp";
-import DG from "@/public/images/testimonials/d-and-g-review-image.webp";
-import KJ from "@/public/images/testimonials/k-and-j-review-image.webp";
-import JJ from "@/public/images/testimonials/j-and-j-review-image.webp";
+import TG from "@/public/images/testimonials/g-and-t-testimonial.webp";
+import DG from "@/public/images/testimonials/d-and-g-testimonial.webp";
+import KJ from "@/public/images/testimonials/k-and-j-testimonial.webp";
+import JJ from "@/public/images/testimonials/j-and-j-testimonial.webp";
 
 export const testimonialData = {
   testimonials: [
