@@ -31,7 +31,7 @@ const Poster = ({
           placeholder="blur"
           loading="eager"
         />
-        <div className="absolute inset-0 z-1 bg-black opacity-45" />
+        <div className="absolute inset-0 z-1 bg-gray-900 opacity-30" />
         <CardContent className="z-2 flex flex-col justify-between items-center h-full text-white">
           <span className="text-xl text-center font-playfair-display">
             {venue.name}

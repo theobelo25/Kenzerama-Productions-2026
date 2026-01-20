@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { filmData } from "@/data/films";
 import PageTitle from "@/app/(root)/page-title";
 import VideoComponent from "@/components/video-component";
-import Tags from "../../tags";
 import FilmDetails from "./film-details";
 import RecentlyWatched from "./recently-watched";
 import RelatedFilms from "./related-films";
@@ -24,16 +23,15 @@ const FilmPage = async (props: { params: Promise<{ name: string }> }) => {
       <VideoComponent
         video={film.video}
         classNames="wrapper"
-        autoplay={false}
+        autoplay={true}
         controls={true}
-        muted={false}
+        muted={true}
+        playsInline={true}
       />
-      <Tags tags={film.tags} className="wrapper py-0" />
       <p className="wrapper text-center font-questrial py-10">
         {film.description}
       </p>
       <FilmDetails details={film.details} />
-      <RecentlyWatched />
       <RelatedFilms currentFilm={film} />
       <Instagram />
       <ContactCta />

@@ -16,7 +16,7 @@ const VenueComponent = ({ venue }: { venue: Venue }) => {
       href={venue.url ? venue.url : "#"}
       target="_blank"
       rel="noopenner noreferrer"
-      className="col-span-1 md:col-span-3"
+      className="col-span-1 md:col-span-2 md:col-start-2"
     >
       <Card className="relative col-span-3 overflow-hidden bg-transparent">
         <Image

@@ -33,6 +33,27 @@ export const metadata: Metadata = {
   },
   description: APP_DESCRIPTION,
   metadataBase: new URL(SERVER_URL),
+  openGraph: {
+    title: APP_NAME,
+    description: APP_DESCRIPTION,
+    images: [
+      {
+        url: "/kp-opengraph-rec.png",
+        width: 1200,
+        height: 630,
+        alt: "Kenzerama Productions Logo",
+        type: "image/png",
+      },
+      {
+        url: "/kp-opengraph-sq.png",
+        width: 1200,
+        height: 1200,
+        alt: "Kenzerama Productions Logo",
+        type: "image/png",
+      },
+    ],
+    type: "website",
+  },
 };
 
 export default function RootLayout({

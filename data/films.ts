@@ -1,5 +1,5 @@
 // Posters
-import BC from "@/public/images/posters/C&B-Poster.webp";
+import BC from "@/public/images/posters/c&b-poster.webp";
 import JR from "@/public/images/posters/j&r-poster.webp";
 import OJ from "@/public/images/posters/o&j-poster.webp";
 import YM from "@/public/images/posters/y&m-poster.webp";

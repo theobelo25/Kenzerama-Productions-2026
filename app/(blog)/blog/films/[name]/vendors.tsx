@@ -8,7 +8,7 @@ import { APP_NAME } from "@/lib/constants";
 
 const Vendors = ({ vendors }: { vendors: Vendor[] }) => {
   return (
-    <Card className="relative col-span-2 md:col-span-3 bg-transparent overflow-hidden">
+    <Card className="relative col-span-2 md:col-span-2 bg-transparent overflow-hidden">
       <Image
         src={logo}
         alt={`${APP_NAME} logo`}

@@ -6,7 +6,7 @@ import Link from "@/components/link-component";
 
 const WhoWeAre = () => {
   return (
-    <section className="bg-background-grey py-10">
+    <section className="bg-ring py-10">
       <div className="wrapper grid grid-cols-1 md:grid-cols-5">
         <VideoComponent
           video={whoWeAreVideo}
@@ -21,14 +21,14 @@ const WhoWeAre = () => {
             ?
           </h2>
           <p className="text-white font-questrial">
-            Your wedding day is a beautiful chapter in your love story — and at
-            Kenzerama Productions, we’re here to capture every heartfelt moment
-            with artistry and care. From the quiet, stolen glances to the joyous
-            laughter shared with loved ones, we preserve the emotions that make
-            your day truly unforgettable. With a deep passion for storytelling
-            and a romantic cinematic style, we create films that let you relive
-            the magic of your wedding again and again. Let us turn your love
-            into a timeless work of art.
+            Over the last sixteen years, our team has been crafting the art of
+            cinematic storytelling through each and every one of our wedding
+            films. Through the use of our candid and creative approach to
+            shooting with an editorial flair, each one of our films represents a
+            personalized story of your relationship together. No two weddings
+            are alike, so your wedding film shouldn't be either. Let's create
+            something as uniquely beautiful as your love story. We can't wait to
+            hear your story, and help bring your vision to life.
           </p>
           <Button
             asChild

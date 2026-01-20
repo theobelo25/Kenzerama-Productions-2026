@@ -24,6 +24,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Link from "@/components/link-component";
 import InstagramPostComponent from "./instagram-post";
 import FeaturedPostMenuItem from "../header/featured-post-menu-item";
+import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 
 const CarouselComponent = ({
   posts,
@@ -39,7 +40,6 @@ const CarouselComponent = ({
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     const target = e.target as HTMLButtonElement;
-    console.log(target);
 
     if (target.value === "prev") {
       prevRef.current?.click();
@@ -109,60 +109,62 @@ const CarouselComponent = ({
         <CarouselPrevious ref={prevRef} className="hidden" />
         <CarouselNext ref={nextRef} className="hidden" />
       </Carousel>
-      <div
-        className={cn(
-          "grid md:grid-flow-col grid-cols-1 md:grid-cols-6 gap-2 py-10 wrapper",
-          (posts.length <= 1
-            ? "hidden"
-            : posts.length <= 3
-            ? "md:hidden"
-            : posts.length <= 5
-            ? "lg:hidden"
-            : "") + (isInstagram(posts[0]) ? " pb-0" : "")
-        )}
-      >
-        <Button
-          value={"prev"}
-          variant={"outline"}
+      {!isInstagram(posts[0]) && (
+        <div
           className={cn(
-            "grid-cols-1 self-center cursor-pointer",
-            "md:col-start-2"
+            "grid md:grid-flow-col grid-cols-4 md:grid-cols-10 gap-2 py-10 wrapper",
+            (posts.length <= 1
+              ? "hidden"
+              : posts.length <= 3
+              ? "md:hidden"
+              : posts.length <= 5
+              ? "lg:hidden"
+              : "") + (isInstagram(posts[0]) ? " pb-0" : "")
           )}
-          onClick={handleClick}
         >
-          Previous
-        </Button>
-        {!isInstagram(posts[0]) && (
-          <div
+          <Button
+            value={"prev"}
+            variant={"outline"}
             className={cn(
-              "order-3 md:order-2 mt-5 md:mt-0 col-span-1 md:col-span-2 md:col-start-3",
-              path.includes("blog/films") ? " hidden!" : ""
+              "grid-cols-1 self-center cursor-pointer col-start-2 md:col-start-4",
+              ""
             )}
+            onClick={handleClick}
           >
-            {isBlog && (
-              <Link href={`/search/`}>
-                <Card className="h-full py-3">
-                  <CardContent className="flex justify-center items-center h-full text-2xl font-playfair-display text-kenzerama-pink">
-                    View all Films
-                  </CardContent>
-                </Card>
-              </Link>
-            )}
-          </div>
-        )}
-
-        <Button
-          value={"next"}
-          variant={"outline"}
-          className={cn(
-            "grid-cols-1 self-center cursor-pointer",
-            "md:col-start-5"
+            <ArrowBigLeft />
+          </Button>
+          {!isInstagram(posts[0]) && (
+            <div
+              className={cn(
+                "order-3 md:order-2 mt-5 md:mt-0 col-span-1 md:col-span-2 md:col-start-3",
+                path.includes("blog/films") ? " hidden!" : ""
+              )}
+            >
+              {isBlog && (
+                <Link href={`/search/`}>
+                  <Card className="h-full py-3">
+                    <CardContent className="flex justify-center items-center h-full text-2xl font-playfair-display text-kenzerama-pink">
+                      View all Films
+                    </CardContent>
+                  </Card>
+                </Link>
+              )}
+            </div>
           )}
-          onClick={handleClick}
-        >
-          Next
-        </Button>
-      </div>
+
+          <Button
+            value={"next"}
+            variant={"outline"}
+            className={cn(
+              "grid-cols-1 self-center cursor-pointer",
+              "md:col-start-7"
+            )}
+            onClick={handleClick}
+          >
+            <ArrowBigRight />
+          </Button>
+        </div>
+      )}
     </>
   );
 };

@@ -28,7 +28,7 @@
     "gsap": "^3.13.0",
     "lucide-react": "^0.553.0",
     "motion": "^12.23.24",
-    "next": "^16.0.7",
+    "next": "16.0.10",
     "next-mdx-remote": "^5.0.0",
     "next-recaptcha-v3": "^1.5.3",
     "next-video": "^2.5.1",

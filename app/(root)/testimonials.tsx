@@ -57,9 +57,13 @@ const Testimonials = () => {
             animate="animate"
             exit="exit"
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="max-md:order-first h-fit col-span-1 md:col-span-1 rounded-sm overflow-hidden"
+            className="max-md:order-first h-fit col-span-1 md:col-span-1 rounded-sm overflow-hidden px-20 md:px-0"
           >
-            <Image src={testimonials[currentPosition].image} alt={"TENP"} />
+            <Image
+              src={testimonials[currentPosition].image}
+              alt={testimonials[currentPosition].names}
+              sizes="100vw,50vw"
+            />
           </motion.div>
         </AnimatePresence>
         <div className="flex justify-between items-center col-span-1 md:col-span-5 md:pt-10 w-full md:min-w-[400px] md:w-[50%] m-auto mt-5">

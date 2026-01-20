@@ -6,12 +6,14 @@ const Instagram = async () => {
   const instagramPosts = response?.data.slice(0, 5);
 
   return (
-    <section className="bg-background-grey py-10">
+    <section className="bg-ring py-10">
       <div className="wrapper space-y-10 py-0">
         <h2 className="relative h2-subheading text-white">
           Follow us on Instagram!
         </h2>
-        <CarouselComponent posts={instagramPosts} />
+        {instagramPosts && instagramPosts.length > 0 && (
+          <CarouselComponent posts={instagramPosts} />
+        )}
       </div>
     </section>
   );
