@@ -1,5 +1,5 @@
 import { APP_NAME } from "@/lib/constants";
-import bgImage from "./public/images/about/message-from-kenzerama-bg.webp";
+import bgImage from "@/public/images/about/message-from-kenzerama-bg.webp";
 import Image from "next/image";
 import PageTitle from "../page-title";
 

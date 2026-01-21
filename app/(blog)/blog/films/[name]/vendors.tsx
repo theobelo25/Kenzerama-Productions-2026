@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import type { Vendor } from "@/types";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
-import logo from "./public/images/logo.webp";
+import logo from "@/public/images/logo.webp";
 import { APP_NAME } from "@/lib/constants";
 
 const Vendors = ({ vendors }: { vendors: Vendor[] }) => {

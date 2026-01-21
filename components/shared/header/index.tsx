@@ -2,7 +2,7 @@ import Link from "@/components/link-component";
 import Image from "next/image";
 import { APP_NAME } from "@/lib/constants";
 import Menu from "./menu";
-import logo from "./public/images/logo.webp";
+import logo from "@/public/images/logo.webp";
 import { headers } from "next/headers";
 import BlogMenu from "./blog-menu";
 import { getFeaturedPost } from "@/lib/actions/posts.actions";
