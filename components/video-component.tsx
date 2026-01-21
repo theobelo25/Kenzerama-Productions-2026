@@ -1,9 +1,8 @@
-"use client";
 import Video from "next-video";
 import { cn } from "@/lib/utils";
 import type { Asset } from "next-video/dist/assets.js";
 
-const VideoComponent = ({
+const VideoComponent = async ({
   video,
   autoplay = true,
   muted = true,
