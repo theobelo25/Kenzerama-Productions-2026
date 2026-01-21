@@ -1,3 +1,4 @@
+"use client";
 import dynamic from "next/dynamic";
 
 const Video = dynamic(() => import("next-video"), {
@@ -6,7 +7,7 @@ const Video = dynamic(() => import("next-video"), {
 import { cn } from "@/lib/utils";
 import type { Asset } from "next-video/dist/assets.js";
 
-const VideoComponent = async ({
+const VideoComponent = ({
   video,
   autoplay = true,
   muted = true,
