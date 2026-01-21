@@ -5,7 +5,7 @@ import createMDX from "@next/mdx";
 const nextConfig: NextConfig = {
   output: "standalone",
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  transpilePackages: ["next-mdx-remote"],
+  transpilePackages: ["next-mdx-remote", "next-video"],
   images: {
     remotePatterns: [
       {
