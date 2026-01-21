@@ -8,7 +8,7 @@ import PageTransition from "@/components/motion/page-transition";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
   const { frontmatter } = await getPost(slug);
