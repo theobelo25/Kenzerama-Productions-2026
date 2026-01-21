@@ -11,6 +11,7 @@ const Instagram = async () => {
         <h2 className="relative h2-subheading text-white">
           Follow us on Instagram!
         </h2>
+
         {instagramPosts && instagramPosts.length > 0 && (
           <CarouselComponent posts={instagramPosts} />
         )}
