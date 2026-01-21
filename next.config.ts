@@ -2,8 +2,8 @@ import { withNextVideo } from "next-video/process";
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 
+/** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
-  output: "standalone",
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   transpilePackages: ["next-mdx-remote", "next-video"],
   images: {
@@ -30,4 +30,4 @@ const nextConfig: NextConfig = {
 
 const withMDX = createMDX({});
 
-export default withMDX(withNextVideo(nextConfig));
+export default withNextVideo(withMDX(nextConfig));
