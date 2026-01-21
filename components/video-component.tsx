@@ -1,9 +1,5 @@
 "use client";
-import dynamic from "next/dynamic";
-
-const Video = dynamic(() => import("next-video"), {
-  ssr: false, // Crucial for client-only components
-});
+import Video from "next-video";
 import { cn } from "@/lib/utils";
 import type { Asset } from "next-video/dist/assets.js";
 
