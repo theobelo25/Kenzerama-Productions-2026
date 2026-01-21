@@ -22,7 +22,6 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     esmExternals: true, // prefer native ESM deps
-    turbopackRemoveUnusedExports: true,
     inlineCss: true,
     mdxRs: true,
     viewTransition: true,
