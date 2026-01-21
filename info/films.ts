@@ -1,11 +1,11 @@
 // Posters
-import BC from "@/public/images/posters/c&b-poster.webp";
-import JR from "@/public/images/posters/j&r-poster.webp";
-import OJ from "@/public/images/posters/o&j-poster.webp";
-import YM from "@/public/images/posters/y&m-poster.webp";
-import KM from "@/public/images/posters/k&m-poster.webp";
-import KD from "@/public/images/posters/k&d-poster.webp";
-import AK from "@/public/images/posters/a&k-poster.webp";
+import BC from "@/assets/posters/c&b-poster.webp";
+import JR from "@/assets/posters/j&r-poster.webp";
+import OJ from "@/assets/posters/o&j-poster.webp";
+import YM from "@/assets/posters/y&m-poster.webp";
+import KM from "@/assets/posters/k&m-poster.webp";
+import KD from "@/assets/posters/k&d-poster.webp";
+import AK from "@/assets/posters/a&k-poster.webp";
 
 // Venues
 import deltaKingstonWaterfront from "@/public/images/venues/delta-kingston-waterfront.webp";
