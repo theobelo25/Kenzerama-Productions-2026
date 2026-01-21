@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import { testimonialData } from "../../data/testimonials";
+import { testimonialData } from "@/info/testimonials";
 import { ANIMATION_VARIANTS } from "@/lib/constants";
 
 const Testimonials = () => {

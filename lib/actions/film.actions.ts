@@ -1,5 +1,5 @@
 "use server";
-import { filmData } from "../../data/films";
+import { filmData } from "@/info/films";
 import type { Film } from "@/types";
 import { findStringInObject } from "../utils";
 

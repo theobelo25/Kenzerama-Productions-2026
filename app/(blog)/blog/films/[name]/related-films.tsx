@@ -1,5 +1,5 @@
 import CarouselComponent from "@/components/shared/carousel";
-import { filmData } from "../../../../../data/films";
+import { filmData } from "@/info/films";
 import { Film } from "@/types";
 import { getRandomItems } from "@/lib/utils";
 

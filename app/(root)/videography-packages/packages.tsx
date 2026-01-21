@@ -1,6 +1,6 @@
 import PackageItem from "./package-item";
 import ExtraItem from "./extra-item";
-import { PACKAGES, EXTRAS } from "../../../data/packages";
+import { PACKAGES, EXTRAS } from "@/info/packages";
 
 const Packages = () => {
   return (
