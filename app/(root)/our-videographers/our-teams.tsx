@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { TEAMS } from "@/data/teams";
+import { TEAMS } from "../../../data/teams";
 const OurTeams = () => {
   return (
     <section className="wrapper py-10 space-y-10">

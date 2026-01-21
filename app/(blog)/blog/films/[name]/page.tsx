@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { filmData } from "@/data/films";
+import { filmData } from "../../../../../data/films";
 import PageTitle from "@/app/(root)/page-title";
 import VideoComponent from "@/components/video-component";
 import FilmDetails from "./film-details";

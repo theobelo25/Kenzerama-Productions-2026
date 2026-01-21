@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { formatDateTime } from "@/lib/utils";
 import Image from "next/image";
-import logo from "@/public/images/logo.webp";
+import logo from "./public/images/logo.webp";
 import { APP_NAME } from "@/lib/constants";
 import { Post } from "@/types";
 import { cn } from "@/lib/utils";

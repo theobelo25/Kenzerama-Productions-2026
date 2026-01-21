@@ -1,4 +1,4 @@
-import { filmData } from "@/data/films";
+import { filmData } from "../../../../../data/films";
 import CarouselComponent from "@/components/shared/carousel";
 import { getHistory } from "@/lib/actions/cookies.actions";
 

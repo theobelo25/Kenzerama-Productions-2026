@@ -1,12 +1,12 @@
 import CarouselComponent from "@/components/shared/carousel";
-import { filmData } from "@/data/films";
+import { filmData } from "../../../../../data/films";
 import { Film } from "@/types";
 import { getRandomItems } from "@/lib/utils";
 
 const RelatedFilms = ({ currentFilm }: { currentFilm: Film }) => {
   let films: Film[] = filmData.filter((film) => film.slug !== currentFilm.slug);
   films = films.filter((film) =>
-    film.tags.some((tag) => currentFilm.tags.includes(tag))
+    film.tags.some((tag) => currentFilm.tags.includes(tag)),
   );
 
   const randomRelated = getRandomItems(films, 5);

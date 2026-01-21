@@ -1,5 +1,5 @@
 "use server";
-import { filmData } from "@/data/films";
+import { filmData } from "../../data/films";
 import type { Film } from "@/types";
 import { findStringInObject } from "../utils";
 
@@ -39,7 +39,7 @@ export async function getAllFilms({
     filteredData = filteredData.filter((film) => film.category === category);
   if (query !== "all")
     filteredData = filteredData.filter((film) =>
-      findStringInObject(film, query)
+      findStringInObject(film, query),
     );
 
   return filteredData;
