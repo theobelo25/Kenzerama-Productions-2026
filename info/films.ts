@@ -34,9 +34,10 @@ import pandg from "@/videos/g_and_p_main.mp4";
 import mandd from "@/videos/d_and_m_main.mp4";
 
 export const filmData = [
+  // Pallavi & Geoff - featured
   {
     id: 1,
-    isFeatured: false,
+    isFeatured: true,
     type: "film",
     category: "Wedding",
     slug: "palavi-and-geoff",
@@ -107,9 +108,10 @@ export const filmData = [
       ],
     },
   },
+  // Mackenzie & Davis - featured
   {
     id: 2,
-    isFeatured: false,
+    isFeatured: true,
     type: "film",
     category: "Wedding",
     slug: "mackenzie-and-davis",
@@ -140,6 +142,7 @@ export const filmData = [
       ],
     },
   },
+  // Kaylee & Jake - featured
   {
     id: 3,
     isFeatured: true,
@@ -173,9 +176,10 @@ export const filmData = [
       ],
     },
   },
+  // Caroline & Brennen
   {
     id: 4,
-    isFeatured: true,
+    isFeatured: false,
     type: "film",
     category: "Wedding",
     slug: "caroline-and-brennen",
@@ -206,6 +210,7 @@ export const filmData = [
       ],
     },
   },
+  // Olivia & Jacob - featured
   {
     id: 5,
     isFeatured: true,
@@ -289,6 +294,7 @@ export const filmData = [
       ],
     },
   },
+  // Yasmin & Michael - featured
   {
     id: 6,
     isFeatured: true,
@@ -362,6 +368,7 @@ export const filmData = [
       ],
     },
   },
+  // Krista & Mitch - featured
   {
     id: 7,
     isFeatured: true,
@@ -405,6 +412,7 @@ export const filmData = [
       ],
     },
   },
+  // Kristina & Dan - featured
   {
     id: 8,
     isFeatured: true,
@@ -483,9 +491,10 @@ export const filmData = [
       ],
     },
   },
+  // Annie & Knickoy
   {
     id: 9,
-    isFeatured: true,
+    isFeatured: false,
     type: "film",
     category: "Wedding",
     slug: "annie-and-knickoy",
