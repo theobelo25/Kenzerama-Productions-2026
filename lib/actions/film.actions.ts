@@ -9,6 +9,10 @@ export async function getFeaturedFilms() {
   return featured as Film[];
 }
 
+export async function getFilms() {
+  return filmData as Film[];
+}
+
 export async function getFilmCategories() {
   const categories: string[] = [];
 
