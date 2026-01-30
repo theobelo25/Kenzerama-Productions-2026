@@ -37,7 +37,7 @@ export const filmData = [
   // Pallavi & Geoff - featured
   {
     id: 1,
-    isFeatured: true,
+    isFeatured: false,
     type: "film",
     category: "Wedding",
     slug: "palavi-and-geoff",
