@@ -8,7 +8,7 @@ const WeddingVideographyPage = () => {
   return (
     <PageTransition>
       <PageTitle title="Wedding Films" />
-      <FeaturedWeddings />
+      <FeaturedWeddings isFeatured={false} />
       <Instagram />
       <ContactCta />
     </PageTransition>
