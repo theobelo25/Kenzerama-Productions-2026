@@ -1,21 +1,25 @@
 // Posters
 import BC from "@/assets/posters/c&b-poster.webp";
-import JR from "@/assets/posters/j&r-poster.webp";
+// import JR from "@/assets/posters/j&r-poster.webp";
 import OJ from "@/assets/posters/o&j-poster.webp";
 import YM from "@/assets/posters/y&m-poster.webp";
 import KM from "@/assets/posters/k&m-poster.webp";
 import KD from "@/assets/posters/k&d-poster.webp";
 import AK from "@/assets/posters/a&k-poster.webp";
+import KJ from "@/assets/posters/k&j-poster.webp";
+import PG from "@/assets/posters/p&g-poster.webp";
+import MD from "@/assets/posters/m&d-poster.webp";
 
 // Venues
 import deltaKingstonWaterfront from "@/public/images/venues/delta-kingston-waterfront.webp";
-import hartHouse from "@/public/images/venues/Hart-House.webp";
+// import hartHouse from "@/public/images/venues/Hart-House.webp";
 import threeFeathersTerrace from "@/public/images/venues/three-feathers-terrace.webp";
 import arlingtonEstate from "@/public/images/venues/arlington-estate.webp";
 import kandmAirbnb from "@/public/images/venues/k-and-m-main.webp";
 import ricardas from "@/public/images/venues/ricardas.webp";
 import liunaStation from "@/public/images/venues/liuna-station.webp";
 import millerLashHouse from "@/public/images/venues/miller-lash-house.webp";
+import theSymes from "@/public/images/venues/the-symes.webp";
 
 // Videos
 import bandc from "@/videos/b_and_c_main.mp4";
@@ -25,10 +29,152 @@ import yandm from "@/videos/y_and_m_main.mp4";
 import kandm from "@/videos/k_and_m_main.mp4";
 import kandd from "@/videos/k_and_d_main.mp4";
 import aandk from "@/videos/a_and_k_main.mp4";
+import kandj from "@/videos/k_and_j_main.mp4";
+import pandg from "@/videos/g_and_p_main.mp4";
+import mandd from "@/videos/d_and_m_main.mp4";
 
 export const filmData = [
   {
     id: 1,
+    isFeatured: false,
+    type: "film",
+    category: "Wedding",
+    slug: "palavi-and-geoff",
+    title: "Palavi & Geoff",
+    date: new Date("2025-08-23"),
+    publishDate: new Date("2026-01-30"),
+    poster: {
+      image: PG,
+      alt: "Pallavi & Geoff enjoying a moment together at their rpe-wedding event.",
+    },
+    video: pandg,
+    tags: ["video"],
+    description:
+      "Pallavi & Geoff celebrated their wedding over three beautiful days, culminating in an absolutely stynning event at the miller lash house.",
+    details: {
+      venue: {
+        name: "Miller Lash House",
+        location: "Scarborough, On",
+        url: "https://www.millerlashhouse.ca/",
+        image: millerLashHouse,
+      },
+      vendors: [
+        {
+          name: "Emily Li Photography",
+          title: "Photographer",
+          url: "https://emilyliphotography.com/",
+        },
+        {
+          name: "Purpletree Photography",
+          title: "Photographer",
+          url: "https://www.purpletree.ca/",
+        },
+        {
+          name: "JT Wedding Events",
+          title: "Planner",
+          url: "https://www.jtweddingevents.com/",
+        },
+        // {
+        //   name: "khushwin Dhaliwal",
+        //   title: "Hair",
+        //   url: "https://khushwindhair.as.me/schedule/8272df94",
+        // },
+        // {
+        //   name: "Jeige Beauty",
+        //   title: "Hair",
+        //   url: "https://www.instagram.com/jeigebeauty/?hl=en",
+        // },
+        // {
+        //   name: "MUAVEE Makeup Studio",
+        //   title: "Makeup",
+        //   url: "https://muavee.com/",
+        // },
+        // {
+        //   name: "Styled By Luxshanaa",
+        //   title: "Saree",
+        //   url: "https://styledbyluxshanaa.com/",
+        // },
+        {
+          name: "Mandeep Gandhi Music",
+          title: "DJ / Live Entertainment",
+          url: "https://www.instagram.com/mandeepgandhimusic/?hl=en",
+        },
+        {
+          name: "DJ Harman",
+          title: "DJ",
+          url: "https://www.instagram.com/djharman__/?hl=en",
+        },
+      ],
+    },
+  },
+  {
+    id: 2,
+    isFeatured: false,
+    type: "film",
+    category: "Wedding",
+    slug: "mackenzie-and-davis",
+    title: "Mackenzie & Davis",
+    date: new Date("2024-12-07"),
+    publishDate: new Date("2026-01-30"),
+    poster: {
+      image: MD,
+      alt: "Mackenzie and Davis walking into their wedding during their Grand Entrance.",
+    },
+    video: mandd,
+    tags: ["video"],
+    description:
+      "Mackenzie and Davis celebrated a beautiful winter wedding with their family and friends at the stunning Arlington Estate venue.",
+    details: {
+      venue: {
+        name: "The Arlington Estate",
+        location: "Vaughan, On",
+        url: "https://thearlingtonestate.com/",
+        image: arlingtonEstate,
+      },
+      vendors: [
+        {
+          name: "Purpletree Photography",
+          title: "Photographer",
+          url: "https://www.purpletree.ca/",
+        },
+      ],
+    },
+  },
+  {
+    id: 3,
+    isFeatured: true,
+    type: "film",
+    category: "Wedding",
+    slug: "kaylee-and-jake",
+    title: "Kaylee & Jake",
+    date: new Date("2025-09-20"),
+    publishDate: new Date("2026-01-30"),
+    poster: {
+      image: KJ,
+      alt: "Kaylee & Jake sharing their first kiss as husband and wife.",
+    },
+    video: kandj,
+    tags: ["video"],
+    description:
+      "Kaylee & Jake got married at the Symes, a beautiful venue that was the perfect backdrop for their vows.",
+    details: {
+      venue: {
+        name: "The Symes",
+        location: "Toronto, On",
+        url: "https://www.thesymes.ca/",
+        image: theSymes,
+      },
+      vendors: [
+        {
+          name: "Mango Studios",
+          title: "Photographer",
+          url: "https://mangostudios.com/",
+        },
+      ],
+    },
+  },
+  {
+    id: 4,
     isFeatured: true,
     type: "film",
     category: "Wedding",
@@ -60,76 +206,8 @@ export const filmData = [
       ],
     },
   },
-  // {
-  //   id: 2,
-  //   isFeatured: true,
-  //   type: "film",
-  //   category: "Wedding",
-  //   slug: "jennika-and-ryan",
-  //   title: "Jennika & Ryan",
-  //   date: new Date("2023-09-16"),
-  //   publishDate: new Date("2025-11-19"),
-  //   poster: {
-  //     image: JR,
-  //     alt: "Jennika facing away from the camera infront of a window inside Hart House, beautifully backlit with sun shining through her long veil.",
-  //   },
-  //   video: jandr,
-  //   tags: ["video"],
-  //   description:
-  //     "Jennika & Ryan’s wedding at Hart House in Toronto was the perfect blend of elegance and romance. Their ceremony took place in the stunning Hart House courtyard, surrounded by ivy-covered walls and historic charm. After the vows, we wandered through the University of Toronto campus to capture timeless portraits against its iconic architecture. Their wedding film is a graceful tribute to a day filled with love, laughter, and classic Toronto beauty.",
-  //   details: {
-  //     venue: {
-  //       name: "Hart House",
-  //       location: "Toronto, On",
-  //       url: "https://harthouse.ca/spaces/weddings",
-  //       image: hartHouse,
-  //     },
-  //     vendors: [
-  //       {
-  //         name: "Beautique Events",
-  //         title: "Planner",
-  //         url: "https://www.beautiqueevents.com/",
-  //       },
-  //       {
-  //         name: "Emily Michelson",
-  //         title: "Photographer",
-  //         url: "https://emilymichelson.com/",
-  //       },
-  //       {
-  //         name: "Riverside Flower Shop",
-  //         title: "Florals",
-  //         url: "https://www.riversideflowershopsu.com/",
-  //       },
-  //       {
-  //         name: "Sounds of Joy Toronto",
-  //         title: "Musicians",
-  //         url: "https://www.instagram.com/soundsofjoyto.weddingmusic/?hl=en",
-  //       },
-  //       {
-  //         name: "The Marrying Lady",
-  //         title: "Officiant",
-  //         url: "https://www.sheisthemarryinglady.com/",
-  //       },
-  //       {
-  //         name: "Maximum Music",
-  //         title: "DJ",
-  //         url: "https://maximumdj.com/",
-  //       },
-  //       {
-  //         name: "Cakes By Robert",
-  //         title: "Cake",
-  //         url: "https://www.cakesbyrobert.com/",
-  //       },
-  //       {
-  //         name: "Lea-Ann Belter",
-  //         title: "Dress",
-  //         url: "https://lea-annbelter.com/",
-  //       },
-  //     ],
-  //   },
-  // },
   {
-    id: 3,
+    id: 5,
     isFeatured: true,
     type: "film",
     category: "Wedding",
@@ -212,7 +290,7 @@ export const filmData = [
     },
   },
   {
-    id: 4,
+    id: 6,
     isFeatured: true,
     type: "film",
     category: "Wedding",
@@ -285,7 +363,7 @@ export const filmData = [
     },
   },
   {
-    id: 5,
+    id: 7,
     isFeatured: true,
     type: "film",
     category: "Elopement",
@@ -328,7 +406,7 @@ export const filmData = [
     },
   },
   {
-    id: 6,
+    id: 8,
     isFeatured: true,
     type: "film",
     category: "Wedding",
@@ -406,7 +484,7 @@ export const filmData = [
     },
   },
   {
-    id: 7,
+    id: 9,
     isFeatured: true,
     type: "film",
     category: "Wedding",
@@ -489,107 +567,69 @@ export const filmData = [
     },
   },
   // {
-  //   id: 8,
-  //   isFeatured: false,
+  //   id: 2,
+  //   isFeatured: true,
   //   type: "film",
   //   category: "Wedding",
-  //   slug: "mackenzie-and-davis",
-  //   title: "Mackenzie & Davis",
-  //   date: new Date("2023-09-03"),
+  //   slug: "jennika-and-ryan",
+  //   title: "Jennika & Ryan",
+  //   date: new Date("2023-09-16"),
   //   publishDate: new Date("2025-11-19"),
   //   poster: {
-  //     image: AK,
-  //     alt: "Annie & Knickoy standing outside of Liuna Station at the end of the night, enjoying a moment of peace and quiet, and a sip of champagne.",
+  //     image: JR,
+  //     alt: "Jennika facing away from the camera infront of a window inside Hart House, beautifully backlit with sun shining through her long veil.",
   //   },
-  //   video: aandk,
+  //   video: jandr,
   //   tags: ["video"],
   //   description:
-  //     "Annie & Knickoy knew after dating for over 8 years that they wanted to have a short engagement. They planned their wedding in under six months, and not one detail was missed. With family flying in from all over the world for this celebration, they wanted to create a WOW factor for their guests. From steel pan drums playing during cocktail hour to a delicious midnight buffet of Jamaican patties, their guests danced the night away until the wee hours of the morning!",
+  //     "Jennika & Ryan’s wedding at Hart House in Toronto was the perfect blend of elegance and romance. Their ceremony took place in the stunning Hart House courtyard, surrounded by ivy-covered walls and historic charm. After the vows, we wandered through the University of Toronto campus to capture timeless portraits against its iconic architecture. Their wedding film is a graceful tribute to a day filled with love, laughter, and classic Toronto beauty.",
   //   details: {
   //     venue: {
-  //       name: "The Arlington Estate",
-  //       location: "Vaughan, On",
-  //       url: "https://thearlingtonestate.com/",
-  //       image: arlingtonEstate,
+  //       name: "Hart House",
+  //       location: "Toronto, On",
+  //       url: "https://harthouse.ca/spaces/weddings",
+  //       image: hartHouse,
   //     },
   //     vendors: [
   //       {
-  //         name: "Dundurn Castle",
-  //         title: "Park",
-  //         url: "https://www.hamilton.ca/things-do/hamilton-civic-museums/dundurn-national-historic-site",
-  //       },
-  //     ],
-  //   },
-  // },
-  // {
-  //   id: 8,
-  //   isFeatured: false,
-  //   type: "film",
-  //   category: "Wedding",
-  //   slug: "palavi-and-geoff",
-  //   title: "Palavi & Geoff",
-  //   date: new Date("2023-09-03"),
-  //   publishDate: new Date("2025-11-19"),
-  //   poster: {
-  //     image: AK,
-  //     alt: "Annie & Knickoy standing outside of Liuna Station at the end of the night, enjoying a moment of peace and quiet, and a sip of champagne.",
-  //   },
-  //   video: aandk,
-  //   tags: ["video"],
-  //   description:
-  //     "Annie & Knickoy knew after dating for over 8 years that they wanted to have a short engagement. They planned their wedding in under six months, and not one detail was missed. With family flying in from all over the world for this celebration, they wanted to create a WOW factor for their guests. From steel pan drums playing during cocktail hour to a delicious midnight buffet of Jamaican patties, their guests danced the night away until the wee hours of the morning!",
-  //   details: {
-  //     venue: {
-  //       name: "Miller Lash House",
-  //       location: "Scarborough, On",
-  //       url: "https://www.millerlashhouse.ca/",
-  //       image: millerLashHouse,
-  //     },
-  //     vendors: [
-  //       {
-  //         name: "Emily Li Photography",
-  //         title: "Photographer",
-  //         url: "https://emilyliphotography.com/",
-  //       },
-  //       {
-  //         name: "Purpletree Photography",
-  //         title: "Photographer",
-  //         url: "https://www.purpletree.ca/",
-  //       },
-  //       {
-  //         name: "JT Wedding Events",
+  //         name: "Beautique Events",
   //         title: "Planner",
-  //         url: "https://www.jtweddingevents.com/",
+  //         url: "https://www.beautiqueevents.com/",
   //       },
   //       {
-  //         name: "khushwin Dhaliwal",
-  //         title: "Hair",
-  //         url: "https://khushwindhair.as.me/schedule/8272df94",
+  //         name: "Emily Michelson",
+  //         title: "Photographer",
+  //         url: "https://emilymichelson.com/",
   //       },
   //       {
-  //         name: "Jeige Beauty",
-  //         title: "Hair",
-  //         url: "https://www.instagram.com/jeigebeauty/?hl=en",
+  //         name: "Riverside Flower Shop",
+  //         title: "Florals",
+  //         url: "https://www.riversideflowershopsu.com/",
   //       },
   //       {
-  //         name: "MUAVEE Makeup Studio",
-  //         title: "Makeup",
-  //         url: "https://muavee.com/",
+  //         name: "Sounds of Joy Toronto",
+  //         title: "Musicians",
+  //         url: "https://www.instagram.com/soundsofjoyto.weddingmusic/?hl=en",
   //       },
   //       {
-  //         name: "Styled By Luxshanaa",
-  //         title: "Saree",
-  //         url: "https://styledbyluxshanaa.com/",
+  //         name: "The Marrying Lady",
+  //         title: "Officiant",
+  //         url: "https://www.sheisthemarryinglady.com/",
   //       },
   //       {
-  //         name: "Mandeep Gandhi Music",
-  //         title: "DJ / Live Entertainment",
-  //         url: "https://www.instagram.com/mandeepgandhimusic/?hl=en",
-  //       },
-  //       {
-  //         name: "DJ Harman",
+  //         name: "Maximum Music",
   //         title: "DJ",
-  //         url: "https://www.instagram.com/djharman__/?hl=en",
+  //         url: "https://maximumdj.com/",
+  //       },
+  //       {
+  //         name: "Cakes By Robert",
+  //         title: "Cake",
+  //         url: "https://www.cakesbyrobert.com/",
+  //       },
+  //       {
+  //         name: "Lea-Ann Belter",
+  //         title: "Dress",
+  //         url: "https://lea-annbelter.com/",
   //       },
   //     ],
   //   },
