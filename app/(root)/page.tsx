@@ -10,7 +10,7 @@ const Homepage = async () => {
   return (
     <PageTransition>
       <PrimaryHero />
-      <FeaturedWeddings />
+      <FeaturedWeddings isFeatured={true} />
       <WhoWeAre />
       <Testimonials />
       <Instagram />
