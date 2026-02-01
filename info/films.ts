@@ -125,7 +125,7 @@ export const filmData = [
     video: mandd,
     tags: ["video"],
     description:
-      "Mackenzie and Davis celebrated a beautiful winter wedding with their family and friends at the stunning Arlington Estate venue.",
+      "Mackenzie and Davis celebrated a beautiful winter wedding with their family and friends at the stunning Arlington Estate venue. After braving the cold for their first look, Mackenzie walked down the aisle in her custom dress, and their event culminated in an elegant black tie dinner.",
     details: {
       venue: {
         name: "The Arlington Estate",
