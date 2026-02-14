@@ -16,7 +16,7 @@ const BlogPage = async () => {
     <PageTransition>
       <PageTitle title="Our Blog" />
       <FeaturedPosts featuredPost={featuredPost} featuredPosts={randPosts} />
-      <FeaturedWeddings />
+      <FeaturedWeddings isFeatured={true} />
       <ContactCta />
       <Instagram />
     </PageTransition>

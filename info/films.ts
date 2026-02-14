@@ -46,12 +46,12 @@ export const filmData = [
     publishDate: new Date("2026-01-30"),
     poster: {
       image: PG,
-      alt: "Pallavi & Geoff enjoying a moment together at their rpe-wedding event.",
+      alt: "Pallavi & Geoff enjoying a moment together at their pre-wedding event.",
     },
     video: pandg,
     tags: ["video"],
     description:
-      "Pallavi & Geoff celebrated their wedding over three beautiful days, culminating in an absolutely stynning event at the miller lash house.",
+      "Pallavi & Geoff celebrated their wedding over three beautiful days, culminating in an absolutely stunning event at the miller lash house.",
     details: {
       venue: {
         name: "Miller Lash House",
@@ -72,7 +72,7 @@ export const filmData = [
         },
         {
           name: "JT Wedding Events",
-          title: "Planner",
+          title: "Planning",
           url: "https://www.jtweddingevents.com/",
         },
         // {
@@ -125,7 +125,7 @@ export const filmData = [
     video: mandd,
     tags: ["video"],
     description:
-      "Mackenzie and Davis celebrated a beautiful winter wedding with their family and friends at the stunning Arlington Estate venue.",
+      "Mackenzie and Davis celebrated a beautiful winter wedding with their family and friends at the stunning Arlington Estate venue. After braving the cold for their first look, Mackenzie walked down the aisle in her custom dress, and their event culminated in an elegant black tie dinner.",
     details: {
       venue: {
         name: "The Arlington Estate",
@@ -135,9 +135,24 @@ export const filmData = [
       },
       vendors: [
         {
-          name: "Purpletree Photography",
-          title: "Photographer",
-          url: "https://www.purpletree.ca/",
+          name: "Rise Event Planning",
+          title: "Planning",
+          url: "https://www.riseventplanning.com",
+        },
+        {
+          name: "Powder Bride",
+          title: "Dress",
+          url: "https://www.instagram.com/powder_bride/",
+        },
+        {
+          name: "Royal Orchid Florist",
+          title: "Florist",
+          url: "https://www.facebook.com/RoyalOrchidFlorist/#",
+        },
+        {
+          name: "Event Graffiti",
+          title: "Floor Wrap",
+          url: "https://eventgraffiti.com/",
         },
       ],
     },
@@ -159,7 +174,7 @@ export const filmData = [
     video: kandj,
     tags: ["video"],
     description:
-      "Kaylee & Jake got married at the Symes, a beautiful venue that was the perfect backdrop for their vows.",
+      "Kaylee & Jake's day started with a unique photo/video session at Objx studio, after which, they headed to the Symes, a beautiful venue that was the perfect backdrop for their vows under the chuppah.",
     details: {
       venue: {
         name: "The Symes",
@@ -169,9 +184,29 @@ export const filmData = [
       },
       vendors: [
         {
-          name: "Mango Studios",
+          name: "Fern Arielle",
           title: "Photographer",
-          url: "https://mangostudios.com/",
+          url: "https://www.fernariellephotography.com/",
+        },
+        {
+          name: "Fab Fete Events",
+          title: "Planning",
+          url: "https://fabfeteevents.com/",
+        },
+        {
+          name: "Chuppah.ca",
+          title: "Chuppah",
+          url: "https://chuppah.ca/",
+        },
+        {
+          name: "Rose & Shine",
+          title: "Florals",
+          url: "https://www.roseandshine.ca/",
+        },
+        {
+          name: "Kwento",
+          title: "Cake",
+          url: "https://www.make-kwento.com/",
         },
       ],
     },
@@ -322,7 +357,7 @@ export const filmData = [
       vendors: [
         {
           name: "Classy Affairs",
-          title: "Planner",
+          title: "Planning",
           url: "https://classyaffairsto.com/",
         },
         {
@@ -440,7 +475,7 @@ export const filmData = [
       vendors: [
         {
           name: "Classy Affairs",
-          title: "Planner",
+          title: "Planning",
           url: "https://classyaffairsto.com/",
         },
         {
@@ -529,7 +564,7 @@ export const filmData = [
         },
         {
           name: "818 Events",
-          title: "Planner",
+          title: "Planning",
           url: "https://www.experience818events.com/",
         },
         // {
@@ -602,7 +637,7 @@ export const filmData = [
   //     vendors: [
   //       {
   //         name: "Beautique Events",
-  //         title: "Planner",
+  //         title: "Planning",
   //         url: "https://www.beautiqueevents.com/",
   //       },
   //       {

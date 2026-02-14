@@ -18,3 +18,4 @@ const FeaturedWeddings = async ({ isFeatured }: { isFeatured: boolean }) => {
 };
 
 export default FeaturedWeddings;
+
