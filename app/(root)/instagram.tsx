@@ -3,7 +3,7 @@ import CarouselComponent from "@/components/shared/carousel";
 
 const Instagram = async () => {
   const response = await getInstagramPosts();
-  const instagramPosts = response?.data.slice(0, 5);
+  const instagramPosts = response?.data?.slice(0, 5);
 
   return (
     <section className="bg-ring py-10">

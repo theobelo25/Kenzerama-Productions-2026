@@ -57,3 +57,5 @@ public/_next-video
 # Posts / Data
 posts/*
 data/*
+
+/lib/generated/prisma

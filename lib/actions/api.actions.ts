@@ -1,10 +1,20 @@
+import { getValidInstagramAccessToken } from "@/lib/services/instagram-token";
 import { formatError } from "../utils";
 
 export async function getInstagramPosts() {
   try {
+    const token = await getValidInstagramAccessToken();
+
     const response = await fetch(
-      `https://graph.instagram.com/me/media?fields=media_url,permalink,thumbnail_url,caption,timestamp&access_token=${process.env.INSTAGRAM_APP_TOKEN}`,
+      `https://graph.instagram.com/me/media?fields=media_url,permalink,thumbnail_url,caption,timestamp&access_token=${token}`,
+      { cache: "no-store" },
     );
+
+    if (!response.ok) {
+      const text = await response.text();
+      throw new Error(`Instagram API error: ${response.status} ${text}`);
+    }
+
     const { data } = await response.json();
 
     return {
@@ -22,15 +32,14 @@ export async function getInstagramPosts() {
 
 export async function getLatestPost() {
   try {
-    const response = await fetch(
-      `https://graph.instagram.com/me/media?fields=media_url,permalink,thumbnail_url,caption,timestamp&access_token=${process.env.INSTAGRAM_APP_TOKEN}`,
-    );
-    const { data } = await response.json();
+    const response = await getInstagramPosts();
+
+    if (!response.success) return response;
 
     return {
       success: true,
       message: "Successfully retrieved instagram posts",
-      data: data[0],
+      data: response.data?.[0],
     };
   } catch (error) {
     return {
