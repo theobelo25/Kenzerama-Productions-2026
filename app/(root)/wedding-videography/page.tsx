@@ -1,14 +1,16 @@
-import PageTitle from "../page-title";
 import FeaturedWeddings from "../featured-weddings";
 import Instagram from "../instagram";
 import ContactCta from "../contact-cta";
 import PageTransition from "@/components/motion/page-transition";
+import WeddingHero from "./wedding-hero";
+import WhatWeCreate from "./what-we-create";
 
 const WeddingVideographyPage = () => {
   return (
     <PageTransition>
-      <PageTitle title="Wedding Films" />
-      <FeaturedWeddings isFeatured={false} />
+      <WeddingHero />
+      <WhatWeCreate />
+      <FeaturedWeddings isFeatured={false} noTopPadding />
       <Instagram />
       <ContactCta />
     </PageTransition>

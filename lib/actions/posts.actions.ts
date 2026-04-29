@@ -7,9 +7,14 @@ import { findStringInObject, formatError, getRandomItems } from "../utils";
 import { readFile, access } from "fs/promises";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { isValidDate } from "../utils";
+import { SEARCH_PAGE_SIZE } from "@/lib/constants/search";
+import {
+  filterCollection,
+  getUniqueCategories,
+  sortByPublishDateDesc,
+} from "@/lib/search-utils";
 
 const POSTS_DIRECTORY = path.join(process.cwd(), "posts");
-const PAGE_SIZE = 10;
 
 export async function getAllPosts() {
   const fileNames = fs.readdirSync(POSTS_DIRECTORY);
@@ -37,28 +42,19 @@ export async function getAllPosts() {
 
 export async function getFeaturedPost() {
   const posts = await getAllPosts();
-
-  const featuredPost = posts.sort((a, b) => {
-    return b.publishDate.getTime() - a.publishDate.getTime();
-  })[0];
+  const featuredPost = sortByPublishDateDesc(posts)[0];
 
   return featuredPost;
 }
 
 export async function getPostCategories() {
   const posts = await getAllPosts();
-  const categories: string[] = [];
-
-  posts.map((post) => {
-    if (!categories.includes(post.category)) categories.push(post.category);
-  });
-
-  return categories;
+  return getUniqueCategories(posts, (post) => post.category);
 }
 
 export async function getFilteredPosts({
   query,
-  limit = PAGE_SIZE,
+  limit = SEARCH_PAGE_SIZE,
   page,
   category,
   sort,
@@ -70,15 +66,12 @@ export async function getFilteredPosts({
   sort?: string;
 }) {
   const postData = await getAllPosts();
-
-  let filteredData = [...postData];
-  if (category !== "all")
-    filteredData = filteredData.filter((post) => post.category === category);
-  if (query !== "all")
-    filteredData = filteredData.filter((film) =>
-      findStringInObject(film, query)
-    );
-  return filteredData;
+  return filterCollection(postData, {
+    query,
+    category,
+    getCategory: (post) => post.category,
+    matchesQuery: (post, q) => findStringInObject(post, q),
+  });
 }
 
 export async function getPost(slug: string) {

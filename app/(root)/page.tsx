@@ -6,15 +6,17 @@ import Instagram from "./instagram";
 import ContactCta from "./contact-cta";
 import PageTransition from "@/components/motion/page-transition";
 
-const Homepage = async () => {
+const Homepage = () => {
   return (
     <PageTransition>
-      <PrimaryHero />
-      <FeaturedWeddings isFeatured={true} />
-      <WhoWeAre />
-      <Testimonials />
-      <Instagram />
-      <ContactCta />
+      <div className="landing-page-compact">
+        <PrimaryHero />
+        <WhoWeAre />
+        <FeaturedWeddings isFeatured compactSpacing />
+        <Testimonials />
+        <Instagram compactSpacing />
+        <ContactCta />
+      </div>
     </PageTransition>
   );
 };

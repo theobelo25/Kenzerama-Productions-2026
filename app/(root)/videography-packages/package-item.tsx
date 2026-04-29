@@ -3,7 +3,6 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
@@ -41,7 +40,7 @@ const PackageItem = ({
       >
         <div>
           <CardHeader>
-            <CardTitle>{title}</CardTitle>
+            <h3 className="leading-none font-semibold">{title}</h3>
           </CardHeader>
           <CardContent>
             <ul>

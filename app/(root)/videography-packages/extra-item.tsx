@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 
-const extraItem = ({
+const ExtraItem = ({
   extraItem: { title, price },
 }: {
   extraItem: { title: string; price: string };
@@ -8,13 +8,15 @@ const extraItem = ({
   return (
     <li>
       <Card className="flex flex-row py-3">
-        <CardContent className="w-full flex justify-between">
-          <span className="block">{title}</span>
-          <span className="block">{price}</span>
+        <CardContent className="w-full">
+          <dl className="flex items-center justify-between gap-4">
+            <dt>{title}</dt>
+            <dd>{price}</dd>
+          </dl>
         </CardContent>
       </Card>
     </li>
   );
 };
 
-export default extraItem;
+export default ExtraItem;

@@ -2,7 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import type { InstagramPost } from "@/types";
-import HoverVideoPlayer from "react-hover-video-player";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const InstagramPostComponent = ({
@@ -12,29 +12,95 @@ const InstagramPostComponent = ({
   post: InstagramPost;
   className?: string;
 }) => {
+  const [isPreviewActive, setIsPreviewActive] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
+
+    updatePreference();
+    mediaQuery.addEventListener("change", updatePreference);
+
+    return () => mediaQuery.removeEventListener("change", updatePreference);
+  }, []);
+
+  const trimmedCaption = post.caption?.trim();
+  const shortCaption =
+    trimmedCaption && trimmedCaption.length > 120
+      ? `${trimmedCaption.slice(0, 117)}...`
+      : trimmedCaption;
+  const linkLabel = shortCaption
+    ? `View Instagram post: ${shortCaption}`
+    : "View Instagram post";
+  const imageAlt = shortCaption
+    ? `Instagram post preview: ${shortCaption}`
+    : "Instagram post preview";
+  const isVideoPost = post.media_type === "VIDEO" || post.media_type === "REELS";
+  const previewImageSrc = post.thumbnail_url || (!isVideoPost ? post.media_url : undefined);
+  const shouldPlayPreviewVideo = isVideoPost && isPreviewActive && !prefersReducedMotion;
+  const showVideoLayer = shouldPlayPreviewVideo && isVideoReady;
+
   if (post)
     return (
       <a
         href={post.permalink}
         target="_blank"
-        rel="noopenner noreferrer"
+        rel="noopener noreferrer"
+        aria-label={linkLabel}
         className={cn("", className)}
+        onMouseEnter={() => {
+          setIsVideoReady(false);
+          setIsPreviewActive(true);
+        }}
+        onMouseLeave={() => setIsPreviewActive(false)}
+        onFocus={() => {
+          setIsVideoReady(false);
+          setIsPreviewActive(true);
+        }}
+        onBlur={() => setIsPreviewActive(false)}
       >
         <Card className="aspect-square rounded-lg border-none overflow-hidden py-0 gap-0 block bg-black">
-          <CardContent className="relative px-0">
-            <HoverVideoPlayer
-              videoSrc={post.media_url}
-              pausedOverlay={
-                <Image
-                  src={post.thumbnail_url}
-                  alt={"temp"}
-                  className="w-full h-full"
-                  height={0}
-                  width={0}
-                  sizes="100vw"
-                />
-              }
-            />
+          <CardContent className="relative h-full p-0">
+            {previewImageSrc ? (
+              <Image
+                src={previewImageSrc}
+                alt={imageAlt}
+                fill
+                className={cn(
+                  "object-cover transition-opacity duration-150",
+                  showVideoLayer ? "opacity-0" : "opacity-100"
+                )}
+                sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                unoptimized
+              />
+            ) : null}
+
+            {shouldPlayPreviewVideo ? (
+              <video
+                src={post.media_url}
+                className={cn(
+                  "h-full w-full object-cover transition-opacity duration-150",
+                  showVideoLayer ? "opacity-100" : "opacity-0"
+                )}
+                autoPlay
+                muted
+                loop
+                playsInline
+                onLoadedData={() => setIsVideoReady(true)}
+                aria-hidden="true"
+              />
+            ) : !previewImageSrc ? (
+              <video
+                src={post.media_url}
+                className="h-full w-full object-cover"
+                muted
+                playsInline
+                preload="metadata"
+                aria-hidden="true"
+              />
+            ) : null}
           </CardContent>
         </Card>
       </a>

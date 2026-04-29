@@ -2,7 +2,7 @@ import Image from "next/image";
 import { TEAMS } from "@/info/teams";
 const OurTeams = () => {
   return (
-    <section className="wrapper py-10 space-y-10">
+    <section className="wrapper pt-0 pb-10 space-y-10">
       <h2 className="mb-15 h2-subheading">Our Teams</h2>
       {TEAMS.map((team) => (
         <div
@@ -15,19 +15,13 @@ const OurTeams = () => {
             className="col-span-1 md:col-span-3 lg:col-span-2 order-(--order) rounded-lg"
             width={0}
             height={0}
-            sizes="50vw, 100vw"
-            fetchPriority="high"
+            sizes="(min-width: 768px) 50vw, 100vw"
             placeholder="blur"
-            loading="eager"
           />
-          <div className="flex flex-col justify-center col-span-1 md:col-span-4 lg:col-span-5 space-y-4">
-            <h3 className="font-cinzel text-2xl text-kenzerama-pink">
-              {team.name}
-              <span className="block text-base font-questrial text-black">
-                {team.title}
-              </span>
-            </h3>
-            <p className="font-questrial text-(--text-ali)">{team.about}</p>
+          <div className="flex flex-col justify-center col-span-1 md:col-span-4 lg:col-span-5">
+            <h3 className="font-cinzel text-2xl text-kenzerama-pink">{team.name}</h3>
+            <p className="mt-1 text-base font-questrial text-black">{team.title}</p>
+            <p className="mt-4 font-questrial text-(--text-ali)">{team.about}</p>
           </div>
         </div>
       ))}

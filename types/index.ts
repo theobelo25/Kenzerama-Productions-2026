@@ -53,9 +53,10 @@ export type Film = {
 export type InstagramPost = {
   caption: string;
   id: string;
+  media_type: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM" | "REELS";
   media_url: string;
   permalink: string;
-  thumbnail_url: string;
+  thumbnail_url?: string;
   timestamp: string;
 };
 

@@ -6,8 +6,8 @@ export async function getInstagramPosts() {
     const token = await getValidInstagramAccessToken();
 
     const response = await fetch(
-      `https://graph.instagram.com/me/media?fields=media_url,permalink,thumbnail_url,caption,timestamp&access_token=${token}`,
-      { cache: "no-store" },
+      `https://graph.instagram.com/me/media?fields=media_type,media_url,permalink,thumbnail_url,caption,timestamp&access_token=${token}`,
+      { next: { revalidate: 86400 } },
     );
 
     if (!response.ok) {

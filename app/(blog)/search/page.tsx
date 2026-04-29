@@ -7,7 +7,12 @@ import {
 } from "@/lib/actions/posts.actions";
 import { Film, Post } from "@/types";
 import Results from "./results";
-import { SORT_ORDERS } from "@/lib/constants";
+import {
+  ALL_FILTER_VALUE,
+  DEFAULT_SEARCH_SORT,
+  SEARCH_SORT_ORDERS,
+} from "@/lib/constants/search";
+import { getUniqueCategories, sortBySearchOrder } from "@/lib/search-utils";
 
 export async function generateMetadata(props: {
   searchParams: Promise<{
@@ -18,17 +23,18 @@ export async function generateMetadata(props: {
   }>;
 }) {
   const {
-    q = "all",
-    category = "all",
-    price = "all",
-    rating = "all",
+    q = ALL_FILTER_VALUE,
+    category = ALL_FILTER_VALUE,
+    price = ALL_FILTER_VALUE,
+    rating = ALL_FILTER_VALUE,
   } = await props.searchParams;
 
-  const isQuerySet = q && q !== "all" && q.trim() !== "";
+  const isQuerySet = q && q !== ALL_FILTER_VALUE && q.trim() !== "";
   const isCategorySet =
-    category && category !== "all" && category.trim() !== "";
-  const isPriceSet = price && price !== "all" && price.trim() !== "";
-  const isRatingSet = rating && rating !== "all" && rating.trim() !== "";
+    category && category !== ALL_FILTER_VALUE && category.trim() !== "";
+  const isPriceSet = price && price !== ALL_FILTER_VALUE && price.trim() !== "";
+  const isRatingSet =
+    rating && rating !== ALL_FILTER_VALUE && rating.trim() !== "";
 
   if (isQuerySet || isCategorySet || isPriceSet || isRatingSet) {
     return {
@@ -55,10 +61,10 @@ const SearchPage = async (props: {
   }>;
 }) => {
   const {
-    q = "all",
-    category = "all",
-    type = "all",
-    sort = "newest",
+    q = ALL_FILTER_VALUE,
+    category = ALL_FILTER_VALUE,
+    type = ALL_FILTER_VALUE,
+    sort = DEFAULT_SEARCH_SORT,
     page = "1",
   } = await props.searchParams;
 
@@ -86,10 +92,13 @@ const SearchPage = async (props: {
   const types = ["Film", "Post"];
   const filmCategories = await getFilmCategories();
   const postCategories = await getPostCategories();
-  const categories = [...filmCategories, ...postCategories];
+  const categories = getUniqueCategories(
+    [...filmCategories, ...postCategories],
+    (categoryText) => categoryText,
+  );
 
   const filmResults: Film[] = [];
-  if (type === "film" || type === "all") {
+  if (type === "film" || type === ALL_FILTER_VALUE) {
     const tempFilms = await getAllFilms({
       query: q,
       category,
@@ -100,7 +109,7 @@ const SearchPage = async (props: {
   }
 
   const postResults: Post[] = [];
-  if (type === "post" || type === "all") {
+  if (type === "post" || type === ALL_FILTER_VALUE) {
     const tempPosts = await getFilteredPosts({
       query: q,
       category,
@@ -109,17 +118,7 @@ const SearchPage = async (props: {
     });
     postResults.push(...tempPosts);
   }
-  let results = [...filmResults, ...postResults];
-
-  if (sort === "oldest") {
-    results = results.sort(
-      (a, b) => a.publishDate.getTime() - b.publishDate.getTime()
-    );
-  } else {
-    results = results.sort(
-      (a, b) => b.publishDate.getTime() - a.publishDate.getTime()
-    );
-  }
+  const results = sortBySearchOrder([...filmResults, ...postResults], sort);
 
   return (
     <>
@@ -131,9 +130,9 @@ const SearchPage = async (props: {
             <ul className="space-y-1">
               <li>
                 <Link
-                  href={getFilterUrl({ t: "all" })}
+                  href={getFilterUrl({ t: ALL_FILTER_VALUE })}
                   className={`${
-                    (type === "all" || type === "") && "font-bold"
+                    (type === ALL_FILTER_VALUE || type === "") && "font-bold"
                   }`}
                 >
                   Any
@@ -159,9 +158,10 @@ const SearchPage = async (props: {
             <ul className="space-y-1">
               <li>
                 <Link
-                  href={getFilterUrl({ c: "all" })}
+                  href={getFilterUrl({ c: ALL_FILTER_VALUE })}
                   className={`${
-                    (category === "all" || category === "") && "font-bold"
+                    (category === ALL_FILTER_VALUE || category === "") &&
+                    "font-bold"
                   }`}
                 >
                   Any
@@ -183,15 +183,15 @@ const SearchPage = async (props: {
         <div className="md:col-span-4 space-y-4">
           <div className="flex-between flex-col my-4 md:flex-row">
             <div className="flex items-center">
-              {q !== "all" && q !== "" && "Query: " + q + ", "}
-              {type !== "all" && type !== "" && "Type: " + type + ", "}
-              {category !== "all" &&
+              {q !== ALL_FILTER_VALUE && q !== "" && "Query: " + q + ", "}
+              {type !== ALL_FILTER_VALUE && type !== "" && "Type: " + type + ", "}
+              {category !== ALL_FILTER_VALUE &&
                 category !== "" &&
                 "Category: " + category + ", "}
               &nbsp;
-              {(q !== "all" && q !== "") ||
-              (category !== "all" && category !== "") ||
-              (type !== "all" && type !== "") ? (
+              {(q !== ALL_FILTER_VALUE && q !== "") ||
+              (category !== ALL_FILTER_VALUE && category !== "") ||
+              (type !== ALL_FILTER_VALUE && type !== "") ? (
                 <Button variant={"link"} asChild>
                   <Link href={"/search"}>Clear</Link>
                 </Button>
@@ -199,7 +199,7 @@ const SearchPage = async (props: {
             </div>
             <div>
               Sort by{" "}
-              {SORT_ORDERS.map((s) => (
+              {SEARCH_SORT_ORDERS.map((s) => (
                 <Link
                   key={s}
                   className={`mx-2${sort == s && " font-bold"}`}

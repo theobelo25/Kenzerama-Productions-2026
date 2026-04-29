@@ -49,6 +49,8 @@ function Carousel({
   plugins,
   className,
   children,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   ...props
 }: React.ComponentProps<"div"> & CarouselProps) {
   const [carouselRef, api] = useEmblaCarousel(
@@ -123,6 +125,8 @@ function Carousel({
         className={cn("relative", className)}
         role="region"
         aria-roledescription="carousel"
+        aria-label={ariaLabelledBy ? undefined : (ariaLabel ?? "Carousel")}
+        aria-labelledby={ariaLabelledBy}
         data-slot="carousel"
         {...props}
       >

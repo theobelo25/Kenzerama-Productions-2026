@@ -25,7 +25,7 @@ const VenueComponent = ({ venue }: { venue: Venue }) => {
           className="absolute left-[50%] top-[50%] -translate-[50%] h-full w-auto -z-2 object-cover"
           width={0}
           height={0}
-          sizes="50vw, 100vw"
+          sizes="(min-width: 768px) 50vw, 100vw"
           fetchPriority="high"
           loading="eager"
         />

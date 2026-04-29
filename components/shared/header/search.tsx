@@ -15,8 +15,15 @@ const Search = () => {
   return (
     <form action="/search" method="GET">
       <div className="flex justify-center items-center space-x-2 md:p-0 max-sm:wrapper">
+        <label htmlFor="search-type" className="sr-only">
+          Filter by content type
+        </label>
         <Select name="type" defaultValue="all">
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger
+            id="search-type"
+            aria-label="Filter by content type"
+            className="w-[180px]"
+          >
             <SelectValue placeholder="All" />
           </SelectTrigger>
           <SelectContent className="z-10" onClick={(e) => e.stopPropagation()}>
@@ -31,7 +38,12 @@ const Search = () => {
             </SelectItem>
           </SelectContent>
         </Select>
+        <label htmlFor="search-query" className="sr-only">
+          Search query
+        </label>
         <Input
+          id="search-query"
+          aria-label="Search query"
           name="q"
           type="text"
           placeholder="Search..."

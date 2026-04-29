@@ -1,50 +1,38 @@
 import Link from "@/components/link-component";
 import Image from "next/image";
+import { headers } from "next/headers";
 import { APP_NAME } from "@/lib/constants";
 import Menu from "./menu";
 import logo from "@/public/images/logo.webp";
-import { headers } from "next/headers";
-import BlogMenu from "./blog-menu";
-import { getFeaturedPost } from "@/lib/actions/posts.actions";
-import { getFeaturedFilms } from "@/lib/actions/film.actions";
-import { getLatestPost } from "@/lib/actions/api.actions";
 
 const Header = async () => {
-  const headersList = await headers();
-  const pathname = headersList.get("x-current-path");
-  const featuredPost = await getFeaturedPost();
-  const featuredFilms = await getFeaturedFilms();
-  const latestInstagram = await getLatestPost();
-  const { data } = latestInstagram;
+  const headerList = await headers();
+  const pathname = headerList.get("x-current-path");
+  const isLandingPage = pathname === "/";
 
   return (
-    <header className="w-screen fixed z-9 bg-white transition-disabled">
-      <div className="flex-between wrapper">
-        <div className="flex-start">
-          <Link href="/" className="flex-start">
+    <header className="w-screen fixed z-9 bg-transparent text-white">
+      <div className="flex-between w-full px-5 py-3 md:px-15 md:py-4 lg:px-25">
+        <div className="flex-start transition-disabled">
+          <Link href="/" className="flex-start" withTransition>
             <Image
               src={logo}
               alt={`${APP_NAME} logo`}
               height={36}
               width={36}
-              className="hidden md:block lg:hidden"
+              className="hidden"
             />
-            <span className="md:hidden lg:block text-xl md:text-2xl text-kenzerama-pink font-cinzel">
-              {APP_NAME}
-            </span>
+            {!isLandingPage && (
+              <span className="block text-xl md:text-2xl text-white font-cinzel">
+                {APP_NAME}
+              </span>
+            )}
           </Link>
         </div>
-        <nav className="space-x-2">
+        <nav aria-label="Primary" className="space-x-2">
           <Menu />
         </nav>
       </div>
-      {/* {(pathname?.includes("blog") || pathname?.includes("search")) && (
-        <BlogMenu
-          featuredPost={featuredPost}
-          featuredFilm={featuredFilms[0]}
-          latestInstagram={data}
-        />
-      )} */}
     </header>
   );
 };

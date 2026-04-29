@@ -12,17 +12,46 @@ const ContactFormWrapper = () => {
   //   console.log(SN_SRC_URL);
   // }, []);
 
+  const contactFormUrl = SN_SRC_URL;
+
   return (
     <>
       {/* <ReCaptcha onValidate={setToken} action="page_view" /> */}
       {SN_SRC_URL && (
-        <iframe
-          aria-label={"Contact Form"}
-          src={
-            "https://app.studioninja.co/contactform/parser/0a800fc8-8f7c-14c2-818f-7f50b7024e52/0a800fc8-8f7c-14c2-818f-7f50b7214e54"
-          }
-          className={cn("w-full h-[980px] md:h-[800px]")}
-        />
+        <div>
+          <p id="contact-form-description" className="sr-only">
+            Complete the embedded contact form below. If it does not load, use the direct
+            form link.
+          </p>
+          <iframe
+            aria-label="Contact Form"
+            aria-describedby="contact-form-description"
+            title="Kenzerama Productions contact form"
+            src={contactFormUrl}
+            sandbox="allow-forms allow-scripts allow-same-origin allow-popups"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allow="clipboard-write"
+            className={cn("w-full h-[980px] md:h-[800px]")}
+          >
+            Your browser does not support embedded forms. Use the{" "}
+            <a href={contactFormUrl} target="_blank" rel="noreferrer">
+              direct contact form link
+            </a>
+            .
+          </iframe>
+          <p className="mt-0 md:mt-3 text-center text-sm text-muted-foreground">
+            Trouble viewing the form? Open the{" "}
+            <a
+              href={contactFormUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="underline underline-offset-2"
+            >
+              contact form in a new tab
+            </a>
+            .
+          </p>
+        </div>
       )}
     </>
   );

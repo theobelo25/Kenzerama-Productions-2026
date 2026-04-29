@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import Link from "@/components/link-component";
 import { Instagram, Youtube, Mail, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -51,10 +50,10 @@ const ContactLinks = ({
         variant={"ghost"}
         className="hover:text-kenzerama-pink [--spacing:1]"
       >
-        <Link href="tel:14166060379" className="pt-4">
+        <a href="tel:14166060379" className="pt-4">
           <span className="sr-only">Phone</span>
           <Phone size={iconSize} />
-        </Link>
+        </a>
       </Button>
     </div>
   );

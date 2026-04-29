@@ -19,7 +19,7 @@ const LoadingPage = () => {
           alt="Loading..."
           width={0}
           height={0}
-          sizes="50vw, 100vw"
+          sizes="(min-width: 768px) 50vw, 100vw"
           fetchPriority="high"
           loading="eager"
         />

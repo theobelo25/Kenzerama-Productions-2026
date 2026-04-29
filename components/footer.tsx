@@ -4,8 +4,8 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t">
-      <div className="p-5 flex-center">
+    <footer className="bg-background">
+      <div className="flex-center px-5 py-2 text-center text-xs text-background-grey sm:text-sm">
         &copy; {currentYear} {APP_NAME}. All Rights Reserverd.
       </div>
     </footer>

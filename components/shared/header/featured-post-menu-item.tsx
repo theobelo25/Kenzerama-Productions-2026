@@ -27,6 +27,7 @@ const FeaturedPostMenuItem = ({
     <Link
       className={cn("h-full w-full rounded-md col-span-2", className)}
       href={`/blog/${slug}`}
+      withTransition
     >
       <Card
         className={

@@ -1,102 +1,108 @@
 "use client";
-import { useState } from "react";
+
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { testimonialData } from "@/info/testimonials";
-import { ANIMATION_VARIANTS } from "@/lib/constants";
+
+const ROTATE_MS = 10_000;
+
+const TESTIMONIAL_BG = "/images/testimonial-bg.jpg";
+
+const fadeVariants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+
+/** First segment before `. ` / `! ` / `? ` (simple sentence split). */
+function getFirstSentence(text: string): string {
+  const t = text.trim();
+  const parts = t.split(/(?<=[.!?])\s+/u);
+  return (parts[0] ?? t).trim();
+}
+
+function stripOuterQuotes(s: string): string {
+  return s
+    .replace(/^[\s\u201C\u201D\u2018\u2019"']+/u, "")
+    .replace(/[\s\u201C\u201D\u2018\u2019"']+$/u, "")
+    .trim();
+}
 
 const Testimonials = () => {
-  const [currentPosition, setCurrentPosition] = useState(0);
-  const [direction, setDirection] = useState<"next" | "prev">("next");
   const { testimonials } = testimonialData;
+  const count = testimonials.length;
+  const [index, setIndex] = useState(0);
+  const reduceMotion = useReducedMotion();
+  const t = testimonials[index];
 
-  const handleNext = () => {
-    setDirection("next");
-    if (currentPosition < testimonials.length - 1)
-      setCurrentPosition(currentPosition + 1);
-    else setCurrentPosition(0);
-  };
+  const pullText = useMemo(
+    () => stripOuterQuotes(getFirstSentence(t.testimonial)),
+    [t.testimonial],
+  );
 
-  const handlePrev = () => {
-    setDirection("prev");
-    if (currentPosition > 0) setCurrentPosition(currentPosition - 1);
-    else setCurrentPosition(testimonials.length - 1);
-  };
+  useEffect(() => {
+    if (count <= 1) return;
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % count);
+    }, ROTATE_MS);
+    return () => clearInterval(id);
+  }, [count]);
 
   return (
-    <section className="py-10">
-      <h2 className="sr-only">Testimonials</h2>
-      <h2 className="py-0 wrapper relative text-right text-xl font-questrial after:content-[''] after:absolute after:right-0 after:-bottom-1 after:bg-kenzerama-pink after:w-[80%] after:h-px">
-        See what our clients are saying!
-      </h2>
-      <div className="wrapper grid grid-cols-1 md:grid-cols-5">
-        <div className="md:flex md:flex-col md:justify-center pt-10 md:pt-0 md:pr-10 col-span-1 md:col-span-4">
-          <AnimatePresence custom={direction} initial={false} mode="wait">
-            <motion.blockquote
-              key={currentPosition}
-              custom={direction}
-              variants={ANIMATION_VARIANTS}
-              initial="initial"
+    <section
+      className="relative isolate overflow-hidden landing-section-y"
+      aria-label="Client testimonials"
+    >
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <Image
+          src={TESTIMONIAL_BG}
+          alt=""
+          fill
+          className="object-cover object-[center_58%] grayscale"
+          sizes="100vw"
+        />
+      </div>
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] bg-black/65"
+        aria-hidden
+      />
+      <div className="relative z-10">
+        <div className="wrapper relative h-[min(75.9vh,46.2rem)] sm:h-[min(74.25vh,42.9rem)] md:h-[23.1rem] lg:h-[20.9rem]">
+          <p className="sr-only" aria-live="polite" aria-atomic="true">
+            Testimonial {index + 1} of {count}: {t.names}. {t.testimonial}
+          </p>
+          <AnimatePresence initial={false} mode="wait">
+            <motion.article
+              key={t.names}
+              variants={fadeVariants}
+              initial={reduceMotion ? "animate" : "initial"}
               animate="animate"
-              exit="exit"
-              className="text-center font-questrial"
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              exit={reduceMotion ? "animate" : "exit"}
+              transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeInOut" }}
+              className="absolute inset-0 w-full overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable] pr-1 [scrollbar-color:rgba(255,255,255,0.35)_transparent]"
             >
-              {testimonials[currentPosition].testimonial}
-            </motion.blockquote>
+              <div className="flex min-h-full w-full flex-col items-center justify-center px-2 py-4 md:px-1">
+                <blockquote className="flex w-full max-w-[44rem] flex-col items-center gap-4 px-2 text-center md:gap-5 md:px-0">
+                  <p className="text-balance font-playfair-display text-lg font-medium leading-snug text-kenzerama-pink md:text-xl">
+                    <span className="font-normal" aria-hidden>
+                      &ldquo;
+                    </span>
+                    {pullText}
+                    <span className="font-normal" aria-hidden>
+                      &rdquo;
+                    </span>
+                  </p>
+                  <p className="text-balance text-sm font-normal leading-relaxed text-white/90 font-questrial md:text-base">
+                    {t.testimonial}
+                  </p>
+                  <p className="pt-1 font-cinzel text-sm font-medium tracking-wide text-white md:text-base">
+                    &ndash; {t.names}
+                  </p>
+                </blockquote>
+              </div>
+            </motion.article>
           </AnimatePresence>
-        </div>
-        <AnimatePresence custom={direction} initial={false} mode="wait">
-          <motion.div
-            key={currentPosition}
-            custom={direction}
-            variants={ANIMATION_VARIANTS}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="max-md:order-first h-fit col-span-1 md:col-span-1 rounded-sm overflow-hidden px-20 md:px-0"
-          >
-            <Image
-              src={testimonials[currentPosition].image}
-              alt={testimonials[currentPosition].names}
-              sizes="100vw,50vw"
-            />
-          </motion.div>
-        </AnimatePresence>
-        <div className="flex justify-between items-center col-span-1 md:col-span-5 md:pt-10 w-full md:min-w-[400px] md:w-[50%] m-auto mt-5">
-          <Button
-            variant={"outline"}
-            onClick={handlePrev}
-            className="cursor-pointer"
-          >
-            <ArrowBigLeft />
-            <span className="sr-only">Previous</span>
-          </Button>
-          <AnimatePresence custom={direction} initial={false} mode="wait">
-            <motion.span
-              key={currentPosition}
-              custom={direction}
-              variants={ANIMATION_VARIANTS}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="text-2xl font-cinzel"
-            >
-              {testimonials[currentPosition].names}
-            </motion.span>
-          </AnimatePresence>
-          <Button
-            variant={"outline"}
-            onClick={handleNext}
-            className="cursor-pointer"
-          >
-            <ArrowBigRight />
-            <span className="sr-only">Next</span>
-          </Button>
         </div>
       </div>
     </section>

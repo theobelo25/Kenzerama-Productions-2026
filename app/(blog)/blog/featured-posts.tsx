@@ -27,7 +27,11 @@ const FeaturedPosts = ({
     <section className="wrapper space-y-5">
       <h2 className="relative h2-subheading">Featured Posts</h2>
       <div className="w-full">
-        <Link href={`/blog/${featuredPost.slug}`} className="w-full h-full">
+        <Link
+          href={`/blog/${featuredPost.slug}`}
+          className="w-full h-full"
+          withTransition
+        >
           <article>
             <Card className="relative min-h-[300px] justify-between">
               <Image
@@ -62,7 +66,7 @@ const FeaturedPosts = ({
           />
         ))}
         <div className="col-span-4 md:col-span-2 rounded-sm">
-          <Link href={`/search/`}>
+          <Link href={`/search/`} withTransition>
             <Card className="h-full">
               <CardContent className="flex justify-center items-center h-full text-2xl font-playfair-display text-kenzerama-pink">
                 View all Posts

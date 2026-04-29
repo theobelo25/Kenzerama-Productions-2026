@@ -1,4 +1,5 @@
 import AboutHero from "./about-hero";
+import MessageFromKenzerama from "./message-from-kenzerama";
 import OurTeams from "./our-teams";
 import Instagram from "../instagram";
 import ContactCta from "../contact-cta";
@@ -9,6 +10,7 @@ const OurVideographersPage = () => {
   return (
     <PageTransition>
       <AboutHero />
+      <MessageFromKenzerama />
       <OurTeams />
       <FrequentlyAskedQuestions />
       <Instagram />

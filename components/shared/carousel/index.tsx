@@ -1,9 +1,8 @@
 "use client";
 import {
-  MouseEventHandler,
   useEffect,
   useEffectEvent,
-  useRef,
+  type KeyboardEventHandler,
   useState,
 } from "react";
 import Poster from "./poster";
@@ -14,8 +13,6 @@ import {
   type CarouselApi,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import { Film, InstagramPost, Post } from "@/types";
@@ -31,41 +28,71 @@ const CarouselComponent = ({
 }: {
   posts: Film[] | InstagramPost[] | Post[];
 }) => {
+  if (posts.length === 0) {
+    return (
+      <div className="wrapper py-10 text-center text-muted-foreground">
+        No posts available right now.
+      </div>
+    );
+  }
+
+  const firstPost = posts[0];
+  const firstPostIsInstagram = isInstagram(firstPost);
   const [api, setApi] = useState<CarouselApi>();
   const [active, setActive] = useState(0);
-  const prevRef = useRef<HTMLButtonElement>(null);
-  const nextRef = useRef<HTMLButtonElement>(null);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
   const path = usePathname();
   const isBlog = path.includes("blog");
-
-  const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    const target = e.target as HTMLButtonElement;
-
-    if (target.value === "prev") {
-      prevRef.current?.click();
-    } else if (target.value === "next") {
-      nextRef.current?.click();
-    }
-  };
+  const carouselLabel = isBlog
+    ? "Related posts carousel"
+    : firstPostIsInstagram
+      ? "Instagram posts carousel"
+      : "Films carousel";
 
   const setActiveSlide = useEffectEvent(() =>
     setActive(api!.selectedScrollSnap())
   );
+  const setScrollState = useEffectEvent(() => {
+    setCanScrollPrev(api!.canScrollPrev());
+    setCanScrollNext(api!.canScrollNext());
+  });
+  const handleControlKeyDown: KeyboardEventHandler<HTMLButtonElement> = (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      api?.scrollPrev();
+      return;
+    }
+
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      api?.scrollNext();
+    }
+  };
 
   useEffect(() => {
     if (api) {
-      api.on("select", () => {
-        setActiveSlide();
-      });
+      setActiveSlide();
+      setScrollState();
+      api.on("select", setActiveSlide);
+      api.on("select", setScrollState);
+      api.on("reInit", setScrollState);
+
+      return () => {
+        api.off("select", setActiveSlide);
+        api.off("select", setScrollState);
+        api.off("reInit", setScrollState);
+      };
     }
-  }, [api]);
+  }, [api, setActiveSlide, setScrollState]);
 
   return (
     <>
       <Carousel
         className="m-auto fade-horizontal-sm md:fade-horizontal px-5"
+        aria-label={carouselLabel}
         opts={{
-          loop: true,
+          loop: !firstPostIsInstagram,
         }}
         setApi={setApi}
       >
@@ -75,13 +102,14 @@ const CarouselComponent = ({
               return (
                 <CarouselItem
                   key={post.slug}
+                  aria-current={active === index ? "true" : undefined}
                   className={cn(
-                    "basis-1/1 min-[450px]:basis-1/2 md:basis-1/2 lg:basis-1/4",
+                    "basis-1/2 sm:basis-1/3 md:basis-1/2 lg:basis-1/4",
                     active !== index ? "inactive" : ""
                   )}
                 >
                   <div className="md:px-1 lg:px-2">
-                    <Poster film={post} />
+                    <Poster film={post} prioritize={index === 0} />
                   </div>
                 </CarouselItem>
               );
@@ -89,7 +117,8 @@ const CarouselComponent = ({
               return (
                 <CarouselItem
                   key={post.id}
-                  className="basis-1/1 sm:basis-1/3 lg:basis-1/5"
+                  aria-current={active === index ? "true" : undefined}
+                  className="basis-1/3 lg:basis-1/5"
                 >
                   <InstagramPostComponent post={post} />
                 </CarouselItem>
@@ -98,6 +127,7 @@ const CarouselComponent = ({
               return (
                 <CarouselItem
                   key={post.slug}
+                  aria-current={active === index ? "true" : undefined}
                   className="basis-1/1 md:basis-1/3 lg:basis-1/5"
                 >
                   <FeaturedPostMenuItem post={post} />
@@ -106,10 +136,8 @@ const CarouselComponent = ({
             }
           })}
         </CarouselContent>
-        <CarouselPrevious ref={prevRef} className="hidden" />
-        <CarouselNext ref={nextRef} className="hidden" />
       </Carousel>
-      {!isInstagram(posts[0]) && (
+      {!firstPostIsInstagram && (
         <div
           className={cn(
             "grid md:grid-flow-col grid-cols-4 md:grid-cols-10 gap-2 py-10 wrapper",
@@ -119,21 +147,26 @@ const CarouselComponent = ({
               ? "md:hidden"
               : posts.length <= 5
               ? "lg:hidden"
-              : "") + (isInstagram(posts[0]) ? " pb-0" : "")
+              : "") + (firstPostIsInstagram ? " pb-0" : "")
           )}
         >
           <Button
-            value={"prev"}
             variant={"outline"}
+            aria-label={
+              isBlog ? "Previous post" : firstPostIsInstagram ? "Previous Instagram post" : "Previous film"
+            }
+            disabled={!canScrollPrev}
+            aria-disabled={!canScrollPrev}
             className={cn(
               "grid-cols-1 self-center cursor-pointer col-start-2 md:col-start-4",
               ""
             )}
-            onClick={handleClick}
+            onClick={() => api?.scrollPrev()}
+            onKeyDown={handleControlKeyDown}
           >
             <ArrowBigLeft />
           </Button>
-          {!isInstagram(posts[0]) && (
+          {!firstPostIsInstagram && (
             <div
               className={cn(
                 "order-3 md:order-2 mt-5 md:mt-0 col-span-1 md:col-span-2 md:col-start-3",
@@ -141,7 +174,7 @@ const CarouselComponent = ({
               )}
             >
               {isBlog && (
-                <Link href={`/search/`}>
+                <Link href={`/search/`} withTransition>
                   <Card className="h-full py-3">
                     <CardContent className="flex justify-center items-center h-full text-2xl font-playfair-display text-kenzerama-pink">
                       View all Films
@@ -153,13 +186,18 @@ const CarouselComponent = ({
           )}
 
           <Button
-            value={"next"}
             variant={"outline"}
+            aria-label={
+              isBlog ? "Next post" : firstPostIsInstagram ? "Next Instagram post" : "Next film"
+            }
+            disabled={!canScrollNext}
+            aria-disabled={!canScrollNext}
             className={cn(
               "grid-cols-1 self-center cursor-pointer",
               "md:col-start-7"
             )}
-            onClick={handleClick}
+            onClick={() => api?.scrollNext()}
+            onKeyDown={handleControlKeyDown}
           >
             <ArrowBigRight />
           </Button>

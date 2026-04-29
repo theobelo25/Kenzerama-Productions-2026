@@ -50,7 +50,7 @@ const BlogMenu = ({
                 Randomly select one of our wedding films to watch
               </ListItem>
               {latestInstagram && (
-                <li className="relative row-span-2 font-cinzel text-2xl text-center text-kenzerama-pink-light">
+                <li className="relative row-span-2 font-cinzel text-2xl text-center text-kenzerama-pink-dark">
                   <span className="absolute z-10 w-full left-0 top-3 ">
                     Follow us on
                   </span>
@@ -107,7 +107,7 @@ function ListItem({
   return (
     <li {...props}>
       <NavigationMenuLink asChild>
-        <Link href={href} className="h-full flex flex-col justify-center">
+        <Link href={href} className="h-full flex flex-col justify-center" withTransition>
           <div className="text-sm leading-none font-medium">{title}</div>
           <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
             {children}
