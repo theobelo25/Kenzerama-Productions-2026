@@ -31,7 +31,7 @@ const FilmTileGrid = ({
         <li key={film.slug}>
           <Poster
             film={film}
-            prioritize={index < 6}
+            prioritize={index < 3}
             sizes="(min-width: 1024px) 16.66vw, 33.33vw"
           />
         </li>

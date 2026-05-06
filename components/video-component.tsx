@@ -1,12 +1,44 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import type { MaxResolutionValue } from "@mux/playback-core";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import Video from "next-video";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import type { Asset } from "next-video/dist/assets.js";
 
 const REDUCED_MOTION_MEDIA_QUERY = "(prefers-reduced-motion: reduce)";
+const HERO_NARROW_MQ = "(max-width: 899px)";
+const EMBED_MOBILE_MQ = "(max-width: 767px)";
+
+function subscribeMq(query: string, onChange: () => void) {
+  const mq = window.matchMedia(query);
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
+}
+
+function useHeroMuxMaxResolution(): MaxResolutionValue {
+  return useSyncExternalStore(
+    (cb) => subscribeMq(HERO_NARROW_MQ, cb),
+    () => (window.matchMedia(HERO_NARROW_MQ).matches ? "720p" : "1080p"),
+    () => "1080p",
+  );
+}
+
+function useEmbedMuxMaxResolution(): MaxResolutionValue | undefined {
+  return useSyncExternalStore(
+    (cb) => subscribeMq(EMBED_MOBILE_MQ, cb),
+    () =>
+      window.matchMedia(EMBED_MOBILE_MQ).matches ? "720p" : undefined,
+    () => undefined,
+  );
+}
+
+const muxThumbnailUrl = (
+  playbackId: string,
+  opts: { width: number; quality: number },
+) =>
+  `https://image.mux.com/${playbackId}/thumbnail.webp?width=${opts.width}&quality=${opts.quality}&fit_mode=preserve&time=0`;
 
 const VideoComponent = ({
   video,
@@ -21,6 +53,8 @@ const VideoComponent = ({
   decorative = false,
   showPlayPauseButton = false,
   playPauseButtonClassName,
+  /** Above-the-fold hero: viewport-sized poster, high fetch priority, video preload=metadata for LCP. */
+  lcpHero = false,
 }: {
   video: Asset;
   autoplay?: boolean;
@@ -34,7 +68,12 @@ const VideoComponent = ({
   decorative?: boolean;
   showPlayPauseButton?: boolean;
   playPauseButtonClassName?: string;
+  lcpHero?: boolean;
 }) => {
+  const heroMuxCap = useHeroMuxMaxResolution();
+  const embedMuxCap = useEmbedMuxMaxResolution();
+  const muxMaxResolution = lcpHero ? heroMuxCap : embedMuxCap;
+
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isPausedByUser, setIsPausedByUser] = useState(false);
@@ -56,15 +95,22 @@ const VideoComponent = ({
   }, []);
 
   const muxPlaybackId = video.providerMetadata?.mux?.playbackId;
+  const heroPosterWidth = muxMaxResolution === "720p" ? 960 : 1280;
   const muxPoster = muxPlaybackId
-    ? `https://image.mux.com/${muxPlaybackId}/thumbnail.webp?width=240&quality=35&fit_mode=preserve&time=0`
+    ? muxThumbnailUrl(
+        muxPlaybackId,
+        lcpHero
+          ? { width: heroPosterWidth, quality: 70 }
+          : { width: 240, quality: 35 },
+      )
     : undefined;
   const posterSrc = muxPoster ?? video.poster;
   const shouldAutoplay = autoplay && !prefersReducedMotion;
   const effectiveAutoplay = shouldAutoplay && !isPausedByUser;
   const shouldLoop = loop && (showPlayPauseButton ? isPlaying : effectiveAutoplay);
   const showPosterOverlay = showPlayPauseButton && !isPlaying;
-  const effectivePreload = preload ?? (effectiveAutoplay ? "auto" : "metadata");
+  const effectivePreload =
+    lcpHero ? "metadata" : preload ?? (effectiveAutoplay ? "auto" : "metadata");
   const videoKey = useMemo(
     () => `${video.src}-${playbackSession}`,
     [video.src, playbackSession],
@@ -114,6 +160,7 @@ const VideoComponent = ({
         controls={controls}
         preload={effectivePreload}
         className={videoClassName}
+        {...(muxMaxResolution ? { maxResolution: muxMaxResolution } : {})}
         style={{
           width: "100%",
           height: "100%",
@@ -132,7 +179,9 @@ const VideoComponent = ({
           alt=""
           fill
           sizes="100vw"
-          quality={45}
+          quality={lcpHero ? 70 : 45}
+          priority={lcpHero}
+          fetchPriority={lcpHero ? "high" : undefined}
           aria-hidden={true}
           className={cn(videoClassName, "pointer-events-none h-full w-full")}
         />

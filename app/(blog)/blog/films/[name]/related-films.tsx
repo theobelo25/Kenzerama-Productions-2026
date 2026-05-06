@@ -1,8 +1,8 @@
-import CarouselComponent from "@/components/shared/carousel";
 import { filmData } from "@/info/films";
 import { Film } from "@/types";
 import { getRandomItems } from "@/lib/utils";
 import SectionWithHeading from "@/components/shared/section-with-heading";
+import RelatedFilmsCarousel from "./related-films-carousel.client";
 
 const RelatedFilms = ({ currentFilm }: { currentFilm: Film }) => {
   let films: Film[] = filmData.filter((film) => film.slug !== currentFilm.slug);
@@ -18,7 +18,7 @@ const RelatedFilms = ({ currentFilm }: { currentFilm: Film }) => {
       heading="Related Films"
       headingClassName="mb-10"
     >
-      <CarouselComponent posts={randomRelated} />
+      <RelatedFilmsCarousel films={randomRelated} />
     </SectionWithHeading>
   );
 };

@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { filmData } from "@/info/films";
 import PageTitle from "@/app/(root)/page-title";
@@ -34,9 +33,7 @@ const FilmPage = async (props: { params: Promise<{ name: string }> }) => {
       </p>
       <FilmDetails details={film.details} />
       <RelatedFilms currentFilm={film} />
-      <Suspense fallback={null}>
-        <Instagram />
-      </Suspense>
+      <Instagram />
       <ContactCta />
     </>
   );

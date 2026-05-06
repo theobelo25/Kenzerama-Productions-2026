@@ -15,9 +15,7 @@ const Homepage = () => {
       </Suspense>
       <WhoWeAre />
       <TestimonialsClient />
-      <Suspense fallback={null}>
-        <Instagram compactSpacing />
-      </Suspense>
+      <Instagram compactSpacing />
       <ContactCta />
     </div>
   );
