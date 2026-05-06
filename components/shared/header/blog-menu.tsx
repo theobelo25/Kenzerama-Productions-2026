@@ -41,7 +41,10 @@ const BlogMenu = ({
                 <span className="w-full text-center font-playfair-display uppercase">
                   Featured Film
                 </span>
-                <Poster film={featuredFilm} />
+                <Poster
+                  film={featuredFilm}
+                  sizes="(min-width: 1024px) 180px, (min-width: 768px) 160px, 140px"
+                />
               </li>
               <ListItem href="/search?type=film" title="See All Films">
                 View all wedding films.

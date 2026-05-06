@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import FeaturedWeddings from "../featured-weddings";
 import Instagram from "../instagram";
 import ContactCta from "../contact-cta";
@@ -10,9 +11,15 @@ const WeddingVideographyPage = () => {
     <PageTransition>
       <WeddingHero />
       <WhatWeCreate />
-      <FeaturedWeddings isFeatured={false} noTopPadding />
-      <Instagram />
-      <ContactCta />
+      <Suspense fallback={null}>
+        <FeaturedWeddings isFeatured={false} noTopPadding />
+      </Suspense>
+      <Suspense fallback={null}>
+        <Instagram />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ContactCta />
+      </Suspense>
     </PageTransition>
   );
 };

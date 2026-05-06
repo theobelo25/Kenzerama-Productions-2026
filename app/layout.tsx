@@ -5,10 +5,9 @@ import {
   APP_NAME,
   APP_DESCRIPTION,
   SERVER_URL,
-  CAPTCHA_SITE_KEY,
 } from "@/lib/constants";
 import { ViewTransitions } from "next-view-transitions";
-import { ReCaptchaProvider } from "next-recaptcha-v3";
+import TransitionLoadingIndicator from "@/components/transition-loading-indicator";
 
 const cinzel = Cinzel({
   variable: "--font-cinzel",
@@ -73,9 +72,8 @@ export default function RootLayout({
           antialiased
         `}
         >
-          <ReCaptchaProvider reCaptchaKey={CAPTCHA_SITE_KEY}>
-            {children}
-          </ReCaptchaProvider>
+          {children}
+          <TransitionLoadingIndicator />
         </body>
       </html>
     </ViewTransitions>

@@ -28,11 +28,11 @@ const Packages = () => {
         role="region"
         aria-labelledby="package-extras-heading"
       >
-        <h2 id="package-extras-heading" className="mb-10 h2-subheading">
+        <h2 id="package-extras-heading" className="mb-4 h2-subheading">
           Extras
         </h2>
         <ul
-          className="max-md:w-full grid grid-cols-1 md:grid-cols-2 gap-2"
+          className="mx-auto grid w-full max-w-4xl grid-cols-1 gap-y-2 md:grid-cols-2 md:gap-x-10"
           aria-labelledby="package-extras-heading"
         >
           {EXTRAS.map((extraItem) => (

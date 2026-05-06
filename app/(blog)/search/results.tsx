@@ -22,7 +22,10 @@ const Results = ({ results }: { results: (Post | Film)[] }) => {
                     animate="visible"
                     exit="exit"
                   >
-                    <Poster film={result as Film} />
+                    <Poster
+                      film={result as Film}
+                      sizes="(min-width: 1024px) 22vw, (min-width: 640px) 30vw, 42vw"
+                    />
                   </motion.li>
                 );
               } else if (result.type === "post") {

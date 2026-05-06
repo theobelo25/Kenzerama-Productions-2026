@@ -54,9 +54,9 @@ const VideoComponent = ({
 
   const muxPlaybackId = video.providerMetadata?.mux?.playbackId;
   const muxPoster = muxPlaybackId
-    ? `https://image.mux.com/${muxPlaybackId}/thumbnail.webp?width=300&time=0`
+    ? `https://image.mux.com/${muxPlaybackId}/thumbnail.webp?width=240&quality=35&fit_mode=preserve&time=0`
     : undefined;
-  const posterSrc = video.poster ?? muxPoster;
+  const posterSrc = muxPoster ?? video.poster;
   const shouldAutoplay = autoplay && !prefersReducedMotion;
   const effectiveAutoplay = shouldAutoplay && !isPausedByUser;
   const shouldLoop = loop && (showPlayPauseButton ? isPlaying : effectiveAutoplay);
@@ -103,6 +103,7 @@ const VideoComponent = ({
             alt=""
             fill
             sizes="100vw"
+            quality={45}
             aria-hidden={true}
             className={cn(videoClassName, "h-full w-full")}
           />
@@ -139,7 +140,7 @@ const VideoComponent = ({
           type="button"
           onClick={togglePlayback}
           className={cn(
-            "pointer-events-auto absolute right-3 bottom-3 z-20 rounded-full bg-black/70 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm transition hover:bg-black/85",
+            "pointer-events-auto absolute right-3 bottom-3 z-20 rounded-full border border-white/15 bg-black/35 px-3 py-1 text-xs font-medium text-white shadow-md shadow-black/20 backdrop-blur-md transition hover:bg-black/45",
             playPauseButtonClassName,
           )}
           aria-label={isPlaying ? "Pause video" : "Play video"}

@@ -32,14 +32,8 @@ const ContactFormWrapper = () => {
             referrerPolicy="strict-origin-when-cross-origin"
             allow="clipboard-write"
             className={cn("w-full h-[980px] md:h-[800px]")}
-          >
-            Your browser does not support embedded forms. Use the{" "}
-            <a href={contactFormUrl} target="_blank" rel="noreferrer">
-              direct contact form link
-            </a>
-            .
-          </iframe>
-          <p className="mt-0 md:mt-3 text-center text-sm text-muted-foreground">
+          />
+          <p className="mt-0 md:mt-3 mb-6 text-center text-sm text-muted-foreground md:mb-3">
             Trouble viewing the form? Open the{" "}
             <a
               href={contactFormUrl}

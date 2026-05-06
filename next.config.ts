@@ -5,10 +5,19 @@ import createMDX from "@next/mdx";
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
   output: "standalone",
+  async redirects() {
+    return [
+      {
+        source: "/our-videographers",
+        destination: "/our-team",
+        permanent: true,
+      },
+    ];
+  },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   transpilePackages: ["next-mdx-remote", "next-video"],
   images: {
-    qualities: [75, 95],
+    qualities: [40, 45, 60, 75, 95],
     remotePatterns: [
       {
         protocol: "https",

@@ -2,9 +2,9 @@ import FilmTileGrid from "@/components/shared/film-tile-grid";
 import CtaLink from "@/components/shared/cta-link";
 import SectionWithHeading from "@/components/shared/section-with-heading";
 import { cn } from "@/lib/utils";
-import { getFeaturedFilms, getFilms } from "@/lib/actions/film.actions";
+import { filmData } from "@/info/films";
 
-const FeaturedWeddings = async ({
+const FeaturedWeddings = ({
   isFeatured,
   compactSpacing = false,
   noTopPadding = false,
@@ -13,12 +13,7 @@ const FeaturedWeddings = async ({
   compactSpacing?: boolean;
   noTopPadding?: boolean;
 }) => {
-  let films;
-  if (isFeatured) {
-    films = await getFeaturedFilms();
-  } else {
-    films = await getFilms();
-  }
+  const films = isFeatured ? filmData.filter((film) => film.isFeatured) : filmData;
 
   const headingId = isFeatured
     ? "featured-weddings-heading"
@@ -47,6 +42,7 @@ const FeaturedWeddings = async ({
         sectionSpacingClass,
         compactSpacing && "!pt-0 !pb-8 md:!pb-10",
         noTopPadding && "!pt-0",
+        isFeatured && "!pb-0 md:!pb-0",
       )}
       wrapperClassName={cn("flex flex-col gap-4", headingGap)}
       headingClassName="relative text-center"

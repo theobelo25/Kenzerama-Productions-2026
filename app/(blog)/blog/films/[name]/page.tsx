@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { filmData } from "@/info/films";
 import PageTitle from "@/app/(root)/page-title";
@@ -19,7 +20,7 @@ const FilmPage = async (props: { params: Promise<{ name: string }> }) => {
   return (
     <PageTransition>
       <NavigationTracker />
-      <PageTitle title={film.title} />
+      <PageTitle title={film.title} subtitle={film.details.venue.name} />
       <VideoComponent
         video={film.video}
         classNames="wrapper"
@@ -33,7 +34,9 @@ const FilmPage = async (props: { params: Promise<{ name: string }> }) => {
       </p>
       <FilmDetails details={film.details} />
       <RelatedFilms currentFilm={film} />
-      <Instagram />
+      <Suspense fallback={null}>
+        <Instagram />
+      </Suspense>
       <ContactCta />
     </PageTransition>
   );

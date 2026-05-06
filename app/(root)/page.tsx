@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import PrimaryHero from "./primary-hero";
 import FeaturedWeddings from "./featured-weddings";
 import WhoWeAre from "./who-we-are";
@@ -11,10 +12,14 @@ const Homepage = () => {
     <PageTransition>
       <div className="landing-page-compact">
         <PrimaryHero />
+        <Suspense fallback={null}>
+          <FeaturedWeddings isFeatured compactSpacing />
+        </Suspense>
         <WhoWeAre />
-        <FeaturedWeddings isFeatured compactSpacing />
         <Testimonials />
-        <Instagram compactSpacing />
+        <Suspense fallback={null}>
+          <Instagram compactSpacing />
+        </Suspense>
         <ContactCta />
       </div>
     </PageTransition>

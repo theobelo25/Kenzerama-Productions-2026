@@ -109,7 +109,11 @@ const CarouselComponent = ({
                   )}
                 >
                   <div className="md:px-1 lg:px-2">
-                    <Poster film={post} prioritize={index === 0} />
+                    <Poster
+                      film={post}
+                      prioritize={index === 0}
+                      sizes="(min-width: 1024px) 18vw, (min-width: 768px) 35vw, (min-width: 640px) 30vw, 45vw"
+                    />
                   </div>
                 </CarouselItem>
               );

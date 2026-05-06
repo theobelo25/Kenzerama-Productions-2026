@@ -2,8 +2,7 @@ import { Suspense } from "react";
 import VideoComponent from "@/components/video-component";
 import homepageHeroTeaser from "@/videos/homepage_hero_video.mp4";
 import SiteTitle from "@/components/motion/site-title";
-import { APP_DESCRIPTION_SHORT, APP_NAME } from "@/lib/constants";
-import HeroScrollCue from "@/components/shared/hero-scroll-cue";
+import { APP_NAME } from "@/lib/constants";
 
 const HeroVideoFallback = () => (
   <div className="absolute inset-0 z-0 bg-black/70" aria-hidden />
@@ -34,12 +33,9 @@ const PrimaryHero = () => {
           <SiteTitle
             id="primary-hero-title"
             title={APP_NAME}
-            eyebrow={"Editorial wedding films, crafted with emotion"}
-            ctaLabel="Inquire about our availability"
-            ctaHref="/contact-us"
+            eyebrow="Editorial wedding films"
           />
         </div>
-        <HeroScrollCue />
       </div>
     </section>
   );

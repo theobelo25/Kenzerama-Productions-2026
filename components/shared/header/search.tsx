@@ -49,7 +49,7 @@ const Search = () => {
           placeholder="Search..."
           className="md:w-[100px] lg:w-[300px]"
         />
-        <Button type="submit">
+        <Button type="submit" variant="ghost">
           <SearchIcon />
           <span className="sr-only">Search</span>
         </Button>

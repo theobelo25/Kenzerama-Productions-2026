@@ -8,6 +8,8 @@ type SecondaryHeroProps = {
   imageAlt?: string;
   /** Focal point for `object-cover` (`object-position`). */
   imagePin?: "top" | "center" | "bottom";
+  /** Optional custom object-position class (e.g. `object-[center_75%]`). */
+  imagePositionClass?: string;
 };
 
 const SecondaryHero = ({
@@ -15,15 +17,17 @@ const SecondaryHero = ({
   image,
   imageAlt = "",
   imagePin = "bottom",
+  imagePositionClass,
 }: SecondaryHeroProps) => {
   const objectPositionClass =
-    imagePin === "top"
+    imagePositionClass ??
+    (imagePin === "top"
       ? "object-top"
       : imagePin === "center"
         ? "object-center"
-        : "object-bottom";
+        : "object-bottom");
   return (
-    <section className="flex flex-col text-center overflow-hidden min-h-fit">
+    <section className="flex min-h-fit flex-col overflow-hidden text-center -mt-[76px]">
       <div className="relative h-full">
         <div className="relative min-h-[240px] md:min-h-[360px] lg:min-h-[460px]">
           <div className="absolute inset-0 z-1 flex items-center justify-center px-4">

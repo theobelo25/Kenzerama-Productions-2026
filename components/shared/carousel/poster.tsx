@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
 import type { Film } from "@/types";
 import Link from "@/components/link-component";
 
@@ -11,7 +10,7 @@ const Poster = ({
     poster,
   },
   prioritize = false,
-  sizes = "100vw",
+  sizes = "(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw",
 }: {
   film: Film;
   prioritize?: boolean;
@@ -23,30 +22,29 @@ const Poster = ({
       className="[--scale-value:1] hover:[--scale-value:1.02]"
       withTransition
     >
-      <Card className="relative aspect-poster overflow-hidden rounded-none">
-        <Image
-          src={poster.image}
-          alt={title}
-          fill
-          sizes={sizes}
-          className="absolute inset-0 z-0 h-full w-full object-cover transition-transform scale-(--scale-value)"
-          priority={prioritize}
-          quality={95}
-          placeholder="blur"
-          loading={prioritize ? "eager" : "lazy"}
-        />
-        <div className="absolute inset-0 z-1 bg-gray-900 opacity-30" />
-        <CardContent className="z-2 flex flex-col justify-between items-center h-full text-white">
-          <span className="text-[clamp(0.75rem,1.3vw,1.25rem)] text-center font-playfair-display leading-tight">
+      <div className="flex flex-col overflow-hidden">
+        <div className="relative aspect-poster w-full shrink-0 overflow-hidden">
+          <Image
+            src={poster.image}
+            alt={title}
+            fill
+            sizes={sizes}
+            className="object-cover transition-transform scale-(--scale-value)"
+            priority={prioritize}
+            quality={70}
+            placeholder="blur"
+            loading={prioritize ? "eager" : "lazy"}
+          />
+        </div>
+        <div className="flex flex-col items-center gap-0.5 px-2 py-2.5 text-center md:px-3 md:py-3">
+          <span className="font-cinzel text-sm leading-snug text-foreground md:text-base">
+            {title}
+          </span>
+          <span className="font-playfair-display text-[0.6875rem] leading-snug text-foreground md:text-xs">
             {venue.name}
           </span>
-          <div className="flex flex-col items-center font-cinzel">
-            <span className="text-[clamp(0.9rem,1.8vw,1.5rem)] text-center font-cinzel text-kenzerama-pink leading-tight">
-              {title}
-            </span>
-          </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </Link>
   );
 };

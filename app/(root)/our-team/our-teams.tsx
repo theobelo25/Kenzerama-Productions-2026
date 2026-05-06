@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { TEAMS } from "@/info/teams";
+import { cn } from "@/lib/utils";
 const OurTeams = () => {
   return (
     <section className="wrapper pt-0 pb-10 space-y-10">
@@ -12,7 +13,10 @@ const OurTeams = () => {
           <Image
             src={team.image}
             alt={team.name}
-            className="col-span-1 md:col-span-3 lg:col-span-2 order-(--order) rounded-lg"
+            className={cn(
+              "col-span-1 md:col-span-3 lg:col-span-2 order-(--order) rounded-lg",
+              team.name === "Mitch & Joel" && "hidden md:block",
+            )}
             width={0}
             height={0}
             sizes="(min-width: 768px) 50vw, 100vw"

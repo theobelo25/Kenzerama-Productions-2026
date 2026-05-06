@@ -8,7 +8,7 @@ type NavLink = {
 
 const NAV_LINKS: NavLink[] = [
   { href: "/", label: "Home" },
-  { href: "/our-videographers", label: "Our Team" },
+  { href: "/our-team", label: "Our Team" },
   { href: "/wedding-videography", label: "Wedding Films" },
   { href: "/videography-packages", label: "Investment" },
   { href: "/contact-us", label: "Contact Us" },

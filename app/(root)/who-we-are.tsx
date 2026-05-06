@@ -4,7 +4,7 @@ import CtaLink from "@/components/shared/cta-link";
 const WhoWeAre = () => {
   return (
     <section
-      className="bg-background landing-section-y !py-8 md:!py-10"
+      className="bg-background landing-section-y !pt-0 !pb-8 md:!pb-10"
       aria-labelledby="who-we-are-title"
     >
       <div className="wrapper flex flex-col items-center space-y-5 md:space-y-8">
@@ -28,7 +28,7 @@ const WhoWeAre = () => {
           as uniquely beautiful as your love story. We can't wait to hear your
           story, and help bring your vision to life.
         </p>
-        <CtaLink href="/our-videographers" className="self-center">
+        <CtaLink href="/our-team" className="self-center">
           Find out more about us!
         </CtaLink>
       </div>

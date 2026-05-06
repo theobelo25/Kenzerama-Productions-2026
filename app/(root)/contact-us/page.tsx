@@ -1,15 +1,15 @@
 import PageTransition from "@/components/motion/page-transition";
 import Instagram from "../instagram";
 import SecondaryHero from "@/components/shared/secondary-hero";
-import contactBgImage from "@/public/images/contact-us-bg.jpg";
+import contactBgImage from "@/public/images/contact-header.jpg";
 import ContactLinks from "@/components/shared/header/contact-links";
 import ContactFormWrapper from "./contact-form-wrapper";
 
 const ContactUsPage = () => {
   return (
     <PageTransition>
-      <SecondaryHero title="Contact Us" image={contactBgImage} />
-      <section className="bg-background landing-section-y !py-8 md:!py-10">
+      <SecondaryHero title="Contact Us" image={contactBgImage} imagePin="center" />
+      <section className="bg-background landing-section-y !pb-0 md:!pb-0 !pt-8 md:!pt-10">
         <div className="wrapper flex flex-col items-center space-y-5 md:space-y-8">
           <p className="w-full text-center text-foreground/90 font-questrial">
             We are so excited to hear more about your wedding, and what you
@@ -20,32 +20,15 @@ const ContactUsPage = () => {
         </div>
       </section>
       <ContactFormWrapper />
-      <p className="wrapper mt-4 text-center text-sm text-muted-foreground font-questrial">
-        This site is protected by reCAPTCHA and the Google{" "}
-        <a
-          href="https://policies.google.com/privacy"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline hover:text-foreground"
-        >
-          Privacy Policy
-        </a>{" "}
-        and{" "}
-        <a
-          href="https://policies.google.com/terms"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline hover:text-foreground"
-        >
-          Terms of Service
-        </a>{" "}
-        apply.
-      </p>
       <section aria-labelledby="alternate-contact-heading">
         <h2 id="alternate-contact-heading" className="h2-subheading mb-10">
           More ways to reach us
         </h2>
-        <ContactLinks className="justify-center mb-10" iconSize={30} />
+        <ContactLinks
+          className="justify-center mb-10"
+          buttonClassName="text-foreground hover:text-kenzerama-pink-dark focus-visible:text-kenzerama-pink-dark"
+          iconSize={30}
+        />
       </section>
       <Instagram />
     </PageTransition>

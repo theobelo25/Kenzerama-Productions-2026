@@ -4,6 +4,8 @@ import { useTransitionRouter } from "next-view-transitions";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
+const TRANSITION_START_EVENT = "kp:route-transition-start";
+
 const LinkComponent = ({
   href,
   children,
@@ -43,6 +45,7 @@ const LinkComponent = ({
         }
 
         e.preventDefault();
+        window.dispatchEvent(new Event(TRANSITION_START_EVENT));
         if (setOpen) setOpen(false);
 
         router.push(href, {
@@ -60,13 +63,13 @@ const LinkComponent = ({
 const pageAnimation = () => {
   document.documentElement.animate([{ opacity: 1 }, { opacity: 0 }], {
     duration: 500,
-    easing: "cubic-bezier(0.76, 0, 0.24, 1",
+    easing: "cubic-bezier(0.76, 0, 0.24, 1)",
     pseudoElement: "::view-transition-old(root)",
   });
 
   document.documentElement.animate([{ opacity: 0 }, { opacity: 1 }], {
     duration: 500,
-    easing: "cubic-bezier(0.76, 0, 0.24, 1",
+    easing: "cubic-bezier(0.76, 0, 0.24, 1)",
     pseudoElement: "::view-transition-new(root)",
   });
 };

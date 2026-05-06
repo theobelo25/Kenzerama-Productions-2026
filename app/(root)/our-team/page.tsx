@@ -6,7 +6,7 @@ import ContactCta from "../contact-cta";
 import FrequentlyAskedQuestions from "./faq";
 import PageTransition from "@/components/motion/page-transition";
 
-const OurVideographersPage = () => {
+const OurTeamPage = () => {
   return (
     <PageTransition>
       <AboutHero />
@@ -19,4 +19,4 @@ const OurVideographersPage = () => {
   );
 };
 
-export default OurVideographersPage;
+export default OurTeamPage;
