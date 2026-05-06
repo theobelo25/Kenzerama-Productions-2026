@@ -26,14 +26,9 @@ const Instagram = async ({ compactSpacing = false }: InstagramProps = {}) => {
       {hasPosts ? (
         <CarouselComponent posts={instagramPosts} />
       ) : (
-        <div className="space-y-1 text-center">
-          <p className="text-sm text-muted-foreground font-questrial">
-            Instagram posts are temporarily unavailable.
-          </p>
-          <p className="text-xs text-destructive/80 font-questrial break-words">
-            {response?.message || "Unknown Instagram fetch error"}
-          </p>
-        </div>
+        <p className="text-center text-sm text-muted-foreground font-questrial">
+          Instagram posts are temporarily unavailable.
+        </p>
       )}
     </SectionWithHeading>
   );
