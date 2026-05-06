@@ -1,12 +1,31 @@
 "use client";
 
 import { Suspense, useEffect, useState } from "react";
+import Image from "next/image";
 import VideoComponent from "@/components/video-component";
 import homepageHeroTeaser from "@/videos/homepage_hero_video.mp4";
 
-const HeroVideoFallback = () => (
-  <div className="absolute inset-0 z-0 bg-black/70" aria-hidden />
-);
+/** Opaque base + hero poster so body background never bleeds through (semi-transparent fallback looked grey on reload). */
+const HeroVideoPlaceholder = () => {
+  const poster = homepageHeroTeaser.poster;
+  return (
+    <div className="absolute inset-0 z-0 bg-black" aria-hidden>
+      {poster ? (
+        <Image
+          src={poster}
+          alt=""
+          fill
+          sizes="100vw"
+          quality={70}
+          priority
+          fetchPriority="high"
+          aria-hidden
+          className="object-cover object-center"
+        />
+      ) : null}
+    </div>
+  );
+};
 
 const DeferredHeroVideo = () => {
   const [shouldRenderVideo, setShouldRenderVideo] = useState(false);
@@ -51,11 +70,11 @@ const DeferredHeroVideo = () => {
   }, []);
 
   if (!shouldRenderVideo) {
-    return <HeroVideoFallback />;
+    return <HeroVideoPlaceholder />;
   }
 
   return (
-    <Suspense fallback={<HeroVideoFallback />}>
+    <Suspense fallback={<HeroVideoPlaceholder />}>
       <VideoComponent
         video={homepageHeroTeaser}
         autoplay

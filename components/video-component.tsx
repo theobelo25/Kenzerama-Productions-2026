@@ -1,7 +1,15 @@
 "use client";
 
 import type { MaxResolutionValue } from "@mux/playback-core";
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import Video from "next-video";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -31,6 +39,14 @@ function useEmbedMuxMaxResolution(): MaxResolutionValue | undefined {
     () =>
       window.matchMedia(EMBED_MOBILE_MQ).matches ? "720p" : undefined,
     () => undefined,
+  );
+}
+
+function usePrefersReducedMotion(): boolean {
+  return useSyncExternalStore(
+    (cb) => subscribeMq(REDUCED_MOTION_MEDIA_QUERY, cb),
+    () => window.matchMedia(REDUCED_MOTION_MEDIA_QUERY).matches,
+    () => false,
   );
 }
 
@@ -74,25 +90,13 @@ const VideoComponent = ({
   const embedMuxCap = useEmbedMuxMaxResolution();
   const muxMaxResolution = lcpHero ? heroMuxCap : embedMuxCap;
 
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(true);
+  const prefersReducedMotion = usePrefersReducedMotion();
   const [isPlaying, setIsPlaying] = useState(true);
   const [isPausedByUser, setIsPausedByUser] = useState(false);
   const [playbackSession, setPlaybackSession] = useState(0);
   const [hasLoadedFrame, setHasLoadedFrame] = useState(false);
-
-  useEffect(() => {
-    const mediaQueryList = window.matchMedia(REDUCED_MOTION_MEDIA_QUERY);
-    const updateMotionPreference = () => {
-      setPrefersReducedMotion(mediaQueryList.matches);
-    };
-
-    updateMotionPreference();
-    mediaQueryList.addEventListener("change", updateMotionPreference);
-
-    return () => {
-      mediaQueryList.removeEventListener("change", updateMotionPreference);
-    };
-  }, []);
+  /** Mux player is lazy-loaded inside next-video; ref may be a custom element with `play()`. */
+  const mediaHostRef = useRef<HTMLMediaElement | null>(null);
 
   const muxPlaybackId = video.providerMetadata?.mux?.playbackId;
   const heroPosterWidth = muxMaxResolution === "720p" ? 960 : 1280;
@@ -109,12 +113,31 @@ const VideoComponent = ({
   const effectiveAutoplay = shouldAutoplay && !isPausedByUser;
   const shouldLoop = loop && (showPlayPauseButton ? isPlaying : effectiveAutoplay);
   const showPosterOverlay = showPlayPauseButton && !isPlaying;
-  const effectivePreload =
-    lcpHero ? "metadata" : preload ?? (effectiveAutoplay ? "auto" : "metadata");
+  const effectivePreload = lcpHero
+    ? effectiveAutoplay
+      ? "auto"
+      : "metadata"
+    : (preload ?? (effectiveAutoplay ? "auto" : "metadata"));
   const videoKey = useMemo(
     () => `${video.src}-${playbackSession}`,
     [video.src, playbackSession],
   );
+
+  const tryPlay = useCallback(() => {
+    if (!effectiveAutoplay) return;
+    const el = mediaHostRef.current;
+    if (el && typeof el.play === "function") {
+      void el.play().catch(() => {});
+    }
+  }, [effectiveAutoplay]);
+
+  useLayoutEffect(() => {
+    if (!effectiveAutoplay) return;
+    tryPlay();
+    const retryMs = [80, 250, 700];
+    const ids = retryMs.map((ms) => window.setTimeout(tryPlay, ms));
+    return () => ids.forEach((id) => clearTimeout(id));
+  }, [effectiveAutoplay, tryPlay, videoKey]);
 
   useEffect(() => {
     setIsPausedByUser(false);
@@ -142,6 +165,15 @@ const VideoComponent = ({
     setIsPlaying(false);
   };
 
+  const handleLoadedData = useCallback(() => {
+    setHasLoadedFrame(true);
+    tryPlay();
+  }, [tryPlay]);
+
+  const handleCanPlay = useCallback(() => {
+    tryPlay();
+  }, [tryPlay]);
+
   const shouldShowPosterLayer =
     (showPosterOverlay || !hasLoadedFrame) && Boolean(posterSrc);
 
@@ -152,6 +184,7 @@ const VideoComponent = ({
     >
       <Video
         key={videoKey}
+        ref={mediaHostRef as React.Ref<HTMLVideoElement>}
         src={video}
         autoplay={showPlayPauseButton ? isPlaying : effectiveAutoplay}
         muted={muted}
@@ -171,7 +204,8 @@ const VideoComponent = ({
           objectPosition: "center",
         }}
         poster={posterSrc}
-        onLoadedData={() => setHasLoadedFrame(true)}
+        onLoadedData={handleLoadedData}
+        onCanPlay={handleCanPlay}
       />
       {shouldShowPosterLayer && posterSrc ? (
         <Image

@@ -48,7 +48,9 @@ const LinkComponent = ({
 
         e.preventDefault();
         window.dispatchEvent(new Event(TRANSITION_START_EVENT));
-        router.push(href);
+        router.push(href, {
+          onTransitionReady: pageAnimation,
+        });
       }}
       className={cn("", className)}
       {...linkProps}
@@ -56,6 +58,20 @@ const LinkComponent = ({
       {children}
     </Link>
   );
+};
+
+const pageAnimation = () => {
+  document.documentElement.animate([{ opacity: 1 }, { opacity: 0 }], {
+    duration: 500,
+    easing: "cubic-bezier(0.76, 0, 0.24, 1)",
+    pseudoElement: "::view-transition-old(root)",
+  });
+
+  document.documentElement.animate([{ opacity: 0 }, { opacity: 1 }], {
+    duration: 500,
+    easing: "cubic-bezier(0.76, 0, 0.24, 1)",
+    pseudoElement: "::view-transition-new(root)",
+  });
 };
 
 export default LinkComponent;

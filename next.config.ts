@@ -1,6 +1,11 @@
 import { withNextVideo } from "next-video/process";
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
+import bundleAnalyzer from "@next/bundle-analyzer";
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
@@ -41,4 +46,4 @@ const nextConfig: NextConfig = {
 
 const withMDX = createMDX({});
 
-export default withNextVideo(withMDX(nextConfig));
+export default withBundleAnalyzer(withNextVideo(withMDX(nextConfig)));

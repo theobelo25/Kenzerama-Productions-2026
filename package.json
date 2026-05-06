@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build --webpack",
+    "analyze": "cross-env ANALYZE=true next build --webpack",
     "start": "next start",
     "lint": "eslint",
     "cron:instagram:refresh": "tsx scripts/refresh-instagram-token.ts"
@@ -49,12 +50,14 @@
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.2.5",
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "baseline-browser-mapping": "^2.10.27",
+    "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "^16.0.7",
     "file-loader": "^6.2.0",
