@@ -11,6 +11,7 @@ const Instagram = async ({ compactSpacing = false }: InstagramProps = {}) => {
   const response = await getInstagramPosts();
   const instagramPosts = response?.data?.slice(0, 5);
   const hasPosts = Boolean(instagramPosts && instagramPosts.length > 0);
+  const showInstagramDebug = process.env.NEXT_PUBLIC_DEBUG_INSTAGRAM === "true";
 
   return (
     <SectionWithHeading
@@ -24,9 +25,16 @@ const Instagram = async ({ compactSpacing = false }: InstagramProps = {}) => {
       {hasPosts ? (
         <CarouselComponent posts={instagramPosts} />
       ) : (
-        <p className="text-center text-sm text-muted-foreground font-questrial">
-          Instagram posts are temporarily unavailable.
-        </p>
+        <div className="space-y-1 text-center">
+          <p className="text-sm text-muted-foreground font-questrial">
+            Instagram posts are temporarily unavailable.
+          </p>
+          {showInstagramDebug ? (
+            <p className="text-xs text-destructive/80 font-questrial break-words">
+              {response?.message || "Unknown Instagram fetch error"}
+            </p>
+          ) : null}
+        </div>
       )}
     </SectionWithHeading>
   );
