@@ -18,26 +18,6 @@ export const HERO_CTA_LINK_CLASSNAME =
 export const SECTION_CTA_LINK_CLASSNAME =
   "inline-flex items-center justify-center rounded-full border border-kenzerama-pink bg-black/35 px-4 py-1.5 font-playfair-display text-[10px] uppercase tracking-wide text-white shadow-md shadow-black/20 backdrop-blur-md transition-colors duration-300 hover:bg-kenzerama-pink hover:text-background-grey md:px-5 md:py-2 md:text-sm";
 
-export const SITE_TITLE_ANIMATION = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.8,
-      ease: "easeIn",
-    },
-  },
-  eyebrowVisible: {
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-      ease: "easeIn",
-    },
-  },
-};
-
 // GOOGLE API
 export const CAPTCHA_SITE_KEY = process.env.RECAPTCHA_SITE_KEY || "";
 

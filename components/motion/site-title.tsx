@@ -1,7 +1,3 @@
-"use client";
-import { useEffect, useState } from "react";
-import { motion, stagger, useReducedMotion, Variants } from "motion/react";
-import { SITE_TITLE_ANIMATION } from "@/lib/constants";
 import HeroCtaLink from "@/components/shared/hero-cta-link";
 
 const SiteTitle = ({
@@ -17,20 +13,6 @@ const SiteTitle = ({
   ctaLabel?: string;
   ctaHref?: string;
 }) => {
-  const shouldReduceMotion = useReducedMotion();
-  const [showTitle] = useState(true);
-  const [showEyebrow, setShowEyebrow] = useState(shouldReduceMotion);
-  useEffect(() => {
-    if (shouldReduceMotion) setShowEyebrow(true);
-  }, [shouldReduceMotion]);
-  const titleAnimationVariant = shouldReduceMotion
-    ? {
-        hidden: { opacity: 1 },
-        visible: { opacity: 1, transition: { duration: 0 } },
-        eyebrowVisible: { opacity: 1, transition: { duration: 0 } },
-      }
-    : SITE_TITLE_ANIMATION;
-
   return (
     <h1
       id={id}
@@ -39,46 +21,20 @@ const SiteTitle = ({
       <span className="sr-only">
         {title} - {eyebrow}
       </span>
-      <motion.span
-        className="pointer-events-none"
-        initial="hidden"
-        animate={shouldReduceMotion ? "visible" : showTitle ? "eyebrowVisible" : "hidden"}
-        transition={{
-          delayChildren: shouldReduceMotion ? 0 : stagger(0.04),
-        }}
-        onAnimationComplete={() => {
-          if (!shouldReduceMotion) setShowEyebrow(true);
-        }}
-        aria-hidden
-      >
+      <span className="pointer-events-none" aria-hidden>
         {title.split("").map((c, i) => {
-          if (c === " ") return <br key={i + c} />;
+          if (c === " ") return <br key={`${i}-space`} />;
           return (
-            <motion.span
-              key={i + c}
-              variants={titleAnimationVariant as Variants}
-            >
+            <span key={`${i}-${c}`}>
               {c}
-            </motion.span>
+            </span>
           );
         })}
-      </motion.span>
+      </span>
       {eyebrow && (
-        <motion.span
-          className="eyebrow pointer-events-none text-[0.4em]"
-          initial={shouldReduceMotion ? false : "hidden"}
-          animate={showEyebrow ? "visible" : "hidden"}
-          aria-hidden
-        >
-          {eyebrow.split("").map((char, index) => (
-            <motion.span
-              key={char + index}
-              variants={titleAnimationVariant as Variants}
-            >
-              {char}
-            </motion.span>
-          ))}
-        </motion.span>
+        <span className="eyebrow pointer-events-none text-[0.4em]" aria-hidden>
+          {eyebrow}
+        </span>
       )}
       {ctaLabel && ctaHref && (
         <span className="mt-3 block text-sm md:text-base font-playfair-display normal-case">
