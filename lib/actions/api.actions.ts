@@ -1,9 +1,11 @@
 import { getValidInstagramAccessToken } from "@/lib/services/instagram-token";
 import { formatError } from "../utils";
+import { unstable_noStore as noStore } from "next/cache";
 
 const INSTAGRAM_MEDIA_REVALIDATE_SECONDS = 300;
 
 export async function getInstagramPosts() {
+  noStore();
   try {
     const token = await getValidInstagramAccessToken();
 

@@ -2,12 +2,14 @@ import { getInstagramPosts } from "@/lib/actions/api.actions";
 import CarouselComponent from "@/components/shared/carousel";
 import SectionWithHeading from "@/components/shared/section-with-heading";
 import { cn } from "@/lib/utils";
+import { unstable_noStore as noStore } from "next/cache";
 
 type InstagramProps = {
   compactSpacing?: boolean;
 };
 
 const Instagram = async ({ compactSpacing = false }: InstagramProps = {}) => {
+  noStore();
   const response = await getInstagramPosts();
   const instagramPosts = response?.data?.slice(0, 5);
   const hasPosts = Boolean(instagramPosts && instagramPosts.length > 0);
