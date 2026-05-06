@@ -1,10 +1,9 @@
 import Image from "next/image";
 import loader from "@/assets/fade-stagger-circles.svg";
-import PageTransition from "@/components/motion/page-transition";
 
 const LoadingPage = () => {
   return (
-    <PageTransition>
+    <>
       <div
         style={{
           display: "flex",
@@ -24,7 +23,7 @@ const LoadingPage = () => {
           loading="eager"
         />
       </div>
-    </PageTransition>
+    </>
   );
 };
 

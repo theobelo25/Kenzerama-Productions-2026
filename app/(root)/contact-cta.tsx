@@ -1,6 +1,5 @@
 import HeroCtaLink from "@/components/shared/hero-cta-link";
-
-const CONTACT_BANNER_BG = "/images/contact-us-bg.jpg";
+import contactBannerBg from "@/public/images/contact-us-bg.webp";
 
 const ContactCta = () => {
   return (
@@ -12,7 +11,7 @@ const ContactCta = () => {
         aria-hidden
         className="pointer-events-none absolute inset-0 z-0 bg-cover bg-no-repeat"
         style={{
-          backgroundImage: `url(${CONTACT_BANNER_BG})`,
+          backgroundImage: `url(${contactBannerBg.src})`,
           backgroundPosition: "center 58%",
         }}
       />

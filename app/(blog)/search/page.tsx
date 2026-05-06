@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import Link from "@/components/link-component";
 import { getAllFilms, getFilmCategories } from "@/lib/actions/film.actions";
 import {
   getFilteredPosts,
@@ -131,6 +131,7 @@ const SearchPage = async (props: {
               <li>
                 <Link
                   href={getFilterUrl({ t: ALL_FILTER_VALUE })}
+                  withTransition
                   className={`${
                     (type === ALL_FILTER_VALUE || type === "") && "font-bold"
                   }`}
@@ -141,6 +142,7 @@ const SearchPage = async (props: {
               {types.map((typeText) => (
                 <li key={typeText}>
                   <Link
+                    withTransition
                     className={`${
                       type === typeText.toLowerCase() && "font-bold"
                     }`}
@@ -159,6 +161,7 @@ const SearchPage = async (props: {
               <li>
                 <Link
                   href={getFilterUrl({ c: ALL_FILTER_VALUE })}
+                  withTransition
                   className={`${
                     (category === ALL_FILTER_VALUE || category === "") &&
                     "font-bold"
@@ -170,6 +173,7 @@ const SearchPage = async (props: {
               {categories.map((categoryText) => (
                 <li key={categoryText}>
                   <Link
+                    withTransition
                     className={`${category === categoryText && "font-bold"}`}
                     href={getFilterUrl({ c: categoryText })}
                   >
@@ -193,7 +197,9 @@ const SearchPage = async (props: {
               (category !== ALL_FILTER_VALUE && category !== "") ||
               (type !== ALL_FILTER_VALUE && type !== "") ? (
                 <Button variant={"link"} asChild>
-                  <Link href={"/search"}>Clear</Link>
+                  <Link href={"/search"} withTransition>
+                    Clear
+                  </Link>
                 </Button>
               ) : null}
             </div>
@@ -202,6 +208,7 @@ const SearchPage = async (props: {
               {SEARCH_SORT_ORDERS.map((s) => (
                 <Link
                   key={s}
+                  withTransition
                   className={`mx-2${sort == s && " font-bold"}`}
                   href={getFilterUrl({ s })}
                 >

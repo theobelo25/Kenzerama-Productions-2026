@@ -9,7 +9,6 @@ import RelatedFilms from "./related-films";
 import NavigationTracker from "@/components/navigation-tracker";
 import Instagram from "@/app/(root)/instagram";
 import ContactCta from "@/app/(root)/contact-cta";
-import PageTransition from "@/components/motion/page-transition";
 
 const FilmPage = async (props: { params: Promise<{ name: string }> }) => {
   const { name } = await props.params;
@@ -18,16 +17,17 @@ const FilmPage = async (props: { params: Promise<{ name: string }> }) => {
   if (!film) return notFound();
 
   return (
-    <PageTransition>
+    <>
       <NavigationTracker />
       <PageTitle title={film.title} subtitle={film.details.venue.name} />
       <VideoComponent
         video={film.video}
         classNames="wrapper"
-        autoplay={true}
+        autoplay={false}
         controls={true}
         muted={true}
         playsInline={true}
+        preload="metadata"
       />
       <p className="wrapper text-center font-questrial py-10">
         {film.description}
@@ -38,7 +38,7 @@ const FilmPage = async (props: { params: Promise<{ name: string }> }) => {
         <Instagram />
       </Suspense>
       <ContactCta />
-    </PageTransition>
+    </>
   );
 };
 

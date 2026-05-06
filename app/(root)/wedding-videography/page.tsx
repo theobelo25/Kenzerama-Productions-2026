@@ -2,13 +2,12 @@ import { Suspense } from "react";
 import FeaturedWeddings from "../featured-weddings";
 import Instagram from "../instagram";
 import ContactCta from "../contact-cta";
-import PageTransition from "@/components/motion/page-transition";
 import WeddingHero from "./wedding-hero";
 import WhatWeCreate from "./what-we-create";
 
 const WeddingVideographyPage = () => {
   return (
-    <PageTransition>
+    <>
       <WeddingHero />
       <WhatWeCreate />
       <Suspense fallback={null}>
@@ -20,7 +19,7 @@ const WeddingVideographyPage = () => {
       <Suspense fallback={null}>
         <ContactCta />
       </Suspense>
-    </PageTransition>
+    </>
   );
 };
 

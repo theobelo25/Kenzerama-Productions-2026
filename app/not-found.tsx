@@ -3,11 +3,10 @@ import { APP_NAME } from "@/lib/constants";
 import Image from "next/image";
 import Link from "@/components/link-component";
 import { Button } from "@/components/ui/button";
-import PageTransition from "@/components/motion/page-transition";
 
 const NotFoundPage = () => {
   return (
-    <PageTransition>
+    <>
       <div className="flex flex-col items-center justify-center min-h-screen">
         <Image
           src="/images/logo.webp"
@@ -26,7 +25,7 @@ const NotFoundPage = () => {
           </Button>
         </div>
       </div>
-    </PageTransition>
+    </>
   );
 };
 

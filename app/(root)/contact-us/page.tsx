@@ -1,4 +1,3 @@
-import PageTransition from "@/components/motion/page-transition";
 import Instagram from "../instagram";
 import SecondaryHero from "@/components/shared/secondary-hero";
 import contactBgImage from "@/public/images/contact-header.jpg";
@@ -7,7 +6,7 @@ import ContactFormWrapper from "./contact-form-wrapper";
 
 const ContactUsPage = () => {
   return (
-    <PageTransition>
+    <>
       <SecondaryHero title="Contact Us" image={contactBgImage} imagePin="center" />
       <section className="bg-background landing-section-y !pb-0 md:!pb-0 !pt-8 md:!pt-10">
         <div className="wrapper flex flex-col items-center space-y-5 md:space-y-8">
@@ -31,7 +30,7 @@ const ContactUsPage = () => {
         />
       </section>
       <Instagram />
-    </PageTransition>
+    </>
   );
 };
 

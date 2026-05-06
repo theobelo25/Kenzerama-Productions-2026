@@ -15,6 +15,7 @@ const VideoComponent = ({
   loop = false,
   playsInline = true,
   controls = false,
+  preload,
   classNames,
   videoClassName = "object-contain",
   decorative = false,
@@ -27,6 +28,7 @@ const VideoComponent = ({
   loop?: boolean;
   playsInline?: boolean;
   controls?: boolean;
+  preload?: "none" | "metadata" | "auto";
   classNames?: string;
   videoClassName?: string;
   decorative?: boolean;
@@ -37,6 +39,7 @@ const VideoComponent = ({
   const [isPlaying, setIsPlaying] = useState(true);
   const [isPausedByUser, setIsPausedByUser] = useState(false);
   const [playbackSession, setPlaybackSession] = useState(0);
+  const [hasLoadedFrame, setHasLoadedFrame] = useState(false);
 
   useEffect(() => {
     const mediaQueryList = window.matchMedia(REDUCED_MOTION_MEDIA_QUERY);
@@ -61,6 +64,7 @@ const VideoComponent = ({
   const effectiveAutoplay = shouldAutoplay && !isPausedByUser;
   const shouldLoop = loop && (showPlayPauseButton ? isPlaying : effectiveAutoplay);
   const showPosterOverlay = showPlayPauseButton && !isPlaying;
+  const effectivePreload = preload ?? (effectiveAutoplay ? "auto" : "metadata");
   const videoKey = useMemo(
     () => `${video.src}-${playbackSession}`,
     [video.src, playbackSession],
@@ -69,6 +73,7 @@ const VideoComponent = ({
   useEffect(() => {
     setIsPausedByUser(false);
     setPlaybackSession(0);
+    setHasLoadedFrame(false);
   }, [video]);
 
   useEffect(() => {
@@ -91,50 +96,47 @@ const VideoComponent = ({
     setIsPlaying(false);
   };
 
+  const shouldShowPosterLayer =
+    (showPosterOverlay || !hasLoadedFrame) && Boolean(posterSrc);
+
   return (
     <div
       className={cn("relative", classNames)}
       aria-hidden={decorative && !showPlayPauseButton ? true : undefined}
     >
-      {showPosterOverlay ? (
-        posterSrc ? (
-          <Image
-            src={posterSrc}
-            alt=""
-            fill
-            sizes="100vw"
-            quality={45}
-            aria-hidden={true}
-            className={cn(videoClassName, "h-full w-full")}
-          />
-        ) : (
-          <div
-            aria-hidden
-            className="h-full w-full bg-black"
-          />
-        )
-      ) : (
-        <Video
-          key={videoKey}
-          src={video}
-          autoplay={showPlayPauseButton ? isPlaying : effectiveAutoplay}
-          muted={muted}
-          loop={shouldLoop}
-          playsInline={playsInline}
-          controls={controls}
-          className={videoClassName}
-          style={{
-            width: "100%",
-            height: "100%",
-            maxWidth: "none",
-            minWidth: "100%",
-            minHeight: "100%",
-            objectFit: "cover",
-            objectPosition: "center",
-          }}
-          poster={posterSrc}
+      <Video
+        key={videoKey}
+        src={video}
+        autoplay={showPlayPauseButton ? isPlaying : effectiveAutoplay}
+        muted={muted}
+        loop={shouldLoop}
+        playsInline={playsInline}
+        controls={controls}
+        preload={effectivePreload}
+        className={videoClassName}
+        style={{
+          width: "100%",
+          height: "100%",
+          maxWidth: "none",
+          minWidth: "100%",
+          minHeight: "100%",
+          objectFit: "cover",
+          objectPosition: "center",
+        }}
+        poster={posterSrc}
+        onLoadedData={() => setHasLoadedFrame(true)}
+      />
+      {shouldShowPosterLayer && posterSrc ? (
+        <Image
+          src={posterSrc}
+          alt=""
+          fill
+          sizes="100vw"
+          quality={45}
+          aria-hidden={true}
+          className={cn(videoClassName, "pointer-events-none h-full w-full")}
         />
-      )}
+      ) : null}
       {showPlayPauseButton ? (
         <button
           type="button"
