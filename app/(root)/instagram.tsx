@@ -10,6 +10,7 @@ type InstagramProps = {
 const Instagram = async ({ compactSpacing = false }: InstagramProps = {}) => {
   const response = await getInstagramPosts();
   const instagramPosts = response?.data?.slice(0, 5);
+  const hasPosts = Boolean(instagramPosts && instagramPosts.length > 0);
 
   return (
     <SectionWithHeading
@@ -20,8 +21,12 @@ const Instagram = async ({ compactSpacing = false }: InstagramProps = {}) => {
       headingClassName="relative text-foreground"
       contentClassName={cn(compactSpacing ? "pt-5" : "pt-10")}
     >
-      {instagramPosts && instagramPosts.length > 0 && (
+      {hasPosts ? (
         <CarouselComponent posts={instagramPosts} />
+      ) : (
+        <p className="text-center text-sm text-muted-foreground font-questrial">
+          Instagram posts are temporarily unavailable.
+        </p>
       )}
     </SectionWithHeading>
   );

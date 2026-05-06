@@ -83,6 +83,14 @@ export async function refreshInstagramTokenIfNeeded(force = false) {
 }
 
 export async function getValidInstagramAccessToken() {
-  const cred = await refreshInstagramTokenIfNeeded(false);
-  return cred.accessToken;
+  try {
+    const cred = await refreshInstagramTokenIfNeeded(false);
+    return cred.accessToken;
+  } catch (error) {
+    const fallbackToken = process.env.INSTAGRAM_APP_TOKEN;
+    if (fallbackToken) {
+      return fallbackToken;
+    }
+    throw error;
+  }
 }

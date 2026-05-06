@@ -12,12 +12,25 @@ export async function getInstagramPosts() {
       { next: { revalidate: INSTAGRAM_MEDIA_REVALIDATE_SECONDS } },
     );
 
+    console.log("[instagram] media fetch status", {
+      ok: response.ok,
+      status: response.status,
+      statusText: response.statusText,
+    });
+
     if (!response.ok) {
       const text = await response.text();
+      console.error("[instagram] media fetch error body", text);
       throw new Error(`Instagram API error: ${response.status} ${text}`);
     }
 
     const { data } = await response.json();
+    console.log("[instagram] media fetch payload summary", {
+      count: Array.isArray(data) ? data.length : 0,
+      sampleTypes: Array.isArray(data)
+        ? data.slice(0, 5).map((item: { media_type?: string }) => item.media_type ?? "UNKNOWN")
+        : [],
+    });
 
     return {
       success: true,
