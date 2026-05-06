@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   transpilePackages: ["next-mdx-remote", "next-video"],
   images: {
-    qualities: [40, 45, 60, 75, 95],
+    qualities: [40, 45, 60, 70, 75, 95],
     remotePatterns: [
       {
         protocol: "https",

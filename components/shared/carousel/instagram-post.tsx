@@ -1,6 +1,5 @@
 "use client";
 import { Card, CardContent } from "@/components/ui/card";
-import Image from "next/image";
 import type { InstagramPost } from "@/types";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -64,16 +63,15 @@ const InstagramPostComponent = ({
         <Card className="aspect-square rounded-lg border-none overflow-hidden py-0 gap-0 block bg-black">
           <CardContent className="relative h-full p-0">
             {previewImageSrc ? (
-              <Image
+              <img
                 src={previewImageSrc}
                 alt={imageAlt}
-                fill
+                loading="lazy"
+                decoding="async"
                 className={cn(
-                  "object-cover transition-opacity duration-150",
+                  "absolute inset-0 h-full w-full object-cover transition-opacity duration-150",
                   showVideoLayer ? "opacity-0" : "opacity-100"
                 )}
-                sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                unoptimized
               />
             ) : null}
 
@@ -81,7 +79,7 @@ const InstagramPostComponent = ({
               <video
                 src={post.media_url}
                 className={cn(
-                  "h-full w-full object-cover transition-opacity duration-150",
+                  "absolute inset-0 h-full w-full object-cover transition-opacity duration-150",
                   showVideoLayer ? "opacity-100" : "opacity-0"
                 )}
                 autoPlay
@@ -89,12 +87,13 @@ const InstagramPostComponent = ({
                 loop
                 playsInline
                 onLoadedData={() => setIsVideoReady(true)}
+                onPlaying={() => setIsVideoReady(true)}
                 aria-hidden="true"
               />
             ) : !previewImageSrc ? (
               <video
                 src={post.media_url}
-                className="h-full w-full object-cover"
+                className="absolute inset-0 h-full w-full object-cover"
                 muted
                 playsInline
                 preload="metadata"
