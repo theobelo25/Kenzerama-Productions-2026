@@ -1,6 +1,5 @@
-import Image from "next/image";
-import loader from "@/assets/fade-stagger-circles.svg";
 import PageTitle from "@/app/(root)/page-title";
+import InlineLoadingSpinner from "@/components/inline-loading-spinner";
 import VideoComponent from "@/components/video-component";
 import FilmDetails from "./film-details";
 import RelatedFilms from "./related-films";
@@ -69,14 +68,10 @@ export default function FilmDetailBody({ film }: { film: Film | null }) {
               aria-busy="true"
               aria-live="polite"
             >
-              <Image
-                src={loader}
-                alt="Loading"
-                width={120}
-                height={120}
-                className="shrink-0"
-                priority
-              />
+              <div className="pointer-events-none flex items-center gap-2 rounded-full border border-white/20 bg-black/50 px-3 py-2 text-xs text-white backdrop-blur-md">
+                <InlineLoadingSpinner />
+                <span className="font-questrial">Loading</span>
+              </div>
             </div>
           )}
         </div>

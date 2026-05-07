@@ -1,22 +1,12 @@
 "use client";
-// import { useEffect, useState } from "react";
-// import { ReCaptcha } from "next-recaptcha-v3";
 import { cn } from "@/lib/utils";
 import { SN_SRC_URL } from "@/lib/constants";
 
 const ContactFormWrapper = () => {
-  // const [token, setToken] = useState<string | null>(null);
-
-  // useEffect(() => {
-  //   console.log(token);
-  //   console.log(SN_SRC_URL);
-  // }, []);
-
   const contactFormUrl = SN_SRC_URL;
 
   return (
     <>
-      {/* <ReCaptcha onValidate={setToken} action="page_view" /> */}
       {SN_SRC_URL && (
         <div>
           <p id="contact-form-description" className="sr-only">

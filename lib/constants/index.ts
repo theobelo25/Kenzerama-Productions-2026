@@ -38,9 +38,6 @@ export const SITE_TITLE_ANIMATION = {
   },
 };
 
-// GOOGLE API
-export const CAPTCHA_SITE_KEY = process.env.RECAPTCHA_SITE_KEY || "";
-
 // STUDIO NINJA
 export const SN_SRC_URL =
   process.env.SN_SRC_URL ||

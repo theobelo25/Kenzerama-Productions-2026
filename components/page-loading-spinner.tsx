@@ -1,7 +1,6 @@
-import Image from "next/image";
-import loader from "@/assets/fade-stagger-circles.svg";
+import InlineLoadingSpinner from "@/components/inline-loading-spinner";
 
-/** Compact loader for route `loading.tsx` files — avoids full-viewport height jumps vs real pages. */
+/** Compact loader for route `loading.tsx` — matches root layout transition indicator. */
 export default function PageLoadingSpinner() {
   return (
     <div
@@ -9,14 +8,10 @@ export default function PageLoadingSpinner() {
       aria-busy="true"
       aria-live="polite"
     >
-      <Image
-        src={loader}
-        alt="Loading"
-        width={120}
-        height={120}
-        className="shrink-0"
-        priority
-      />
+      <div className="pointer-events-none flex items-center gap-2 rounded-full border border-white/20 bg-black/50 px-3 py-2 text-xs text-white backdrop-blur-md">
+        <InlineLoadingSpinner />
+        <span className="font-questrial">Loading</span>
+      </div>
     </div>
   );
 }
