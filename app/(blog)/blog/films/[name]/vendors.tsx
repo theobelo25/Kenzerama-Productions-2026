@@ -5,19 +5,20 @@ import { ExternalLink } from "lucide-react";
 const Vendors = ({ vendors }: { vendors: Vendor[] }) => {
   return (
     <section className="col-span-2 md:col-span-6">
-      <ul className="flex flex-row flex-wrap items-center justify-center gap-2">
+      <ul className="flex w-full flex-col items-stretch gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-3">
           {vendors.map((vendor) => (
-            <li key={vendor.name}>
+            <li key={vendor.name} className="w-full sm:w-auto">
               {vendor.url ? (
                 <Button
                   asChild
                   variant={"outline"}
-                  className="h-auto flex flex-row items-center justify-between !px-7 has-[>svg]:!px-7 py-3"
+                  className="h-auto w-full flex flex-row items-center justify-between !px-7 has-[>svg]:!px-7 py-3 sm:w-auto"
                 >
                   <a
                     href={vendor.url}
                     target="_blank"
-                    rel="noopenner noreferrer"
+                    rel="noopener noreferrer"
+                    className="w-full"
                   >
                     <span className="w-full">
                       {vendor.name} - {vendor.title}
@@ -26,7 +27,10 @@ const Vendors = ({ vendors }: { vendors: Vendor[] }) => {
                   </a>
                 </Button>
               ) : (
-                <Button variant={"outline"} className="h-auto !px-7 py-3">
+                <Button
+                  variant={"outline"}
+                  className="h-auto w-full !px-7 py-3 sm:w-auto"
+                >
                   {vendor.name}
                 </Button>
               )}

@@ -8,9 +8,14 @@ import type { InstagramPost } from "@/types";
 
 type InstagramProps = {
   compactSpacing?: boolean;
+  /** Halve default section top padding (e.g. film page directly under Related Films). */
+  tightTop?: boolean;
 };
 
-const Instagram = ({ compactSpacing = false }: InstagramProps = {}) => {
+const Instagram = ({
+  compactSpacing = false,
+  tightTop = false,
+}: InstagramProps = {}) => {
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const [posts, setPosts] = useState<InstagramPost[] | null>(null);
   const [failed, setFailed] = useState(false);
@@ -56,7 +61,10 @@ const Instagram = ({ compactSpacing = false }: InstagramProps = {}) => {
       <SectionWithHeading
         headingId="instagram-carousel-heading"
         heading="Follow us on Instagram!"
-        sectionClassName="bg-background pt-12 pb-20 md:pt-16 md:pb-24"
+        sectionClassName={cn(
+          "bg-background pb-20 md:pb-24",
+          tightTop ? "pt-6 md:pt-8" : "pt-12 md:pt-16",
+        )}
         wrapperClassName="py-0"
         headingClassName="relative text-foreground"
         contentClassName={cn(compactSpacing ? "pt-5" : "pt-10")}

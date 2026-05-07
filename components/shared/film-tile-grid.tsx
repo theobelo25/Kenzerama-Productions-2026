@@ -6,10 +6,13 @@ const FilmTileGrid = ({
   films,
   className = "",
   ariaLabel = "Featured wedding films",
+  posterSizes = "(min-width: 1024px) 16.66vw, 33.33vw",
 }: {
   films: Film[];
   className?: string;
   ariaLabel?: string;
+  /** Override when the grid stays 3 columns at `lg` (e.g. related films). */
+  posterSizes?: string;
 }) => {
   if (films.length === 0) {
     return (
@@ -32,7 +35,7 @@ const FilmTileGrid = ({
           <Poster
             film={film}
             prioritize={index < 3}
-            sizes="(min-width: 1024px) 16.66vw, 33.33vw"
+            sizes={posterSizes}
           />
         </li>
       ))}

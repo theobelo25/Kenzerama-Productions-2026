@@ -23,7 +23,7 @@ const Poster = ({
       withTransition
     >
       <div className="flex flex-col overflow-hidden">
-        <div className="relative aspect-poster w-full shrink-0 overflow-hidden">
+        <div className="relative aspect-poster w-full shrink-0 overflow-hidden rounded-lg">
           <Image
             src={poster.image}
             alt={title}

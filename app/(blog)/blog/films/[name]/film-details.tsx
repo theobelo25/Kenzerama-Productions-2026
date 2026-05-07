@@ -10,7 +10,7 @@ const FilmDetails = ({
 }) => {
   return (
     <section className="wrapper">
-      <h2 className="h2-subheading mb-10">Vendors</h2>
+      <h2 className="h2-subheading mb-4 md:mb-10">Vendors</h2>
       <div className="grid grid-cols-1 md:grid-cols-6 gap-y-3 md:gap-10">
         <Vendors vendors={vendors} />
       </div>

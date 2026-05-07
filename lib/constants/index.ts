@@ -12,11 +12,11 @@ export const APP_DESCRIPTION_SHORT =
 // MOTION
 /** Hero overlay CTA (`SiteTitle`) — semi-transparent dark pill on video */
 export const HERO_CTA_LINK_CLASSNAME =
-  "inline-flex items-center justify-center rounded-full border border-kenzerama-pink bg-black/35 px-4 py-1.5 font-playfair-display text-[10px] uppercase tracking-wide text-white shadow-md shadow-black/20 backdrop-blur-md transition-colors duration-300 hover:bg-kenzerama-pink hover:text-background-grey md:px-5 md:py-2 md:text-sm";
+  "inline-flex items-center justify-center rounded-full border border-kenzerama-pink bg-black/55 px-4 py-1.5 font-playfair-display text-[10px] uppercase tracking-wide text-white shadow-md shadow-black/20 backdrop-blur-md transition-colors duration-300 hover:bg-kenzerama-pink hover:text-background-grey md:px-5 md:py-2 md:text-sm";
 
 /** Section CTA — glass pill on light backgrounds, white label */
 export const SECTION_CTA_LINK_CLASSNAME =
-  "inline-flex items-center justify-center rounded-full border border-kenzerama-pink bg-black/35 px-4 py-1.5 font-playfair-display text-[10px] uppercase tracking-wide text-white shadow-md shadow-black/20 backdrop-blur-md transition-colors duration-300 hover:bg-kenzerama-pink hover:text-background-grey md:px-5 md:py-2 md:text-sm";
+  "inline-flex items-center justify-center rounded-full border border-kenzerama-pink bg-black/55 px-4 py-1.5 font-playfair-display text-[10px] uppercase tracking-wide text-white shadow-md shadow-black/20 backdrop-blur-md transition-colors duration-300 hover:bg-kenzerama-pink hover:text-background-grey md:px-5 md:py-2 md:text-sm";
 
 export const SITE_TITLE_ANIMATION = {
   hidden: {
