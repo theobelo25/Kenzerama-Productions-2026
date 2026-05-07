@@ -12,6 +12,7 @@ import {
   filterCollection,
   getUniqueCategories,
   sortByPublishDateDesc,
+  sortBySearchOrder,
 } from "@/lib/search-utils";
 
 const POSTS_DIRECTORY = path.join(process.cwd(), "posts");
@@ -66,12 +67,18 @@ export async function getFilteredPosts({
   sort?: string;
 }) {
   const postData = await getAllPosts();
-  return filterCollection(postData, {
+  const filteredPosts = filterCollection(postData, {
     query,
     category,
     getCategory: (post) => post.category,
     matchesQuery: (post, q) => findStringInObject(post, q),
   });
+
+  const sortedPosts = sortBySearchOrder(filteredPosts, sort);
+  const currentPage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
+  const offset = (currentPage - 1) * limit;
+
+  return sortedPosts.slice(offset, offset + limit);
 }
 
 export async function getPost(slug: string) {

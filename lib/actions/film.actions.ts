@@ -3,7 +3,11 @@ import { filmData } from "@/info/films";
 import type { Film } from "@/types";
 import { findStringInObject } from "../utils";
 import { SEARCH_PAGE_SIZE } from "@/lib/constants/search";
-import { filterCollection, getUniqueCategories } from "@/lib/search-utils";
+import {
+  filterCollection,
+  getUniqueCategories,
+  sortBySearchOrder,
+} from "@/lib/search-utils";
 
 export async function getFeaturedFilms() {
   const featured = filmData.filter((film) => film.isFeatured === true);
@@ -32,10 +36,16 @@ export async function getAllFilms({
   category?: string;
   sort?: string;
 }) {
-  return filterCollection(filmData, {
+  const filteredFilms = filterCollection(filmData, {
     query,
     category,
     getCategory: (film) => film.category,
     matchesQuery: (film, q) => findStringInObject(film, q),
   });
+
+  const sortedFilms = sortBySearchOrder(filteredFilms, sort);
+  const currentPage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
+  const offset = (currentPage - 1) * limit;
+
+  return sortedFilms.slice(offset, offset + limit);
 }
