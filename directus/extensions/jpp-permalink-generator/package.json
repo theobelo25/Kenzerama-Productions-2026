@@ -1,0 +1,13 @@
+{
+  "name": "directus-extension-slug-generator",
+  "version": "1.0.2",
+  "description": "Hierarchical permalink/slug interface for Directus (vendored build)",
+  "type": "module",
+  "license": "MIT",
+  "directus:extension": {
+    "type": "interface",
+    "path": "dist/index.js",
+    "source": "src/index.ts",
+    "host": "^11.0.0"
+  }
+}

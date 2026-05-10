@@ -1,0 +1,3 @@
+# Directus schema snapshot placeholder.
+# Replace this file using your dev snapshot export before promoting:
+#   npx --yes directus@11 schema snapshot ./directus/schema.snapshot.yaml

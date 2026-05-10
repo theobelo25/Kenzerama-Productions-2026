@@ -1,0 +1,5 @@
+# Extensions are built on the host (committed `dist/`), so the image build
+# does not require pulling a Node builder image. This makes offline / restricted
+# network builds possible.
+FROM directus/directus:11
+COPY directus/extensions /directus/extensions

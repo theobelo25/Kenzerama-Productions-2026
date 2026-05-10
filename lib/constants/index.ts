@@ -6,6 +6,10 @@ export const APP_DESCRIPTION =
   "Toronto-based wedding videographers capturing your love story with cinematic artistry and heartfelt emotion. Relive every smile, glance and dance as we craft timeless films of your special day.";
 export const SERVER_URL =
   process.env.NEXT_PUBLIC_SERVER_URL || "https://www.kenzeramaproductions.com";
+export const SITE_LOCALE = process.env.NEXT_PUBLIC_SITE_LOCALE || "en_CA";
+export const TWITTER_HANDLE = process.env.NEXT_PUBLIC_TWITTER_HANDLE || "";
+export const DEFAULT_OG_IMAGE =
+  process.env.NEXT_PUBLIC_DEFAULT_OG_IMAGE || "/kp-opengraph-rec.png";
 export const APP_DESCRIPTION_SHORT =
   process.env.NEXT_PUBLIC_APP_DESCRIPTION_SHORT || "Wedding Videographers";
 

@@ -6,8 +6,9 @@ import SectionWithHeading from "@/components/shared/section-with-heading";
 
 const RelatedFilms = ({ currentFilm }: { currentFilm: Film }) => {
   let films: Film[] = filmData.filter((film) => film.slug !== currentFilm.slug);
+  const currentTags = currentFilm.tags ?? [];
   films = films.filter((film) =>
-    film.tags.some((tag) => currentFilm.tags.includes(tag)),
+    (film.tags ?? []).some((tag) => currentTags.includes(tag)),
   );
 
   const randomRelated = getRandomItems(films, 3);

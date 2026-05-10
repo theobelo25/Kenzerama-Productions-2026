@@ -3,11 +3,7 @@ import { filmData } from "@/info/films";
 import type { Film } from "@/types";
 import { findStringInObject } from "../utils";
 import { SEARCH_PAGE_SIZE } from "@/lib/constants/search";
-import {
-  filterCollection,
-  getUniqueCategories,
-  sortBySearchOrder,
-} from "@/lib/search-utils";
+import { filterCollection, getUniqueCategories } from "@/lib/search-utils";
 
 export async function getFeaturedFilms() {
   const featured = filmData.filter((film) => film.isFeatured === true);
@@ -20,7 +16,7 @@ export async function getFilms() {
 }
 
 export async function getFilmCategories() {
-  return getUniqueCategories(filmData, (film) => film.category);
+  return getUniqueCategories(filmData, (film) => film.category ?? "");
 }
 
 export async function getAllFilms({
@@ -39,11 +35,15 @@ export async function getAllFilms({
   const filteredFilms = filterCollection(filmData, {
     query,
     category,
-    getCategory: (film) => film.category,
+    getCategory: (film) => film.category ?? "",
     matchesQuery: (film, q) => findStringInObject(film, q),
   });
 
-  const sortedFilms = sortBySearchOrder(filteredFilms, sort);
+  const sortedFilms = [...filteredFilms].sort((a, b) => {
+    const ta = a.publishDate?.getTime() ?? 0;
+    const tb = b.publishDate?.getTime() ?? 0;
+    return sort === "oldest" ? ta - tb : tb - ta;
+  });
   const currentPage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
   const offset = (currentPage - 1) * limit;
 

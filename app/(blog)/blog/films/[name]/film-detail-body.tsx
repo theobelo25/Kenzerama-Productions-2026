@@ -42,7 +42,7 @@ export default function FilmDetailBody({ film }: { film: Film | null }) {
       {film ? (
         <PageTitle
           title={film.title}
-          subtitle={film.details.venue.name}
+          subtitle={film.details?.venue?.name ?? film.location ?? ""}
           headingClassName="pt-0"
         />
       ) : (
@@ -78,10 +78,14 @@ export default function FilmDetailBody({ film }: { film: Film | null }) {
       </div>
       {film ? (
         <>
-          <p className="wrapper text-center font-questrial py-10">
-            {film.description}
-          </p>
-          <FilmDetails details={film.details} />
+          {film.description ? (
+            <p className="wrapper text-center font-questrial py-10">
+              {film.description}
+            </p>
+          ) : null}
+          {film.details?.vendors?.length ? (
+            <FilmDetails details={film.details} />
+          ) : null}
           <RelatedFilms currentFilm={film} />
           <Instagram tightTop />
           <ContactCta />

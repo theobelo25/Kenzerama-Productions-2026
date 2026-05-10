@@ -1,3 +1,5 @@
+import type { Film } from "@/types";
+
 // Posters
 import BC from "@/assets/posters/c&b-poster.webp";
 // import JR from "@/assets/posters/j&r-poster.webp";
@@ -678,4 +680,4 @@ export const filmData = [
   //     ],
   //   },
   // },
-];
+] as Film[];

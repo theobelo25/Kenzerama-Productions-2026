@@ -12,7 +12,8 @@ import {
   DEFAULT_SEARCH_SORT,
   SEARCH_SORT_ORDERS,
 } from "@/lib/constants/search";
-import { getUniqueCategories, sortBySearchOrder } from "@/lib/search-utils";
+import { APP_DESCRIPTION } from "@/lib/constants";
+import { getUniqueCategories } from "@/lib/search-utils";
 
 export async function generateMetadata(props: {
   searchParams: Promise<{
@@ -43,10 +44,12 @@ export async function generateMetadata(props: {
       ${isCategorySet ? `: Category ${category}` : ""}
       ${isPriceSet ? `: Price ${price}` : ""}
       ${isRatingSet ? `: Rating ${rating}` : ""}`,
+      description: APP_DESCRIPTION,
     };
   } else {
     return {
       title: "Search Products",
+      description: APP_DESCRIPTION,
     };
   }
 }
@@ -118,7 +121,11 @@ const SearchPage = async (props: {
     });
     postResults.push(...tempPosts);
   }
-  const results = sortBySearchOrder([...filmResults, ...postResults], sort);
+  const results = [...filmResults, ...postResults].sort((a, b) => {
+    const ta = a.publishDate?.getTime() ?? 0;
+    const tb = b.publishDate?.getTime() ?? 0;
+    return sort === "oldest" ? ta - tb : tb - ta;
+  });
 
   return (
     <>

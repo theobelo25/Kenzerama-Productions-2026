@@ -4,6 +4,7 @@ import { Suspense, useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import VideoComponent from "@/components/video-component";
 import homepageHeroTeaser from "@/videos/homepage_hero_video.mp4";
+import { Asset } from "next-video/dist/assets.js";
 
 /** Poster only; parent supplies `absolute inset-0` shell + bg so layout never changes when video mounts. */
 const HeroPoster = () => {
@@ -24,7 +25,7 @@ const HeroPoster = () => {
   );
 };
 
-const DeferredHeroVideo = () => {
+const DeferredHeroVideo = ({ video }: { video: Asset }) => {
   const [heroCoverVisible, setHeroCoverVisible] = useState(true);
   const onHeroStaticCoverChange = useCallback((visible: boolean) => {
     setHeroCoverVisible(visible);
@@ -40,7 +41,7 @@ const DeferredHeroVideo = () => {
       <div className="absolute inset-0 z-0">
         <Suspense fallback={null}>
           <VideoComponent
-            video={homepageHeroTeaser}
+            video={video}
             autoplay
             loop
             showPlayPauseButton
@@ -53,7 +54,7 @@ const DeferredHeroVideo = () => {
         </Suspense>
       </div>
       {heroCoverVisible ? (
-        <div className="pointer-events-none absolute inset-0 z-[1]">
+        <div className="pointer-events-none absolute inset-0 z-1">
           <HeroPoster />
         </div>
       ) : null}

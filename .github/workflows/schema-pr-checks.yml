@@ -1,0 +1,40 @@
+name: Schema PR Checks
+
+on:
+  pull_request:
+    branches:
+      - development
+    paths:
+      - directus/schema.snapshot.yaml
+      - scripts/directus/apply-schema.sh
+      - .github/workflows/schema-pr-checks.yml
+
+jobs:
+  validate-schema:
+    name: Validate Directus schema artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Verify schema artifact exists
+        run: |
+          if [ ! -f "directus/schema.snapshot.yaml" ]; then
+            echo "Missing directus/schema.snapshot.yaml in repository."
+            exit 1
+          fi
+
+      - name: Ensure schema artifact is not placeholder
+        run: |
+          if grep -qi "placeholder" "directus/schema.snapshot.yaml"; then
+            echo "Schema artifact still contains placeholder content."
+            exit 1
+          fi
+
+      - name: Verify Directus CLI is runnable
+        run: npx --yes directus@11 --help >/dev/null

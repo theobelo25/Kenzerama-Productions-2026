@@ -260,6 +260,24 @@ const VideoComponent = ({
       mediaHostRef.current = node;
       if (!node) return;
 
+      if (process.env.NODE_ENV !== "production") {
+        const inspect = () => {
+          const el = mediaHostRef.current as
+            | (HTMLMediaElement & {
+                disableRemotePlayback?: boolean;
+              })
+            | null;
+          if (!el) return;
+          console.debug("[video-component] remote playback guards", {
+            disableremoteplaybackAttr: el.hasAttribute("disableremoteplayback"),
+            disableRemotePlaybackProp: el.disableRemotePlayback,
+            tagName: el.tagName.toLowerCase(),
+          });
+        };
+        inspect();
+        requestAnimationFrame(inspect);
+      }
+
       const reveal = () => setHasLoadedFrame(true);
       const onReveal = () => reveal();
 
@@ -311,6 +329,12 @@ const VideoComponent = ({
   const crossfadeClass =
     "transition-opacity duration-500 ease-in-out motion-reduce:transition-none motion-reduce:duration-0";
 
+  // Keep both forms so custom-element hydration has the no-remote flag from first paint.
+  const remotePlaybackGuardProps: Record<string, unknown> = {
+    disableRemotePlayback: true,
+    disableremoteplayback: "",
+  };
+
   const muxVideo = (
     <Video
       key={videoKey}
@@ -322,7 +346,7 @@ const VideoComponent = ({
       playsInline={playsInline}
       controls={controls}
       preload={effectivePreload}
-      disableRemotePlayback
+      {...remotePlaybackGuardProps}
       className={videoClassName}
       {...(muxMaxResolution ? { maxResolution: muxMaxResolution } : {})}
       style={videoRootStyle}

@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import type { PageTestimonial } from "@/lib/actions/directus.actions";
+import { testimonialBackgroundSrc } from "@/info/testimonial-background";
 import { testimonialData } from "@/info/testimonials";
 
 const ROTATE_MS = 10_000;
@@ -13,11 +15,60 @@ const fadeVariants = {
   exit: { opacity: 0 },
 };
 
-const Testimonials = () => {
-  const { testimonials } = testimonialData;
+type Slide = {
+  key: string;
+  names: string;
+  testimonial: string;
+  backgroundSrc: string;
+  alt: string;
+};
+
+function slidesFromCms(rows: PageTestimonial[]): Slide[] {
+  return rows
+    .filter((t) => Boolean(t.quote?.trim()))
+    .map((t, i) => {
+      const names = t.names?.trim() ?? "";
+      const quote = t.quote!.trim();
+      return {
+        key: t.linkId ?? `${names}-${i}`,
+        names,
+        testimonial: quote,
+        backgroundSrc: testimonialBackgroundSrc(names),
+        alt: "",
+      };
+    });
+}
+
+type Props = {
+  cmsTestimonials?: PageTestimonial[];
+};
+
+const Testimonials = ({ cmsTestimonials }: Props) => {
+  const testimonials = useMemo(() => {
+    const fromCms = cmsTestimonials?.length
+      ? slidesFromCms(cmsTestimonials)
+      : [];
+    if (fromCms.length > 0) return fromCms;
+    return testimonialData.testimonials.map((t, i) => ({
+      key: `${t.names}-${i}`,
+      names: t.names,
+      testimonial: t.testimonial,
+      backgroundSrc: t.backgroundSrc,
+      alt: t.alt ?? "",
+    }));
+  }, [cmsTestimonials]);
+
   const count = testimonials.length;
   const [index, setIndex] = useState(0);
   const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    setIndex((i) => {
+      if (count <= 0) return 0;
+      return i >= count ? 0 : i;
+    });
+  }, [count]);
+
   const t = testimonials[index];
   const backgroundPositionClass =
     t.names === "Jocilea & Justin"
@@ -36,6 +87,10 @@ const Testimonials = () => {
     return () => clearInterval(id);
   }, [count]);
 
+  if (count === 0 || !t) {
+    return null;
+  }
+
   return (
     <section
       className="relative isolate overflow-hidden landing-section-y"
@@ -44,7 +99,7 @@ const Testimonials = () => {
       <div className="pointer-events-none absolute inset-0 z-0">
         <AnimatePresence initial={false}>
           <motion.div
-            key={t.names}
+            key={t.key}
             variants={fadeVariants}
             initial={reduceMotion ? "animate" : "initial"}
             animate="animate"
@@ -55,7 +110,7 @@ const Testimonials = () => {
           >
             <Image
               src={t.backgroundSrc}
-              alt={t.alt || ""}
+              alt={t.alt}
               fill
               className={`${backgroundPositionClass} grayscale`}
               sizes="100vw"
@@ -75,7 +130,7 @@ const Testimonials = () => {
           </p>
           <AnimatePresence initial={false} mode="wait">
             <motion.article
-              key={t.names}
+              key={t.key}
               variants={fadeVariants}
               initial={reduceMotion ? "animate" : "initial"}
               animate="animate"

@@ -1,0 +1,49 @@
+{
+  "name": "directus-extension-mux-video",
+  "version": "1.0.0",
+  "description": "Directus video field that uploads directly to Mux and stores playback metadata (interface, endpoint, and schema bootstrap hook).",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "directus-extension build",
+    "dev": "directus-extension build -w --no-minify",
+    "link": "directus-extension link",
+    "validate": "directus-extension validate"
+  },
+  "directus:extension": {
+    "type": "bundle",
+    "path": {
+      "app": "dist/app.js",
+      "api": "dist/api.js"
+    },
+    "entries": [
+      {
+        "type": "interface",
+        "name": "mux-video",
+        "source": "src/interface/index.ts"
+      },
+      {
+        "type": "endpoint",
+        "name": "mux",
+        "source": "src/endpoint/index.ts"
+      },
+      {
+        "type": "hook",
+        "name": "mux-video-schema",
+        "source": "src/hook/index.ts"
+      }
+    ],
+    "host": "^11.0.0"
+  },
+  "dependencies": {
+    "@mux/mux-node": "^11.0.0",
+    "@mux/mux-player": "^3.7.0",
+    "@mux/mux-uploader": "^1.4.0"
+  },
+  "devDependencies": {
+    "@directus/extensions-sdk": "^14.0.0",
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.3",
+    "vue": "^3.5.13"
+  }
+}
