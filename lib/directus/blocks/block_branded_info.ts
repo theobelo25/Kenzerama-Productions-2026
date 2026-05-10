@@ -1,25 +1,3 @@
-/** Raw `block_branded_info` row — align with Directus + query fields. */
-export type DirectusBlockBrandedInfo = {
-  id?: string;
-  info_title_before_brand?: string | null;
-  info_title_after_brand?: string | null;
-  content?: string | null;
-  button_text?: string | null;
-  button_href?: string | null;
-  /** Alternate CMS field name (same as video block). */
-  button_link?: string | null;
-};
-
-/** View model for {@link BrandedInfoBlock} / layouts driven by the branded-info block. */
-export type BrandedInfoProps = {
-  id?: string;
-  info_title_before_brand?: string | null;
-  info_title_after_brand?: string | null;
-  content: string;
-  button_text?: string | null;
-  button_href?: string | null;
-};
-
 function normalizeButtonHref(raw: string): string {
   const s = raw.trim();
   if (!s) return "";
@@ -54,7 +32,9 @@ export function brandedInfoFromBlockItem(
       : null;
 
   return {
-    ...(item.id != null && String(item.id) !== "" ? { id: String(item.id) } : {}),
+    ...(item.id != null && String(item.id) !== ""
+      ? { id: String(item.id) }
+      : {}),
     info_title_before_brand: item.info_title_before_brand ?? null,
     info_title_after_brand: item.info_title_after_brand ?? null,
     content,

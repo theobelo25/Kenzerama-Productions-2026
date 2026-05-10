@@ -4,18 +4,18 @@ import {
 } from "@/lib/video/create-mux-video-asset";
 import { Asset } from "next-video/dist/assets.js";
 
-export type PrimaryHeroProps = {
-  id: string;
-  title: string;
-  eyebrow: string;
-  hero_video: Asset;
-};
-
 export type DirectusBlockHeroPrimary = {
   id?: string;
   title?: string | null;
   eyebrow?: string | null;
   hero_video?: DirectusMuxVideo | string | null;
+};
+
+export type PrimaryHeroProps = {
+  id: string;
+  title: string;
+  eyebrow: string;
+  hero_video: Asset;
 };
 
 export function primaryHeroFromBlockItem(
