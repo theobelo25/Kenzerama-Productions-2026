@@ -7,6 +7,14 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 FROM base AS builder
+ARG DIRECTUS_URL
+ARG DIRECTUS_TOKEN
+ARG NEXT_PUBLIC_DIRECTUS_URL
+ARG NEXT_PUBLIC_SERVER_URL
+ENV DIRECTUS_URL=$DIRECTUS_URL
+ENV DIRECTUS_TOKEN=$DIRECTUS_TOKEN
+ENV NEXT_PUBLIC_DIRECTUS_URL=$NEXT_PUBLIC_DIRECTUS_URL
+ENV NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
 RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates && rm -rf /var/lib/apt/lists/*
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .

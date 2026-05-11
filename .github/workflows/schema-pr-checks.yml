@@ -1,0 +1,44 @@
+name: Schema PR Checks
+
+on:
+  pull_request:
+    branches:
+      - development
+    paths:
+      - directus/schema.snapshot.yaml
+      - scripts/directus/apply-schema.sh
+      - .github/workflows/schema-pr-checks.yml
+
+jobs:
+  validate-schema:
+    name: Validate Directus schema artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Verify schema artifact exists
+        run: |
+          if [ ! -f "directus/schema.snapshot.yaml" ]; then
+            echo "Missing directus/schema.snapshot.yaml in repository."
+            exit 1
+          fi
+
+      - name: Ensure schema artifact is not placeholder
+        run: |
+          if head -n 1 "directus/schema.snapshot.yaml" | grep -q "^# Directus schema snapshot placeholder\."; then
+            echo "Schema artifact was not exported from Directus."
+            exit 1
+          fi
+          if ! grep -q "^version: 1$" "directus/schema.snapshot.yaml"; then
+            echo "Schema artifact is missing a Directus version header."
+            exit 1
+          fi
+
+      - name: Verify Directus schema CLI is runnable
+        run: docker run --rm directus/directus:11 npx directus schema --help >/dev/null

@@ -1,28 +1,39 @@
-import { refreshInstagramTokenIfNeeded } from "@/lib/services/instagram-token";
+const DEFAULT_SERVER_URL = "http://localhost:3000";
 
-async function main() {
-  const updated = await refreshInstagramTokenIfNeeded(true);
+function getRefreshUrl() {
+  const baseUrl = (
+    process.env.SERVER_URL ??
+    process.env.NEXT_PUBLIC_SERVER_URL ??
+    DEFAULT_SERVER_URL
+  ).replace(/\/$/, "");
 
-  console.log(
-    JSON.stringify(
-      {
-        ok: true,
-        provider: updated.provider,
-        expiresAt: updated.expiresAt,
-        refreshedAt: updated.lastRefreshedAt,
-      },
-      null,
-      2,
-    ),
-  );
+  return `${baseUrl}/api/instagram/refresh`;
 }
 
-main()
-  .catch((error) => {
-    console.error("Instagram token refresh job failed: ", error);
-    process.exitCode = 1;
-  })
-  .finally(async () => {
-    const { prisma } = await import("@/lib/prisma");
-    await prisma.$disconnect();
+async function main() {
+  const cronSecret = process.env.CRON_SECRET;
+  if (!cronSecret) {
+    throw new Error("CRON_SECRET is not set.");
+  }
+
+  const response = await fetch(getRefreshUrl(), {
+    method: "POST",
+    headers: {
+      "x-cron-secret": cronSecret,
+    },
   });
+
+  const body = await response.json().catch(() => null);
+  if (!response.ok) {
+    throw new Error(
+      `Instagram token refresh failed: ${response.status} ${JSON.stringify(body)}`,
+    );
+  }
+
+  console.log(JSON.stringify(body, null, 2));
+}
+
+main().catch((error) => {
+  console.error("Instagram token refresh job failed: ", error);
+  process.exitCode = 1;
+});

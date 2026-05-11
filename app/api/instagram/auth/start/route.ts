@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/server";
 import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 

@@ -1,0 +1,66 @@
+name: Schema Staging to Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  promote:
+    name: Schema Staging -> Production
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency:
+      group: schema-production
+      cancel-in-progress: false
+    env:
+      PROD_DB_URL: ${{ secrets.PROD_DB_URL }}
+      DIRECTUS_DATABASE_URL: ${{ secrets.PROD_DIRECTUS_DATABASE_URL }}
+      DIRECTUS_SCHEMA_APPLY_CMD: ${{ secrets.PROD_DIRECTUS_SCHEMA_APPLY_CMD }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install PostgreSQL client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+
+      - name: Validate required configuration
+        run: |
+          if [ -z "${PROD_DB_URL}" ]; then
+            echo "Missing PROD_DB_URL secret."
+            exit 1
+          fi
+          if [ -z "${DIRECTUS_DATABASE_URL}" ] && [ -z "${DIRECTUS_SCHEMA_APPLY_CMD}" ]; then
+            echo "Set PROD_DIRECTUS_DATABASE_URL or PROD_DIRECTUS_SCHEMA_APPLY_CMD."
+            exit 1
+          fi
+          if [ ! -f "directus/schema.snapshot.yaml" ]; then
+            echo "Missing directus/schema.snapshot.yaml in repository."
+            exit 1
+          fi
+
+      - name: Make scripts executable
+        run: chmod +x scripts/db/*.sh scripts/directus/*.sh
+
+      - name: Back up production DB
+        run: ./scripts/db/backup.sh "${PROD_DB_URL}" "production-backup.dump"
+
+      - name: Apply Directus schema to production
+        run: ./scripts/directus/apply-schema.sh "directus/schema.snapshot.yaml"
+
+      - name: Run production post-deploy checks
+        run: |
+          psql "${PROD_DB_URL}" -v ON_ERROR_STOP=1 -c "SELECT 1;"
+          psql "${PROD_DB_URL}" -v ON_ERROR_STOP=1 -c "SELECT COUNT(*) FROM directus_collections;"
+
+      - name: Upload promotion artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: schema-staging-to-production-artifacts
+          path: |
+            production-backup.dump
