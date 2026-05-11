@@ -59,10 +59,6 @@ export const PACKAGES = [
 ];
 export const EXTRAS = [
   {
-    title: "Same-Day Edit",
-    price: "$1,200.00",
-  },
-  {
     title: "Extra Hours",
     price: "$500.00/hr",
   },
@@ -73,5 +69,9 @@ export const EXTRAS = [
   {
     title: "Next-Day Edit (3min)",
     price: "$650",
+  },
+  {
+    title: "Same-Day Edit",
+    price: "$1,200.00",
   },
 ];
