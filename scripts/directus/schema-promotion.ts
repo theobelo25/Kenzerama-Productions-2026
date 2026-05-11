@@ -6,10 +6,20 @@ const DEFAULT_SNAPSHOT_PATH = "directus/schema.snapshot.yaml";
 const DIRECTUS_CLI = "directus@11";
 const DOCKER_SNAPSHOT_PATH = "/tmp/directus-schema-snapshot.yaml";
 
+type SpawnEnv = Record<string, string | undefined>;
+
 type RunOptions = {
-  env?: NodeJS.ProcessEnv;
+  env?: SpawnEnv;
   captureStdout?: boolean;
 };
+
+function readSpawnOutput(output: string | Buffer | null | undefined): string {
+  if (output == null) {
+    return "";
+  }
+
+  return String(output).trim();
+}
 
 function resolveExecutable(command: string): string {
   if (process.platform !== "win32" || path.extname(command)) {
@@ -38,10 +48,10 @@ function run(command: string, args: string[], options: RunOptions = {}): string 
     process.exit(result.status ?? 1);
   }
 
-  return options.captureStdout ? (result.stdout ?? "").trim() : "";
+  return options.captureStdout ? readSpawnOutput(result.stdout) : "";
 }
 
-function runNpxDirectus(args: string[], env?: NodeJS.ProcessEnv): void {
+function runNpxDirectus(args: string[], env?: SpawnEnv): void {
   run("npx", ["--yes", DIRECTUS_CLI, ...args], { env });
 }
 
@@ -88,7 +98,7 @@ function runDockerDirectusSnapshot(snapshotPath: string): void {
   run("docker", ["compose", "cp", `directus:${DOCKER_SNAPSHOT_PATH}`, hostSnapshotPath]);
 }
 
-function directusDbEnv(databaseUrl: string): NodeJS.ProcessEnv {
+function directusDbEnv(databaseUrl: string): SpawnEnv {
   return {
     DB_CLIENT: "pg",
     DB_CONNECTION_STRING: databaseUrl,
