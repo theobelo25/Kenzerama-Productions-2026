@@ -27,5 +27,6 @@ fi
 echo "Applying schema with directus CLI using DIRECTUS_DATABASE_URL"
 export DB_CLIENT=pg
 export DB_CONNECTION_STRING="${DIRECTUS_DATABASE_URL}"
+export NPM_CONFIG_LOGLEVEL="${NPM_CONFIG_LOGLEVEL:-error}"
 npx --yes directus@11 schema apply "${schema_file}" --yes
 echo "Schema apply completed"

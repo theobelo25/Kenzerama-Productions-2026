@@ -41,4 +41,6 @@ jobs:
           fi
 
       - name: Verify Directus CLI is runnable
+        env:
+          NPM_CONFIG_LOGLEVEL: error
         run: npx --yes directus@11 --help >/dev/null

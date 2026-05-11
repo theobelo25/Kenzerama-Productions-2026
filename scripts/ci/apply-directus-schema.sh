@@ -20,7 +20,20 @@ if [[ -z "${database_url}" ]]; then
 fi
 
 echo "Applying Directus schema from ${schema_file}"
-export DB_CLIENT=pg
-export DB_CONNECTION_STRING="${database_url}"
-npx --yes directus@11 schema apply "${schema_file}" --yes
+
+if [[ "${GITHUB_ACTIONS:-}" == "true" ]] && command -v docker >/dev/null 2>&1; then
+  schema_abs="$(cd "$(dirname "${schema_file}")" && pwd)/$(basename "${schema_file}")"
+  docker run --rm --network host \
+    -e DB_CLIENT=pg \
+    -e DB_CONNECTION_STRING="${database_url}" \
+    -v "${schema_abs}:/snapshot.yaml:ro" \
+    directus/directus:11 \
+    npx directus schema apply /snapshot.yaml --yes
+else
+  export DB_CLIENT=pg
+  export DB_CONNECTION_STRING="${database_url}"
+  export NPM_CONFIG_LOGLEVEL="${NPM_CONFIG_LOGLEVEL:-error}"
+  npx --yes directus@11 schema apply "${schema_file}" --yes
+fi
+
 echo "Directus schema apply completed"
