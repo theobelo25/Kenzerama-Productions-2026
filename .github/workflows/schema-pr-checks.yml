@@ -31,8 +31,12 @@ jobs:
 
       - name: Ensure schema artifact is not placeholder
         run: |
-          if grep -qi "placeholder" "directus/schema.snapshot.yaml"; then
-            echo "Schema artifact still contains placeholder content."
+          if head -n 1 "directus/schema.snapshot.yaml" | grep -q "^# Directus schema snapshot placeholder\."; then
+            echo "Schema artifact was not exported from Directus."
+            exit 1
+          fi
+          if ! grep -q "^version: 1$" "directus/schema.snapshot.yaml"; then
+            echo "Schema artifact is missing a Directus version header."
             exit 1
           fi
 

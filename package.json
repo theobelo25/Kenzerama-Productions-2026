@@ -12,7 +12,9 @@
     "ci:directus:wait": "bash scripts/ci/wait-directus-health.sh",
     "ci:directus:token": "tsx scripts/ci/issue-directus-token.ts",
     "ci:docker:build": "bash scripts/ci/build-docker-image.sh",
-    "cron:instagram:refresh": "tsx scripts/refresh-instagram-token.ts"
+    "cron:instagram:refresh": "tsx scripts/refresh-instagram-token.ts",
+    "directus:schema:snapshot": "tsx scripts/directus/schema-promotion.ts snapshot",
+    "directus:schema:promote-staging": "tsx scripts/directus/schema-promotion.ts promote-staging"
   },
   "engines": {
     "node": ">=24.0.0"

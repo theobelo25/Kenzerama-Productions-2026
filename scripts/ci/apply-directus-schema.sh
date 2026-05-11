@@ -9,8 +9,8 @@ if [[ ! -f "${schema_file}" ]]; then
   exit 0
 fi
 
-if grep -qi "placeholder" "${schema_file}"; then
-  echo "Schema snapshot is still a placeholder; skipping apply."
+if head -n 1 "${schema_file}" | grep -q "^# Directus schema snapshot placeholder\."; then
+  echo "Schema snapshot was not exported from Directus; skipping apply."
   exit 0
 fi
 
