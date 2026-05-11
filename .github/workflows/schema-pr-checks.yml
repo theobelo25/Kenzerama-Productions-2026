@@ -40,7 +40,5 @@ jobs:
             exit 1
           fi
 
-      - name: Verify Directus CLI is runnable
-        env:
-          NPM_CONFIG_LOGLEVEL: error
-        run: npx --yes directus@11 --help >/dev/null
+      - name: Verify Directus schema CLI is runnable
+        run: docker run --rm directus/directus:11 npx directus schema --help >/dev/null
