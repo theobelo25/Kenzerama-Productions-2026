@@ -4,11 +4,13 @@ import "@/assets/styles/globals.css";
 import {
   APP_NAME,
   APP_DESCRIPTION,
+  DEFAULT_OG_IMAGE,
   SERVER_URL,
-  CAPTCHA_SITE_KEY,
+  SITE_LOCALE,
+  TWITTER_HANDLE,
 } from "@/lib/constants";
 import { ViewTransitions } from "next-view-transitions";
-import { ReCaptchaProvider } from "next-recaptcha-v3";
+import TransitionLoadingIndicator from "@/components/loading/transition-loading-indicator";
 
 const cinzel = Cinzel({
   variable: "--font-cinzel",
@@ -33,27 +35,47 @@ export const metadata: Metadata = {
   },
   description: APP_DESCRIPTION,
   metadataBase: new URL(SERVER_URL),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
+    type: "website",
+    locale: SITE_LOCALE,
+    url: "/",
+    siteName: APP_NAME,
     title: APP_NAME,
     description: APP_DESCRIPTION,
     images: [
       {
-        url: "/kp-opengraph-rec.png",
+        url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Kenzerama Productions Logo",
         type: "image/png",
       },
-      {
-        url: "/kp-opengraph-sq.png",
-        width: 1200,
-        height: 1200,
-        alt: "Kenzerama Productions Logo",
-        type: "image/png",
-      },
     ],
-    type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: APP_NAME,
+    description: APP_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE],
+    creator: TWITTER_HANDLE || undefined,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  applicationName: APP_NAME,
+  creator: APP_NAME,
+  publisher: APP_NAME,
 };
 
 export default function RootLayout({
@@ -62,22 +84,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ViewTransitions>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          suppressHydrationWarning
-          className={`
+    <html lang="en" suppressHydrationWarning>
+      <body
+        suppressHydrationWarning
+        className={`
           ${cinzel.variable} 
           ${playfairDisplay.variable} 
           ${questrial.variable} 
           antialiased
         `}
-        >
-          <ReCaptchaProvider reCaptchaKey={CAPTCHA_SITE_KEY}>
-            {children}
-          </ReCaptchaProvider>
-        </body>
-      </html>
-    </ViewTransitions>
+      >
+        <ViewTransitions>
+          {children}
+          <TransitionLoadingIndicator />
+        </ViewTransitions>
+      </body>
+    </html>
   );
 }

@@ -1,32 +1,61 @@
 "use client";
 import { useState } from "react";
-import { motion, stagger, Variants } from "motion/react";
+import { motion, stagger, useReducedMotion, Variants } from "motion/react";
 import { SITE_TITLE_ANIMATION } from "@/lib/constants";
 
-const SiteTitle = ({ title, eyebrow }: { title: string; eyebrow: string }) => {
+const SiteTitle = ({
+  id,
+  title,
+  eyebrow,
+}: {
+  id?: string;
+  title: string;
+  eyebrow: string;
+}) => {
+  const shouldReduceMotion = useReducedMotion();
   const [showTitle] = useState(true);
-  const [showEyebrow, setShowEyebrow] = useState(false);
+  const [eyebrowRevealed, setEyebrowRevealed] = useState(false);
+  const showEyebrow = Boolean(shouldReduceMotion) || eyebrowRevealed;
+  const titleAnimationVariant = shouldReduceMotion
+    ? {
+        hidden: { opacity: 1 },
+        visible: { opacity: 1, transition: { duration: 0 } },
+        eyebrowVisible: { opacity: 1, transition: { duration: 0 } },
+      }
+    : SITE_TITLE_ANIMATION;
 
   return (
-    <h1 className="relative z-2 m-5 md:m-15 lg:m-25 text-kenzerama-pink md:text-2xl lg:text-4xl font-cinzel uppercase">
+    <h1
+      id={id}
+      className="pointer-events-none relative z-10 my-5 ml-5 inline-block max-w-[min(100%,calc(100vw-2.5rem))] rounded-2xl bg-black/35 px-[1.96875rem] py-4 shadow-lg shadow-black/25 backdrop-blur-md mask-[radial-gradient(ellipse_95%_100%_at_50%_50%,#000_62%,transparent_100%)] [-webkit-mask-image:radial-gradient(ellipse_95%_100%_at_50%_50%,#000_62%,transparent_100%)] md:my-15 md:ml-15 md:px-[2.8125rem] md:py-8 lg:my-25 lg:ml-25 lg:rounded-3xl lg:px-[3.375rem] text-kenzerama-pink text-3xl md:text-4xl lg:text-5xl font-cinzel uppercase"
+    >
       <span className="sr-only">
         {title} - {eyebrow}
       </span>
       <motion.span
+        className="pointer-events-none"
         initial="hidden"
-        animate={showTitle ? "eyebrowVisible" : "hidden"}
+        animate={
+          shouldReduceMotion
+            ? "visible"
+            : showTitle
+              ? "eyebrowVisible"
+              : "hidden"
+        }
         transition={{
-          delayChildren: stagger(0.04),
+          delayChildren: shouldReduceMotion ? 0 : stagger(0.04),
         }}
-        onAnimationComplete={() => setShowEyebrow(true)}
+        onAnimationComplete={() => {
+          if (!shouldReduceMotion) setEyebrowRevealed(true);
+        }}
         aria-hidden
       >
         {title.split("").map((c, i) => {
-          if (c === " ") return <br key={i + c} />;
+          if (c === " ") return <br key={`${i}-space`} />;
           return (
             <motion.span
-              key={i + c}
-              variants={SITE_TITLE_ANIMATION as Variants}
+              key={`${i}-${c}`}
+              variants={titleAnimationVariant as Variants}
             >
               {c}
             </motion.span>
@@ -35,15 +64,15 @@ const SiteTitle = ({ title, eyebrow }: { title: string; eyebrow: string }) => {
       </motion.span>
       {eyebrow && (
         <motion.span
-          className="eyebrow text-[0.5em]"
-          initial="hidden"
+          className="eyebrow pointer-events-none text-[0.4em]"
+          initial={shouldReduceMotion ? false : "hidden"}
           animate={showEyebrow ? "visible" : "hidden"}
           aria-hidden
         >
           {eyebrow.split("").map((char, index) => (
             <motion.span
-              key={char + index}
-              variants={SITE_TITLE_ANIMATION as Variants}
+              key={`${char}-${index}`}
+              variants={titleAnimationVariant as Variants}
             >
               {char}
             </motion.span>

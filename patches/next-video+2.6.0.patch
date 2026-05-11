@@ -1,0 +1,32 @@
+diff --git a/node_modules/next-video/dist/cjs/components/video.js b/node_modules/next-video/dist/cjs/components/video.js
+index 4af3248..6cfdc58 100644
+--- a/node_modules/next-video/dist/cjs/components/video.js
++++ b/node_modules/next-video/dist/cjs/components/video.js
+@@ -123,9 +123,11 @@ function getVideoProps(allProps, state) {
+     blurDataURL,
+     loader,
+     transform,
++    disableRemotePlayback,
+     ...rest
+   } = allProps;
+   const props = {
++    ...(disableRemotePlayback !== void 0 && { disableRemotePlayback }),
+     src,
+     poster,
+     controls,
+diff --git a/node_modules/next-video/dist/components/video.js b/node_modules/next-video/dist/components/video.js
+index bf0d7fb..9ef413a 100644
+--- a/node_modules/next-video/dist/components/video.js
++++ b/node_modules/next-video/dist/components/video.js
+@@ -96,9 +96,11 @@ function getVideoProps(allProps, state) {
+     blurDataURL,
+     loader,
+     transform,
++    disableRemotePlayback,
+     ...rest
+   } = allProps;
+   const props = {
++    ...(disableRemotePlayback !== void 0 && { disableRemotePlayback }),
+     src,
+     poster,
+     controls,

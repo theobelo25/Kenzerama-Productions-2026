@@ -24,13 +24,13 @@
   },
   "include": [
     "video.d.ts",
-    "video.d.ts",
     "next-env.d.ts",
+    "**/*.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", "videos"]
+  "exclude": ["node_modules", "videos", "directus/extensions"]
 }

@@ -6,10 +6,18 @@ export const APP_DESCRIPTION =
   "Toronto-based wedding videographers capturing your love story with cinematic artistry and heartfelt emotion. Relive every smile, glance and dance as we craft timeless films of your special day.";
 export const SERVER_URL =
   process.env.NEXT_PUBLIC_SERVER_URL || "https://www.kenzeramaproductions.com";
+export const SITE_LOCALE = process.env.NEXT_PUBLIC_SITE_LOCALE || "en_CA";
+export const TWITTER_HANDLE = process.env.NEXT_PUBLIC_TWITTER_HANDLE || "";
+export const DEFAULT_OG_IMAGE =
+  process.env.NEXT_PUBLIC_DEFAULT_OG_IMAGE || "/kp-opengraph-rec.png";
 export const APP_DESCRIPTION_SHORT =
   process.env.NEXT_PUBLIC_APP_DESCRIPTION_SHORT || "Wedding Videographers";
 
 // MOTION
+/** Section CTA — glass pill on light backgrounds, white label */
+export const SECTION_CTA_LINK_CLASSNAME =
+  "inline-flex items-center justify-center rounded-full border border-kenzerama-pink bg-black/55 px-4 py-1.5 font-playfair-display text-[10px] uppercase tracking-wide text-white shadow-md shadow-black/20 backdrop-blur-md transition-colors duration-300 hover:bg-kenzerama-pink hover:text-background-grey md:px-5 md:py-2 md:text-sm";
+
 export const SITE_TITLE_ANIMATION = {
   hidden: {
     opacity: 0,
@@ -30,16 +38,13 @@ export const SITE_TITLE_ANIMATION = {
   },
 };
 
-// GOOGLE API
-export const CAPTCHA_SITE_KEY = process.env.RECAPTCHA_SITE_KEY || "";
-
 // STUDIO NINJA
 export const SN_SRC_URL =
   process.env.SN_SRC_URL ||
   "https://app.studioninja.co/contactform/parser/0a800fc8-8f7c-14c2-818f-7f50b7024e52/0a800fc8-8f7c-14c2-818f-7f50b7214e54";
 
 // APP CONSTANTS
-export const SORT_ORDERS = ["newest", "oldest"];
+export { SEARCH_SORT_ORDERS as SORT_ORDERS } from "@/lib/search/constants";
 export const ANIMATION_VARIANTS = {
   initial: (direction: string) => ({
     x: direction === "next" ? 10 : -10,

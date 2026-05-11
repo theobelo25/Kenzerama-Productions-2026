@@ -1,0 +1,35 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: kenzerama
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d kenzerama"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  directus:
+    build:
+      context: .
+      dockerfile: Dockerfile.directus
+    ports:
+      - "8055:8055"
+    environment:
+      DB_CLIENT: pg
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: kenzerama
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      ADMIN_EMAIL: admin@example.com
+      ADMIN_PASSWORD: ci-admin-password
+      KEY: ci-directus-key
+      SECRET: ci-directus-secret
+    depends_on:
+      postgres:
+        condition: service_healthy
