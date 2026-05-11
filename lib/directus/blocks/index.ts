@@ -1,4 +1,4 @@
-import { PageData } from "../../actions/directus.actions";
+import type { PageData } from "@/lib/directus/types";
 import type { DirectusBlockBrandedInfo } from "./block_branded_info";
 import { DirectusBlockContactForm } from "./block_contact_form";
 import { DirectusBlockExtras } from "./block_extras";
@@ -67,4 +67,12 @@ export function getBlockContent<C extends BlockCollection>(
   );
 
   return blockData;
+}
+
+export function mapBlockItem<C extends BlockCollection, T>(
+  page: PageData | null,
+  collection: C,
+  mapper: (item: BlockItemByCollection[C] | undefined) => T | null,
+): T | null {
+  return mapper(getBlockContent(page, collection)?.item);
 }

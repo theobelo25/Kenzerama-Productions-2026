@@ -1,5 +1,4 @@
-import { prisma } from "@/lib/prisma";
-import { saveInstagramCredential } from "@/lib/services/instagram-token";
+import { prisma, saveInstagramCredential } from "@/lib/server";
 import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "nodejs";

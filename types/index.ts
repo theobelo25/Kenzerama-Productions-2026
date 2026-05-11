@@ -30,8 +30,7 @@ export type Post = {
 
 /**
  * Wedding film — maps to `mux_videos` (+ optional junction metadata) from Directus.
- * Legacy rows in `info/films.ts` use `poster` + `details`; CMS rows typically use
- * `posterUrl` / `customPosterId`, `location`, and optional `details`.
+ * CMS rows typically use `posterUrl` / `customPosterId`, `location`, and optional `details`.
  */
 export type Film = {
   /** `mux_videos.id` (Mux asset id) from Directus; legacy static data may use numeric ids */
@@ -56,13 +55,15 @@ export type Film = {
     image: StaticImageData;
     alt: string;
   };
-  /** Rich venue + vendors (legacy or future expanded CMS) */
+  /** Rich venue + vendors (legacy static data often has both; CMS may supply vendors only) */
   details?: {
-    venue: Venue;
-    vendors: Vendor[];
+    venue?: Venue;
+    vendors?: Vendor[];
   };
   date?: Date;
   publishDate?: Date;
+  /** Curated related films from Directus `mux_videos.related_films`. */
+  relatedFilms?: Film[];
 };
 
 export type InstagramPost = {

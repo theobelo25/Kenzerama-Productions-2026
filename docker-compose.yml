@@ -3,6 +3,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        DIRECTUS_URL: ${DIRECTUS_URL:-http://directus:8055}
+        DIRECTUS_TOKEN: ${DIRECTUS_TOKEN:-}
+        NEXT_PUBLIC_DIRECTUS_URL: ${NEXT_PUBLIC_DIRECTUS_URL:-${DIRECTUS_URL:-http://directus:8055}}
+        NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL:-http://localhost:3000}
     ports:
       - "3000:3000"
     environment:

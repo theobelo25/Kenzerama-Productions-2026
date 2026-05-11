@@ -92,7 +92,12 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/our-videographers",
-        destination: "/our-team",
+        destination: "/about-us",
+        permanent: true,
+      },
+      {
+        source: "/our-team",
+        destination: "/about-us",
         permanent: true,
       },
     ];

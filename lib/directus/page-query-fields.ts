@@ -1,6 +1,32 @@
 /** Core `mux_videos` columns shared by hero + featured nested queries. */
-const MUX_VIDEO_ROOT_FIELDS =
+export const MUX_VIDEO_ROOT_FIELDS =
   "id,playback_id,playback_url,playback_policy,poster,sources,playback_token,thumbnail_token,status,upload_id";
+
+const RELATED_MUX_PREFIX = "related_films.related_mux_videos_id";
+
+/** M2M `mux_videos` → `mux_videos` via `mux_videos_mux_videos`. */
+export const RELATED_FILMS_RELATION_FIELDS = [
+  "related_films.id",
+  ...MUX_VIDEO_ROOT_FIELDS.split(",").map((f) => `${RELATED_MUX_PREFIX}.${f}`),
+  `${RELATED_MUX_PREFIX}.slug`,
+  `${RELATED_MUX_PREFIX}.title`,
+  `${RELATED_MUX_PREFIX}.location`,
+  `${RELATED_MUX_PREFIX}.custom_poster.id`,
+  `${RELATED_MUX_PREFIX}.custom_poster.title`,
+];
+
+/** Top-level `mux_videos` read (film detail, etc.) — editorial fields + custom poster file. */
+export const MUX_VIDEO_ITEM_FIELDS = [
+  ...MUX_VIDEO_ROOT_FIELDS.split(","),
+  "slug",
+  "title",
+  "location",
+  "description",
+  "vendors",
+  "custom_poster.id",
+  "custom_poster.title",
+  ...RELATED_FILMS_RELATION_FIELDS,
+].join(",");
 
 /** Nested `mux_videos` fields for `pages.hero_video` M2O — keep in sync with Directus. */
 export const HERO_VIDEO_RELATION_FIELDS = MUX_VIDEO_ROOT_FIELDS.split(",")

@@ -1,4 +1,4 @@
-import { refreshInstagramTokenIfNeeded } from "@/lib/services/instagram-token";
+import { refreshInstagramTokenIfNeeded } from "@/lib/server";
 import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "nodejs";

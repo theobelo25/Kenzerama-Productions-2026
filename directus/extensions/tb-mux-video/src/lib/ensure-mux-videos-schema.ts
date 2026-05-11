@@ -4,6 +4,24 @@ type KnexLike = {
   schema: { hasTable: (name: string) => Promise<boolean> };
 };
 
+type KnexQueryBuilder = {
+  select: (columns: string) => {
+    where: (condition: Record<string, unknown>) => {
+      first: () => Promise<{ id?: number } | undefined>;
+    };
+  };
+  where: (condition: Record<string, unknown>) => KnexQueryBuilder & {
+    whereIn: (column: string, values: string[]) => {
+      update: (patch: Record<string, unknown>) => Promise<number>;
+    };
+    update: (patch: Record<string, unknown>) => Promise<number>;
+  };
+};
+
+type KnexDatabase = KnexLike & {
+  (table: string): KnexQueryBuilder;
+};
+
 type BootstrapContext = {
   services: {
     CollectionsService: new (opts: Record<string, unknown>) => {
@@ -28,7 +46,7 @@ export async function ensureMuxVideosSchema(ctx: BootstrapContext): Promise<void
   const { services, database, getSchema, logger } = ctx;
   const { CollectionsService, FieldsService } = services;
   const knex = database as KnexLike;
-  const db = database as any;
+  const db = database as KnexDatabase;
 
   let schema = await getSchema();
   const accountability = null;

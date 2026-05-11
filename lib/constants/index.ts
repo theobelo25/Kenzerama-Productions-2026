@@ -14,10 +14,6 @@ export const APP_DESCRIPTION_SHORT =
   process.env.NEXT_PUBLIC_APP_DESCRIPTION_SHORT || "Wedding Videographers";
 
 // MOTION
-/** Hero overlay CTA (`SiteTitle`) — semi-transparent dark pill on video */
-export const HERO_CTA_LINK_CLASSNAME =
-  "inline-flex items-center justify-center rounded-full border border-kenzerama-pink bg-black/55 px-4 py-1.5 font-playfair-display text-[10px] uppercase tracking-wide text-white shadow-md shadow-black/20 backdrop-blur-md transition-colors duration-300 hover:bg-kenzerama-pink hover:text-background-grey md:px-5 md:py-2 md:text-sm";
-
 /** Section CTA — glass pill on light backgrounds, white label */
 export const SECTION_CTA_LINK_CLASSNAME =
   "inline-flex items-center justify-center rounded-full border border-kenzerama-pink bg-black/55 px-4 py-1.5 font-playfair-display text-[10px] uppercase tracking-wide text-white shadow-md shadow-black/20 backdrop-blur-md transition-colors duration-300 hover:bg-kenzerama-pink hover:text-background-grey md:px-5 md:py-2 md:text-sm";
@@ -48,7 +44,7 @@ export const SN_SRC_URL =
   "https://app.studioninja.co/contactform/parser/0a800fc8-8f7c-14c2-818f-7f50b7024e52/0a800fc8-8f7c-14c2-818f-7f50b7214e54";
 
 // APP CONSTANTS
-export { SEARCH_SORT_ORDERS as SORT_ORDERS } from "./search";
+export { SEARCH_SORT_ORDERS as SORT_ORDERS } from "@/lib/search/constants";
 export const ANIMATION_VARIANTS = {
   initial: (direction: string) => ({
     x: direction === "next" ? 10 : -10,

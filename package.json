@@ -8,7 +8,10 @@
     "build": "next build --webpack",
     "analyze": "cross-env ANALYZE=true next build --webpack",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint app components lib hooks scripts directus/extensions",
+    "ci:directus:wait": "bash scripts/ci/wait-directus-health.sh",
+    "ci:directus:token": "tsx scripts/ci/issue-directus-token.ts",
+    "ci:docker:build": "bash scripts/ci/build-docker-image.sh",
     "cron:instagram:refresh": "tsx scripts/refresh-instagram-token.ts"
   },
   "engines": {
@@ -46,6 +49,7 @@
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-hover-video-player": "^10.0.2",
+    "server-only": "^0.0.1",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {

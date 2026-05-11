@@ -1,6 +1,7 @@
 import { defineEndpoint } from "@directus/extensions-sdk";
 import Mux from "@mux/mux-node";
 import type { Asset } from "@mux/mux-node/resources/video/assets.js";
+import type { MuxJWTSignOptionsMultiple } from "@mux/mux-node/util/jwt-types";
 
 type AnyRecord = Record<string, unknown>;
 
@@ -66,6 +67,11 @@ function normalizeMaxResolution(value: unknown): "1080p" | "1440p" | "2160p" {
   return "1080p";
 }
 
+type MuxAssetClientPayload = ReturnType<typeof assetToClientPayload> & {
+  playbackToken?: string | null;
+  thumbnailToken?: string | null;
+};
+
 /** Shape returned by GET /assets/:id and POST /lookup for the Directus app. */
 function assetToClientPayload(asset: Asset) {
   const playbackIds = Array.isArray(asset.playback_ids) ? asset.playback_ids : [];
@@ -101,10 +107,11 @@ async function signPlaybackTokens(mux: Mux, playbackId: string): Promise<{
 }> {
   // `mux-player` expects `playback-token` for the video URL and `thumbnail-token`
   // for the poster URL. We mint a thumbnail token for `thumbnail-time=0`.
-  const tokens = await mux.jwt.signPlaybackId(playbackId, {
+  const signConfig: MuxJWTSignOptionsMultiple<"video" | "thumbnail"> = {
     type: ["video", ["thumbnail", { time: "0" }]],
     expiration: "1h",
-  } as any);
+  };
+  const tokens = await mux.jwt.signPlaybackId(playbackId, signConfig);
   const tokenMap: AnyRecord | null =
     tokens && typeof tokens === "object"
       ? (tokens as unknown as AnyRecord)
@@ -212,7 +219,7 @@ export default defineEndpoint((router, { env, logger }) => {
     try {
       const mux = getMuxClient(env as AnyRecord);
       const asset = await mux.video.assets.retrieve(id);
-      const payload: any = assetToClientPayload(asset);
+      const payload: MuxAssetClientPayload = assetToClientPayload(asset);
 
       if (payload.status === "ready" && payload.playbackPolicy === "signed" && payload.playbackId) {
         const tokens = await signPlaybackTokens(mux, payload.playbackId);
@@ -277,7 +284,7 @@ export default defineEndpoint((router, { env, logger }) => {
         const playbackPolicyFromInput = pb.policy;
         asset = await mux.video.assets.retrieve(pb.object.id);
 
-        const payload: any = assetToClientPayload(asset);
+        const payload: MuxAssetClientPayload = assetToClientPayload(asset);
         // Preserve the exact playback id the user provided (especially important for
         // non-public policies like `signed`).
         payload.playbackId = playbackIdFromInput;
@@ -301,7 +308,7 @@ export default defineEndpoint((router, { env, logger }) => {
       }
     }
 
-    const payload: any = assetToClientPayload(asset);
+    const payload: MuxAssetClientPayload = assetToClientPayload(asset);
     if (payload.playbackPolicy === "signed" && payload.playbackId) {
       const tokens = await signPlaybackTokens(mux, payload.playbackId);
       payload.playbackToken = tokens.playbackToken;

@@ -1,31 +1,5 @@
+import type { DirectusMuxVideo } from "@/lib/directus/types";
 import type { Asset } from "next-video/dist/assets.js";
-
-/** Expanded `directus_files` row (minimal) for image fields like `custom_poster`. */
-export type DirectusFileRef = {
-  id: string;
-  title?: string | null;
-};
-
-/** Subset of `mux_videos` used to build a next-video `Asset`. */
-export type DirectusMuxVideo = {
-  id: string;
-  playback_id?: string | null;
-  playback_url?: string | null;
-  playback_policy?: string | null;
-  poster?: string | null;
-  sources?: unknown;
-  playback_token?: string | null;
-  thumbnail_token?: string | null;
-  status?: string | null;
-  upload_id?: string | null;
-  /** Optional editorial fields on `mux_videos` (featured cards, etc.) */
-  slug?: string | null;
-  title?: string | null;
-  location?: string | null;
-  custom_poster?: DirectusFileRef | string | null;
-  /** Raw FK if Directus exposes it alongside the `custom_poster` alias */
-  custom_poster_id?: string | null;
-};
 
 export type CreateMuxVideoAssetInput = {
   playbackId?: string | null;

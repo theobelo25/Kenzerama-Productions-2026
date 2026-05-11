@@ -10,7 +10,7 @@ import {
   TWITTER_HANDLE,
 } from "@/lib/constants";
 import { ViewTransitions } from "next-view-transitions";
-import TransitionLoadingIndicator from "@/components/transition-loading-indicator";
+import TransitionLoadingIndicator from "@/components/loading/transition-loading-indicator";
 
 const cinzel = Cinzel({
   variable: "--font-cinzel",

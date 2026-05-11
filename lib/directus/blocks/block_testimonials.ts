@@ -1,6 +1,6 @@
 import type { DirectusTestimonial } from "@/lib/directus/types";
 
-/** Normalized row for UI (matches {@link PageTestimonial} in `directus.actions`). */
+/** Normalized row for UI (matches {@link PageTestimonial} in `lib/directus/types`). */
 export type Testimonial = {
   linkId?: string;
   sort?: number;

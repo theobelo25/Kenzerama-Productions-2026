@@ -1,7 +1,5 @@
-import {
-  DirectusMuxVideo,
-  muxVideoRowToAsset,
-} from "@/lib/video/create-mux-video-asset";
+import type { DirectusMuxVideo } from "@/lib/directus/types";
+import { muxVideoRowToAsset } from "@/lib/video/create-mux-video-asset";
 import { Asset } from "next-video/dist/assets.js";
 
 export type DirectusBlockHeroPrimary = {

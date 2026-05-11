@@ -206,4 +206,8 @@ export const muxVideosFields: RawField[] = [
   jsonField("sources", "Player sources array from the extension payload."),
   str("playback_token", "Signed JWT for playback (signed policy only)."),
   str("thumbnail_token", "Signed JWT for poster/thumbnail (signed policy only)."),
+  jsonField(
+    "vendors",
+    "Film detail credits: JSON array of { name, url?, title? } for the public film page.",
+  ),
 ];

@@ -204,7 +204,6 @@ function pickTeamRows(item: DirectusBlockOurTeams): unknown[] | null {
 export function ourTeamsFromBlockItem(
   item: DirectusBlockOurTeams | Record<string, unknown> | undefined | null,
 ): OurTeamsProps | null {
-  console.log(item);
   const block = normalizeOurTeamsPayload(item);
   if (!block) return null;
 

@@ -1,6 +1,4 @@
-import {
-  type DirectusMuxVideo,
-} from "@/lib/video/create-mux-video-asset";
+import type { DirectusMuxVideo } from "@/lib/directus/types";
 import {
   directusAssetsBaseUrl,
   extractCustomPosterIdFromMuxRow,
