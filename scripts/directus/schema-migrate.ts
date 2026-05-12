@@ -90,8 +90,12 @@ function requireEnv(name: string): string {
   return value;
 }
 
-function resolveEnv(...names: string[]): string | undefined {
+function resolveEnv(...names: Array<string | undefined>): string | undefined {
   for (const name of names) {
+    if (!name) {
+      continue;
+    }
+
     const value = process.env[name]?.trim();
     if (value) {
       return value;
