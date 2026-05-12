@@ -13,6 +13,11 @@ if [[ ! -f "${schema_file}" ]]; then
   exit 1
 fi
 
+if head -n 1 "${schema_file}" | grep -q "^# Directus schema snapshot placeholder\."; then
+  echo "Schema snapshot was not exported from Directus."
+  exit 1
+fi
+
 if [[ -n "${DIRECTUS_SCHEMA_APPLY_CMD:-}" ]]; then
   echo "Running custom schema apply command from DIRECTUS_SCHEMA_APPLY_CMD"
   bash -lc "${DIRECTUS_SCHEMA_APPLY_CMD}"
@@ -25,8 +30,20 @@ if [[ -z "${DIRECTUS_DATABASE_URL:-}" ]]; then
 fi
 
 echo "Applying schema with directus CLI using DIRECTUS_DATABASE_URL"
-export DB_CLIENT=pg
-export DB_CONNECTION_STRING="${DIRECTUS_DATABASE_URL}"
-export NPM_CONFIG_LOGLEVEL="${NPM_CONFIG_LOGLEVEL:-error}"
-npx --yes directus@11 schema apply "${schema_file}" --yes
+
+if [[ "${GITHUB_ACTIONS:-}" == "true" ]] && command -v docker >/dev/null 2>&1; then
+  schema_abs="$(cd "$(dirname "${schema_file}")" && pwd)/$(basename "${schema_file}")"
+  docker run --rm --network host \
+    -e DB_CLIENT=pg \
+    -e DB_CONNECTION_STRING="${DIRECTUS_DATABASE_URL}" \
+    -v "${schema_abs}:/snapshot.yaml:ro" \
+    directus/directus:11 \
+    npx directus schema apply /snapshot.yaml --yes
+else
+  export DB_CLIENT=pg
+  export DB_CONNECTION_STRING="${DIRECTUS_DATABASE_URL}"
+  export NPM_CONFIG_LOGLEVEL="${NPM_CONFIG_LOGLEVEL:-error}"
+  npx --yes directus@11 schema apply "${schema_file}" --yes
+fi
+
 echo "Schema apply completed"
