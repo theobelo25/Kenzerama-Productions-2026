@@ -5015,7 +5015,7 @@ fields:
       options:
         placeholder: Video Description
       readonly: false
-      required: true
+      required: false
       searchable: true
       sort: 7
       special: null
@@ -5056,7 +5056,7 @@ fields:
       options:
         placeholder: Location
       readonly: false
-      required: true
+      required: false
       searchable: true
       sort: 3
       special: null
@@ -5133,7 +5133,7 @@ fields:
             name: url
             type: string
       readonly: false
-      required: true
+      required: false
       searchable: true
       sort: 8
       special:

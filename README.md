@@ -69,6 +69,22 @@ Export from your local Directus workspace before opening a PR:
 npx --yes directus@11 schema snapshot ./directus/schema.snapshot.yaml
 ```
 
+### Push to staging
+
+1. **Export the schema from local Directus** (with local Docker Compose running, the script uses the `directus` service; otherwise set `DIRECTUS_DATABASE_URL` or `DATABASE_URL`):
+
+```bash
+npm run directus:schema:snapshot
+```
+
+2. **Commit and push to GitHub** on `development` (direct push or merge a PR). Include the updated `directus/schema.snapshot.yaml` in the commit. A push to `development` runs the **Schema Dev to Staging** workflow, which backs up staging, applies the snapshot, and runs health checks.
+
+3. **If the workflow fails or you need to apply the snapshot by hand**, run the same promotion steps locally (requires `STAGING_DB_URL` and `STAGING_DIRECTUS_DATABASE_URL`, or `DIRECTUS_DATABASE_URL`; optional `DIRECTUS_SCHEMA_APPLY_CMD` if staging uses a custom apply path):
+
+```bash
+STAGING_DB_URL="postgresql://..." STAGING_DIRECTUS_DATABASE_URL="postgresql://..." npm run directus:schema:promote-staging
+```
+
 ### Branch and environment rules
 
 - Author schema locally and commit the updated snapshot in git.
