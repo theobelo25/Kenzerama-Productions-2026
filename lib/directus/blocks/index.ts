@@ -1,6 +1,7 @@
 import type { PageData } from "@/lib/directus/types";
 import type { DirectusBlockBrandedInfo } from "./block_branded_info";
-import { DirectusBlockContactForm } from "./block_contact_form";
+import type { DirectusBlockContactForm } from "./block_contact_form";
+import type { DirectusBlockCtaBanner } from "./block_cta_banner";
 import { DirectusBlockExtras } from "./block_extras";
 import type { DirectusBlockFaqs } from "./block_faqs";
 import type { DirectusBlockHeroPrimary } from "./block_hero_primary";
@@ -24,6 +25,7 @@ export const BLOCKS = {
   PACKAGES_BLOCK: "block_packages",
   EXTRAS_BLOCK: "block_extras",
   CONTACT_FORM_BLOCK: "block_contact_form",
+  CTA_BANNER: "block_cta_banner",
 } as const;
 
 export type BlockItemByCollection = {
@@ -38,6 +40,7 @@ export type BlockItemByCollection = {
   block_packages: DirectusBlockPackages;
   block_extras: DirectusBlockExtras;
   block_contact_form: DirectusBlockContactForm;
+  block_cta_banner: DirectusBlockCtaBanner;
 };
 
 export type BlockCollection = (typeof BLOCKS)[keyof typeof BLOCKS];

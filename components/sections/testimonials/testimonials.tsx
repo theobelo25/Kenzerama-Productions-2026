@@ -4,8 +4,6 @@ import Image from "next/image";
 import { useEffect, useEffectEvent, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import type { PageTestimonial } from "@/lib/directus/types";
-import { testimonialBackgroundSrc } from "@/info/testimonial-background";
-import { testimonialData } from "@/info/testimonials";
 
 const ROTATE_MS = 10_000;
 
@@ -24,41 +22,34 @@ type Slide = {
 };
 
 function slidesFromCms(rows: PageTestimonial[]): Slide[] {
-  return rows
-    .filter((t) => Boolean(t.quote?.trim()))
-    .map((t, i) => {
-      const names = t.names?.trim() ?? "";
-      const quote = t.quote!.trim();
-      return {
-        key: t.linkId ?? `${names}-${i}`,
-        names,
-        testimonial: quote,
-        backgroundSrc: testimonialBackgroundSrc(names),
-        alt: "",
-      };
+  const slides: Slide[] = [];
+
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    const quote = row.quote?.trim();
+    const backgroundSrc = row.backgroundSrc?.trim();
+    if (!quote || !backgroundSrc) continue;
+
+    const names = row.names?.trim() ?? "";
+    slides.push({
+      key: row.linkId ?? `${names}-${i}`,
+      names,
+      testimonial: quote,
+      backgroundSrc,
+      alt: "",
     });
+  }
+
+  return slides;
 }
 
 type Props = {
-  cmsTestimonials?: PageTestimonial[];
+  testimonials: PageTestimonial[];
 };
 
-const Testimonials = ({ cmsTestimonials }: Props) => {
-  const testimonials = useMemo(() => {
-    const fromCms = cmsTestimonials?.length
-      ? slidesFromCms(cmsTestimonials)
-      : [];
-    if (fromCms.length > 0) return fromCms;
-    return testimonialData.testimonials.map((t, i) => ({
-      key: `${t.names}-${i}`,
-      names: t.names,
-      testimonial: t.testimonial,
-      backgroundSrc: t.backgroundSrc,
-      alt: t.alt ?? "",
-    }));
-  }, [cmsTestimonials]);
-
-  const count = testimonials.length;
+const Testimonials = ({ testimonials }: Props) => {
+  const slides = useMemo(() => slidesFromCms(testimonials), [testimonials]);
+  const count = slides.length;
   const [index, setIndex] = useState(0);
   const reduceMotion = useReducedMotion();
 
@@ -73,15 +64,7 @@ const Testimonials = ({ cmsTestimonials }: Props) => {
     syncIndexToCount();
   }, [count]);
 
-  const t = testimonials[index];
-  const backgroundPositionClass =
-    t.names === "Jocilea & Justin"
-      ? "object-cover object-[center_58%] md:object-bottom"
-      : t.names === "Devon & Graham"
-        ? "object-cover object-[center_58%] lg:object-[center_40%]"
-        : t.names === "Kristen & Jesse"
-          ? "object-cover object-[center_58%] md:object-bottom"
-          : "object-cover object-[center_58%]";
+  const t = slides[index];
 
   useEffect(() => {
     if (count <= 1) return;
@@ -94,6 +77,15 @@ const Testimonials = ({ cmsTestimonials }: Props) => {
   if (count === 0 || !t) {
     return null;
   }
+
+  const backgroundPositionClass =
+    t.names === "Jocilea & Justin"
+      ? "object-cover object-[center_58%] md:object-bottom"
+      : t.names === "Devon & Graham"
+        ? "object-cover object-[center_58%] lg:object-[center_40%]"
+        : t.names === "Kristen & Jesse"
+          ? "object-cover object-[center_58%] md:object-bottom"
+          : "object-cover object-[center_58%]";
 
   return (
     <section

@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import type { PageTestimonial } from "@/lib/directus/types";
 import type { TestimonialsProps } from "@/lib/directus/blocks/block_testimonials";
 
 const Testimonials = dynamic(() => import("./testimonials"), {
@@ -10,17 +9,11 @@ const Testimonials = dynamic(() => import("./testimonials"), {
 
 type Props = {
   /** From {@link testimonialsFromBlockItem} / `BLOCKS.TESTIMONIALS`. */
-  data?: TestimonialsProps | null;
-  /** Raw rows when not using the testimonials block (e.g. legacy page fields). */
-  testimonials?: PageTestimonial[];
+  data: TestimonialsProps;
 };
 
-const TestimonialsClient = ({ data, testimonials }: Props) => {
-  const cmsTestimonials = data?.testimonials?.length
-    ? data.testimonials
-    : testimonials;
-
-  return <Testimonials cmsTestimonials={cmsTestimonials} />;
+const TestimonialsClient = ({ data }: Props) => {
+  return <Testimonials testimonials={data.testimonials} />;
 };
 
 export default TestimonialsClient;

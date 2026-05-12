@@ -54,4 +54,7 @@ export const TESTIMONIAL_RELATION_FIELDS = [
   `${TESTIMONIAL_MUX_PREFIX}.id`,
   `${TESTIMONIAL_MUX_PREFIX}.names`,
   `${TESTIMONIAL_MUX_PREFIX}.quote`,
+  `${TESTIMONIAL_MUX_PREFIX}.testimonial_image`,
+  `${TESTIMONIAL_MUX_PREFIX}.testimonial_image.id`,
+  `${TESTIMONIAL_MUX_PREFIX}.testimonial_image.title`,
 ].join(",");

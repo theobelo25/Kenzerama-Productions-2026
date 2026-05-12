@@ -2,7 +2,8 @@ import { cache, Suspense } from "react";
 import type { Metadata } from "next";
 import WeddingFilms from "@/components/media/wedding-films/wedding-films";
 import Instagram from "@/components/ctas/instagram";
-import ContactCta from "@/components/ctas/contact-cta";
+import CtaBanner from "@/components/ctas/cta-banner";
+import { DEFAULT_CONTACT_CTA_BANNER } from "@/lib/constants/contact-cta-banner";
 import { buildSeoMetadata } from "@/lib/seo/metadata";
 import { getPageBySlug } from "@/lib/server";
 import { BLOCKS, mapBlockItem } from "@/lib/directus/blocks";
@@ -85,7 +86,7 @@ export default async function WeddingVideographyPage() {
       </Suspense>
 
       <Instagram />
-      <ContactCta />
+      <CtaBanner data={DEFAULT_CONTACT_CTA_BANNER} />
     </>
   );
 }

@@ -4,7 +4,8 @@ import FilmDetails from "./film-details";
 import RelatedFilms from "./related-films";
 import NavigationTracker from "./navigation-tracker";
 import Instagram from "@/components/ctas/instagram";
-import ContactCta from "@/components/ctas/contact-cta";
+import CtaBanner from "@/components/ctas/cta-banner";
+import { DEFAULT_CONTACT_CTA_BANNER } from "@/lib/constants/contact-cta-banner";
 import type { Film } from "@/types";
 
 /** Title block while `film` is unknown — skeleton only so we never flash another couple’s names. */
@@ -48,7 +49,7 @@ export default function FilmDetailBody({ film }: { film: Film | null }) {
           ) : null}
           <RelatedFilms currentFilm={film} />
           <Instagram tightTop />
-          <ContactCta />
+          <CtaBanner data={DEFAULT_CONTACT_CTA_BANNER} />
         </>
       ) : (
         <div
