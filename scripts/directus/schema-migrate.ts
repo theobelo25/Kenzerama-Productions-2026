@@ -220,6 +220,19 @@ function loadDiffFile(diffPath: string): SchemaDiffOutput {
   return diff;
 }
 
+function isNoSchemaDiff(diff: SchemaDiffOutput | null | undefined): boolean {
+  if (!diff || typeof diff.hash !== "string" || !diff.diff || typeof diff.diff !== "object") {
+    return true;
+  }
+
+  const sections = ["collections", "fields", "relations", "system"] as const;
+
+  return !sections.some((key) => {
+    const value = diff.diff[key];
+    return Array.isArray(value) && value.length > 0;
+  });
+}
+
 async function createAuthenticatedClient(
   role: DirectusRole,
 ): Promise<RestClient<unknown>> {
@@ -273,14 +286,26 @@ async function fetchSnapshotFromSource(
 async function createDiff(
   snapshot: SchemaSnapshotOutput,
   force: boolean,
-): Promise<SchemaDiffOutput> {
+): Promise<SchemaDiffOutput | null> {
   const target = await createAuthenticatedClient("target");
   const targetUrl = resolveDirectusUrl("target");
   console.log(`Computing schema diff against ${targetUrl}`);
-  return target.request(schemaDiff(snapshot, force));
+  const diff = await target.request(schemaDiff(snapshot, force));
+
+  if (isNoSchemaDiff(diff)) {
+    console.log("Target schema already matches the snapshot.");
+    return null;
+  }
+
+  return diff;
 }
 
 async function applyDiff(diff: SchemaDiffOutput, force: boolean): Promise<void> {
+  if (isNoSchemaDiff(diff)) {
+    console.log("No schema diff to apply.");
+    return;
+  }
+
   const target = await createAuthenticatedClient("target");
   const targetUrl = resolveDirectusUrl("target");
   console.log(`Applying schema diff to ${targetUrl}`);
@@ -310,6 +335,11 @@ async function runDiff(flags: Map<string, string | boolean>, positionals: string
   const diff = await createDiff(snapshot, force);
   const outputPath = resolveOutputPath(flags, "out");
 
+  if (!diff) {
+    console.log("No schema diff.");
+    return;
+  }
+
   if (outputPath) {
     writeDiffFile(outputPath, diff);
     console.log(`Schema diff written to ${outputPath}`);
@@ -334,6 +364,10 @@ async function runApply(flags: Map<string, string | boolean>, positionals: strin
         force,
       );
 
+  if (!diff) {
+    return;
+  }
+
   await applyDiff(diff, force);
 }
 
@@ -356,13 +390,17 @@ async function runMigrate(flags: Map<string, string | boolean>, positionals: str
   const diff = await createDiff(snapshot, force);
   const diffOut = resolveOutputPath(flags, "diff-out");
 
-  if (diffOut) {
+  if (diff && diffOut) {
     writeDiffFile(diffOut, diff);
     console.log(`Schema diff written to ${diffOut}`);
   }
 
   if (dryRun) {
     console.log("Dry run enabled; skipping schema apply.");
+    return;
+  }
+
+  if (!diff) {
     return;
   }
 
