@@ -42,3 +42,6 @@ jobs:
 
       - name: Verify Directus schema CLI is runnable
         run: docker run --rm directus/directus:11 npx directus schema --help >/dev/null
+
+      - name: Verify custom Directus interface artifacts
+        run: node scripts/ci/verify-directus-custom-interfaces.mjs

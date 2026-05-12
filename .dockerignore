@@ -11,3 +11,5 @@ yarn-error.log*
 coverage
 dist
 build
+!directus/extensions/**/dist/
+!directus/extensions/**/dist/**

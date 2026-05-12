@@ -142,6 +142,17 @@ function assertSnapshotReady(snapshotPath: string): void {
   }
 }
 
+function timestampForFilename(date = new Date()): string {
+  return date
+    .toISOString()
+    .replace(/[-:]/g, "")
+    .replace(/\.\d{3}Z$/, "Z");
+}
+
+function stagingBackupFileName(date = new Date()): string {
+  return `staging-backup-${timestampForFilename(date)}.dump`;
+}
+
 function backupDatabase(dbUrl: string, outputFile: string): void {
   console.log(`Creating DB backup: ${outputFile}`);
   run("pg_dump", [dbUrl, "-Fc", "-f", outputFile]);
@@ -201,7 +212,7 @@ function promoteStaging(snapshotPath: string): void {
   assertSnapshotReady(snapshotPath);
 
   const stagingDbUrl = requireEnv("STAGING_DB_URL");
-  backupDatabase(stagingDbUrl, "staging-backup.dump");
+  backupDatabase(stagingDbUrl, stagingBackupFileName());
   applySchema(snapshotPath);
   runHealthChecks(stagingDbUrl);
 }

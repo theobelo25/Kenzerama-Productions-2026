@@ -49,6 +49,8 @@ services:
       dockerfile: Dockerfile.directus
     ports:
       - "8055:8055"
+    volumes:
+      - directus_uploads:/directus/uploads
     environment:
       DB_CLIENT: ${DIRECTUS_DB_CLIENT:-pg}
       DB_HOST: ${DIRECTUS_DB_HOST:-postgres}
@@ -91,3 +93,4 @@ services:
 
 volumes:
   postgres_data:
+  directus_uploads:
