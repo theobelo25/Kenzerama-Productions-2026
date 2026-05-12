@@ -1,4 +1,5 @@
 "use server";
+
 import { cookies } from "next/headers";
 
 const HISTORY_KEY = "visited_pages";
