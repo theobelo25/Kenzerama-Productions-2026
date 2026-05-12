@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import PrimaryHero from "@/components/sections/heroes/primary-hero";
 import WeddingFilms from "@/components/media/wedding-films/wedding-films";
 import Instagram from "@/components/ctas/instagram";
-import ContactCta from "@/components/ctas/contact-cta";
+import CtaBanner from "@/components/ctas/cta-banner";
 import TestimonialsClient from "@/components/sections/testimonials/testimonials-client";
 import BrandedInfoBlock from "@/components/ctas/branded-info-block";
 import { getPageBySlug } from "@/lib/server";
@@ -15,11 +15,13 @@ import { brandedInfoFromBlockItem } from "@/lib/directus/blocks/block_branded_in
 import { testimonialsFromBlockItem } from "@/lib/directus/blocks/block_testimonials";
 import {
   BLOCK_BRANDED_INFO_NESTED_FIELDS,
+  BLOCK_CTA_BANNER_NESTED_FIELDS,
   BLOCK_HERO_PRIMARY_NESTED_FIELDS,
   BLOCK_TESTIMONIALS_NESTED_FIELDS,
   BLOCK_VIDEOS_NESTED_FIELDS,
   buildPageBySlugQuery,
 } from "@/lib/directus/page-queries";
+import { ctaBannerFromBlockItem } from "@/lib/directus/blocks/block_cta_banner";
 
 const PAGE_SLUG = "homepage";
 const SEO = { fallbackTitle: "Homepage", pathname: "/" } as const;
@@ -29,6 +31,7 @@ const PAGE_QUERY = buildPageBySlugQuery(PAGE_SLUG, {
   block_videos: BLOCK_VIDEOS_NESTED_FIELDS,
   block_branded_info: BLOCK_BRANDED_INFO_NESTED_FIELDS,
   block_testimonials: BLOCK_TESTIMONIALS_NESTED_FIELDS,
+  block_cta_banner: BLOCK_CTA_BANNER_NESTED_FIELDS,
 });
 
 const getHomepagePage = cache(async () => getPageBySlug(PAGE_SLUG, PAGE_QUERY));
@@ -76,6 +79,7 @@ export default async function Homepage() {
     BLOCKS.TESTIMONIALS,
     testimonialsFromBlockItem,
   );
+  const ctaData = mapBlockItem(page, BLOCKS.CTA_BANNER, ctaBannerFromBlockItem);
 
   return (
     <div className="landing-page-compact">
@@ -90,7 +94,7 @@ export default async function Homepage() {
       {testimonialsData ? <TestimonialsClient data={testimonialsData} /> : null}
 
       <Instagram compactSpacing />
-      <ContactCta />
+      {ctaData ? <CtaBanner data={ctaData} /> : null}
     </div>
   );
 }

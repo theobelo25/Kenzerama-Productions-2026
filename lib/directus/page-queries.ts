@@ -23,6 +23,13 @@ export const BLOCK_INFO_NESTED_FIELDS = ["*"] as const;
 
 export const BLOCK_CONTACT_FORM_NESTED_FIELDS = ["*"] as const;
 
+export const BLOCK_CTA_BANNER_NESTED_FIELDS = [
+  "*",
+  {
+    background_image: [...DIRECTUS_FILE_MIN_FIELDS],
+  },
+] as const;
+
 export const BLOCK_OUR_TEAMS_NESTED_FIELDS = [
   "*",
   {
@@ -106,7 +113,14 @@ export const BLOCK_TESTIMONIALS_NESTED_FIELDS = [
     testimonials: [
       "*",
       {
-        testimonials_id: ["id", "names", "quote"],
+        testimonials_id: [
+          "id",
+          "names",
+          "quote",
+          {
+            testimonial_image: [...DIRECTUS_FILE_MIN_FIELDS],
+          },
+        ],
       },
     ],
   },

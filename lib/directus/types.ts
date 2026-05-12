@@ -44,6 +44,7 @@ export type DirectusTestimonial = {
   id?: string;
   names?: string | null;
   quote?: string | null;
+  testimonial_image?: DirectusFileRef | string | null;
 };
 
 export type DirectusTestimonialLink = {
@@ -90,4 +91,5 @@ export type PageTestimonial = {
   sort?: number;
   names?: string;
   quote?: string;
+  backgroundSrc?: string;
 };

@@ -3,7 +3,8 @@ import PageTitle from "@/components/sections/heroes/page-title";
 import WeddingFilms from "@/components/media/wedding-films/wedding-films";
 import FeaturedPosts from "./_components/featured-posts";
 import Instagram from "@/components/ctas/instagram";
-import ContactCta from "@/components/ctas/contact-cta";
+import CtaBanner from "@/components/ctas/cta-banner";
+import { DEFAULT_CONTACT_CTA_BANNER } from "@/lib/constants/contact-cta-banner";
 import { getAllPosts, getFeaturedPost } from "@/lib/server";
 import { buildSeoMetadata } from "@/lib/seo/metadata";
 import { getRandomItems } from "@/lib/utils";
@@ -24,7 +25,7 @@ const BlogPage = async () => {
       <PageTitle title="Our Blog" />
       <FeaturedPosts featuredPost={featuredPost} featuredPosts={randPosts} />
       <WeddingFilms isFeatured={true} />
-      <ContactCta />
+      <CtaBanner data={DEFAULT_CONTACT_CTA_BANNER} />
       <Instagram />
     </>
   );

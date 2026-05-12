@@ -19,7 +19,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 3
+      sort: 4
       sort_field: null
       translations: null
       unarchive_value: null
@@ -43,13 +43,37 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 11
+      sort: 12
       sort_field: null
       translations: null
       unarchive_value: null
       versioning: false
     schema:
       name: block_contact_form
+  - collection: block_cta_banner
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: block_cta_banner
+      color: null
+      display_template: null
+      group: blocks
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: 7
+      sort_field: sort
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: block_cta_banner
   - collection: block_extras
     meta:
       accountability: all
@@ -67,7 +91,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 10
+      sort: 11
       sort_field: sort
       translations: null
       unarchive_value: null
@@ -91,7 +115,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 16
+      sort: 17
       sort_field: null
       translations: null
       unarchive_value: null
@@ -115,7 +139,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 7
+      sort: 9
       sort_field: null
       translations: null
       unarchive_value: null
@@ -187,7 +211,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 8
+      sort: 5
       sort_field: null
       translations: null
       unarchive_value: null
@@ -211,7 +235,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 6
+      sort: 8
       sort_field: sort
       translations: null
       unarchive_value: null
@@ -235,7 +259,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 13
+      sort: 14
       sort_field: null
       translations: null
       unarchive_value: null
@@ -259,7 +283,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 9
+      sort: 10
       sort_field: sort
       translations: null
       unarchive_value: null
@@ -283,7 +307,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 14
+      sort: 15
       sort_field: null
       translations: null
       unarchive_value: null
@@ -307,7 +331,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 15
+      sort: 16
       sort_field: null
       translations: null
       unarchive_value: null
@@ -331,7 +355,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 4
+      sort: 6
       sort_field: null
       translations: null
       unarchive_value: null
@@ -355,7 +379,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 12
+      sort: 13
       sort_field: null
       translations: null
       unarchive_value: null
@@ -379,7 +403,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 5
+      sort: 3
       sort_field: null
       translations: null
       unarchive_value: null
@@ -403,7 +427,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 11
+      sort: 12
       sort_field: null
       translations: null
       unarchive_value: null
@@ -421,19 +445,17 @@ collections:
       color: null
       display_template: null
       group: null
-      hidden: true
-      icon: null
+      hidden: false
+      icon: folder
       item_duplication_fields: null
       note: null
       preview_url: null
-      singleton: true
-      sort: 7
+      singleton: false
+      sort: 8
       sort_field: null
       translations: null
       unarchive_value: null
       versioning: false
-    schema:
-      name: blocks
   - collection: extras
     meta:
       accountability: all
@@ -451,7 +473,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 6
+      sort: 7
       sort_field: sort
       translations: null
       unarchive_value: null
@@ -502,7 +524,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 18
       sort_field: null
       translations: null
       unarchive_value: null
@@ -526,7 +548,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 19
       sort_field: null
       translations: null
       unarchive_value: null
@@ -550,7 +572,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 5
+      sort: 6
       sort_field: sort
       translations: null
       unarchive_value: null
@@ -598,7 +620,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 9
+      sort: 10
       sort_field: null
       translations: null
       unarchive_value: null
@@ -622,7 +644,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 8
+      sort: 9
       sort_field: null
       translations: null
       unarchive_value: null
@@ -646,7 +668,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 10
+      sort: 11
       sort_field: null
       translations: null
       unarchive_value: null
@@ -670,7 +692,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: null
+      sort: 3
       sort_field: sort
       translations: null
       unarchive_value: null
@@ -694,7 +716,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 4
+      sort: 5
       sort_field: sort
       translations: null
       unarchive_value: null
@@ -718,7 +740,7 @@ collections:
       note: null
       preview_url: null
       singleton: false
-      sort: 3
+      sort: 4
       sort_field: sort
       translations: null
       unarchive_value: draft
@@ -1055,6 +1077,253 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
+  - collection: block_cta_banner
+    field: id
+    type: uuid
+    meta:
+      collection: block_cta_banner
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: 1
+      special:
+        - uuid
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: block_cta_banner
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: block_cta_banner
+    field: sort
+    type: integer
+    meta:
+      collection: block_cta_banner
+      conditions: null
+      display: null
+      display_options: null
+      field: sort
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: sort
+      table: block_cta_banner
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: block_cta_banner
+    field: title
+    type: string
+    meta:
+      collection: block_cta_banner
+      conditions: null
+      display: null
+      display_options: null
+      field: title
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        placeholder: Enter CTA title
+      readonly: false
+      required: false
+      searchable: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: title
+      table: block_cta_banner
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: block_cta_banner
+    field: button_text
+    type: string
+    meta:
+      collection: block_cta_banner
+      conditions: null
+      display: null
+      display_options: null
+      field: button_text
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        placeholder: Display text on button
+      readonly: false
+      required: false
+      searchable: true
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: button_text
+      table: block_cta_banner
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: block_cta_banner
+    field: button_href
+    type: string
+    meta:
+      collection: block_cta_banner
+      conditions: null
+      display: null
+      display_options: null
+      field: button_href
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        placeholder: Enter button href
+      readonly: false
+      required: false
+      searchable: true
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: button_href
+      table: block_cta_banner
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: block_cta_banner
+    field: background_image
+    type: uuid
+    meta:
+      collection: block_cta_banner
+      conditions: null
+      display: null
+      display_options: null
+      field: background_image
+      group: null
+      hidden: false
+      interface: file-image
+      note: null
+      options:
+        allowedMimeTypes:
+          - image/webp
+      readonly: false
+      required: false
+      searchable: true
+      sort: 6
+      special:
+        - file
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: background_image
+      table: block_cta_banner
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_files
+      foreign_key_column: id
   - collection: block_extras
     field: id
     type: uuid
@@ -3106,46 +3375,6 @@ fields:
       has_auto_increment: false
       foreign_key_table: mux_videos
       foreign_key_column: id
-  - collection: blocks
-    field: id
-    type: integer
-    meta:
-      collection: blocks
-      conditions: null
-      display: null
-      display_options: null
-      field: id
-      group: null
-      hidden: true
-      interface: input
-      note: null
-      options: null
-      readonly: true
-      required: false
-      searchable: true
-      sort: 1
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: id
-      table: blocks
-      data_type: integer
-      default_value: nextval('blocks_id_seq'::regclass)
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: false
-      is_unique: true
-      is_indexed: false
-      is_primary_key: true
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: true
-      foreign_key_table: null
-      foreign_key_column: null
   - collection: extras
     field: id
     type: uuid
@@ -7316,7 +7545,7 @@ fields:
       options:
         placeholder: Names
       readonly: false
-      required: false
+      required: true
       searchable: true
       sort: 6
       special: null
@@ -7358,7 +7587,7 @@ fields:
         placeholder: Enter testimonial text
         trim: true
       readonly: false
-      required: false
+      required: true
       searchable: true
       sort: 7
       special: null
@@ -7383,6 +7612,49 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
+  - collection: testimonials
+    field: testimonial_image
+    type: uuid
+    meta:
+      collection: testimonials
+      conditions: null
+      display: null
+      display_options: null
+      field: testimonial_image
+      group: null
+      hidden: false
+      interface: file-image
+      note: null
+      options:
+        allowedMimeTypes:
+          - image/webp
+      readonly: false
+      required: true
+      searchable: true
+      sort: 8
+      special:
+        - file
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: testimonial_image
+      table: testimonials
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_files
+      foreign_key_column: id
 systemFields:
   - collection: directus_activity
     field: timestamp
@@ -7397,6 +7669,27 @@ systemFields:
     schema:
       is_indexed: true
 relations:
+  - collection: block_cta_banner
+    field: background_image
+    related_collection: directus_files
+    meta:
+      junction_field: null
+      many_collection: block_cta_banner
+      many_field: background_image
+      one_allowed_collections: null
+      one_collection: directus_files
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: block_cta_banner
+      column: background_image
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      constraint_name: block_cta_banner_background_image_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: block_extras_extras
     field: extras_id
     related_collection: extras
@@ -7878,6 +8171,7 @@ relations:
         - block_packages
         - block_extras
         - block_contact_form
+        - block_cta_banner
       one_collection: null
       one_collection_field: collection
       one_deselect_action: nullify
@@ -7965,5 +8259,26 @@ relations:
       foreign_key_table: directus_files
       foreign_key_column: id
       constraint_name: teams_image_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: testimonials
+    field: testimonial_image
+    related_collection: directus_files
+    meta:
+      junction_field: null
+      many_collection: testimonials
+      many_field: testimonial_image
+      one_allowed_collections: null
+      one_collection: directus_files
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: testimonials
+      column: testimonial_image
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      constraint_name: testimonials_testimonial_image_foreign
       on_update: NO ACTION
       on_delete: SET NULL

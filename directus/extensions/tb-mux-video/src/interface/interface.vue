@@ -181,6 +181,7 @@ export default defineComponent({
     const resumeAssetThumbnailToken = ref<string | null>(null);
     let pollTimer: ReturnType<typeof setTimeout> | null = null;
     let currentUploadId: string | null = null;
+    let emittingValue = false;
 
     const parsedValue = computed<MuxValue>(() => {
       const raw = props.value as unknown;
@@ -240,8 +241,27 @@ export default defineComponent({
       }
     });
 
+    function sessionKeyFor(collection: string, field: string, primaryKey: string | number): string {
+      return `directus-extension-mux-video:${collection || "_"}:${field || "_"}:${String(primaryKey ?? "+")}`;
+    }
+
     function storageKey(): string {
-      return `directus-extension-mux-video:${props.collection || "_"}:${props.field || "_"}:${String(props.primaryKey ?? "+")}`;
+      return sessionKeyFor(props.collection, props.field, props.primaryKey ?? "+");
+    }
+
+    function clearPersistedSessionState(...extraPrimaryKeys: Array<string | number>) {
+      try {
+        const keys = new Set<string>([
+          storageKey(),
+          sessionKeyFor(props.collection, props.field, "+"),
+        ]);
+        for (const primaryKey of extraPrimaryKeys) {
+          keys.add(sessionKeyFor(props.collection, props.field, primaryKey));
+        }
+        for (const key of keys) sessionStorage.removeItem(key);
+      } catch {
+        /* private mode / quota */
+      }
     }
 
     function hasMuxPayload(v: MuxValue | undefined): boolean {
@@ -273,8 +293,12 @@ export default defineComponent({
 
     function emitValue(next: MuxValue) {
       replacing.value = false;
+      emittingValue = true;
       emit("input", next as unknown);
       persistSessionState(next);
+      nextTick(() => {
+        emittingValue = false;
+      });
     }
 
     function apiErrorMessage(err: unknown): string {
@@ -682,16 +706,11 @@ export default defineComponent({
       await nextTick();
       await new Promise<void>((r) => setTimeout(r, 0));
 
-      const key = storageKey();
       if (hasMuxPayload(parsedValue.value ?? undefined)) {
-        try {
-          sessionStorage.removeItem(key);
-        } catch {
-          /* ignore */
-        }
+        clearPersistedSessionState();
       } else {
         try {
-          const raw = sessionStorage.getItem(key);
+          const raw = sessionStorage.getItem(storageKey());
           if (raw) {
             const stored = JSON.parse(raw) as MuxValue;
             if (stored != null && hasMuxPayload(stored)) {
@@ -746,6 +765,15 @@ export default defineComponent({
     onBeforeUnmount(() => {
       stopPolling();
       detachUploader();
+      clearPersistedSessionState();
+    });
+
+    watch(parsedValue, (next) => {
+      if (emittingValue) return;
+      if (String(props.primaryKey ?? "+") === "+") return;
+      if (hasMuxPayload(next ?? undefined)) {
+        clearPersistedSessionState();
+      }
     });
 
     watch(phase, async (next) => {
@@ -765,17 +793,7 @@ export default defineComponent({
         const [c, f, pk] = _next;
         const [oc, of, opk] = prev;
         if (c === oc && f === of && String(opk) === "+" && String(pk) !== "+") {
-          const oldKey = `directus-extension-mux-video:${oc}:${of}:+`;
-          const newKey = `directus-extension-mux-video:${c}:${f}:${String(pk)}`;
-          try {
-            const data = sessionStorage.getItem(oldKey);
-            if (data) {
-              sessionStorage.setItem(newKey, data);
-              sessionStorage.removeItem(oldKey);
-            }
-          } catch {
-            /* ignore */
-          }
+          clearPersistedSessionState(pk, opk);
         }
       },
     );

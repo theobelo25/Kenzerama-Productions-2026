@@ -1,4 +1,5 @@
 import type { DirectusTestimonial } from "@/lib/directus/types";
+import { directusAssetsBaseUrl } from "@/lib/directus/custom-poster";
 
 /** Normalized row for UI (matches {@link PageTestimonial} in `lib/directus/types`). */
 export type Testimonial = {
@@ -6,6 +7,7 @@ export type Testimonial = {
   sort?: number;
   names?: string;
   quote?: string;
+  backgroundSrc?: string;
 };
 
 /** Raw `block_testimonials` row — `testimonials[]` is usually O2M junction slots. */
@@ -29,6 +31,29 @@ function parseSort(raw: unknown): number | undefined {
   return undefined;
 }
 
+function resolveTestimonialImageUrl(raw: unknown): string | undefined {
+  if (raw == null) return undefined;
+
+  if (typeof raw === "string") {
+    const s = raw.trim();
+    if (!s) return undefined;
+    if (/^https?:\/\//i.test(s)) return s;
+    const base = directusAssetsBaseUrl();
+    if (!base) return undefined;
+    return `${base.replace(/\/$/, "")}/assets/${s}`;
+  }
+
+  if (typeof raw === "object" && raw !== null && "id" in raw) {
+    const id = (raw as { id: unknown }).id;
+    if (typeof id !== "string" || !id.trim()) return undefined;
+    const base = directusAssetsBaseUrl();
+    if (!base) return undefined;
+    return `${base.replace(/\/$/, "")}/assets/${id.trim()}`;
+  }
+
+  return undefined;
+}
+
 function testimonialFromDirectus(
   t: DirectusTestimonial,
   index: number,
@@ -43,6 +68,7 @@ function testimonialFromDirectus(
     sort,
     names: t.names?.trim() || undefined,
     quote,
+    backgroundSrc: resolveTestimonialImageUrl(t.testimonial_image),
   };
 }
 

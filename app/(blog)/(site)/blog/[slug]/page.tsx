@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { getAllPosts, getPost } from "@/lib/server";
 import { notFound } from "next/navigation";
 import PostComponent from "./_components/post";
-import ContactCta from "@/components/ctas/contact-cta";
+import CtaBanner from "@/components/ctas/cta-banner";
+import { DEFAULT_CONTACT_CTA_BANNER } from "@/lib/constants/contact-cta-banner";
 import Instagram from "@/components/ctas/instagram";
 import { buildSeoMetadata } from "@/lib/seo/metadata";
 
@@ -60,7 +61,7 @@ const PostPage = async (props: { params: Promise<{ slug: string }> }) => {
   return (
     <>
       <PostComponent data={post.frontmatter} content={post.content} />
-      <ContactCta />
+      <CtaBanner data={DEFAULT_CONTACT_CTA_BANNER} />
       <Instagram />
     </>
   );
