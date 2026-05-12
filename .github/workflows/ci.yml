@@ -85,6 +85,10 @@ jobs:
         if: env.DIRECTUS_URL == 'http://127.0.0.1:8055'
         run: ./scripts/ci/apply-directus-schema.sh directus/schema.snapshot.yaml
 
+      - name: Build Directus extension artifacts
+        if: env.DIRECTUS_URL == 'http://127.0.0.1:8055'
+        run: bash scripts/ci/build-directus-extensions.sh
+
       - name: Build Directus image
         if: env.DIRECTUS_URL == 'http://127.0.0.1:8055'
         run: docker build -t ci-directus -f Dockerfile.directus .

@@ -1,5 +1,10 @@
-# Extensions are built on the host (committed `dist/`), so the image build
-# does not require pulling a Node builder image. This makes offline / restricted
-# network builds possible.
+# jpp-permalink-generator ships committed dist/; tb-mux-video is built here so
+# CI and image builds do not depend on gitignored extension output.
+FROM node:24-alpine AS mux-video-builder
+WORKDIR /extension
+COPY directus/extensions/tb-mux-video/ ./
+RUN npm ci && npm run build
+
 FROM directus/directus:11
 COPY directus/extensions /directus/extensions
+COPY --from=mux-video-builder /extension/dist /directus/extensions/tb-mux-video/dist
