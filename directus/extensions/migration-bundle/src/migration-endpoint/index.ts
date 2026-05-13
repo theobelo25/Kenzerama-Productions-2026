@@ -279,7 +279,7 @@ export default defineEndpoint({
 
 					// Step 1.3: Data
 					res.write(`<div class="pending"><h3>${spinner} Extracting Content</h3>\r\n\r\n`);
-					const dataFetch = await extractContent({ res, services, accountability, schema, scope, folder, storage });
+					const dataFetch = await extractContent({ res, services, accountability, schema, getSchema, scope, folder, storage });
 					res.write('Validating Content: ');
 
 					isValid = isValid

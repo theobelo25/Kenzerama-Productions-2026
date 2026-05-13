@@ -456,6 +456,8 @@ collections:
       translations: null
       unarchive_value: null
       versioning: false
+    schema:
+      name: blocks
   - collection: extras
     meta:
       accountability: all
@@ -3577,6 +3579,441 @@ fields:
       foreign_key_table: null
       foreign_key_column: null
   - collection: mux_videos
+    field: mux_uploader
+    type: json
+    meta:
+      collection: mux_videos
+      conditions: null
+      display: null
+      display_options: null
+      field: mux_uploader
+      group: null
+      hidden: false
+      interface: mux-video
+      note: >-
+        Upload to Mux and preview/playback in Directus. Stores
+        upload/asset/playback metadata (extension: jpp-mux-video).
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 1
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: mux_uploader
+      table: mux_videos
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: mux_videos
+    field: mux_api
+    type: alias
+    meta:
+      collection: mux_videos
+      conditions: null
+      display: null
+      display_options: null
+      field: mux_api
+      group: null
+      hidden: false
+      interface: group-accordion
+      note: Raw fields from the Mux Asset API response.
+      options:
+        accordionMode: true
+        start: first-opened
+      readonly: false
+      required: false
+      searchable: true
+      sort: 3
+      special:
+        - alias
+        - no-data
+        - group
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: mux_videos
+    field: playback_derived
+    type: alias
+    meta:
+      collection: mux_videos
+      conditions: null
+      display: null
+      display_options: null
+      field: playback_derived
+      group: null
+      hidden: false
+      interface: group-accordion
+      note: Derived playback fields used by the Directus UI and player preview.
+      options:
+        accordionMode: true
+        start: all-closed
+      readonly: false
+      required: false
+      searchable: true
+      sort: 4
+      special:
+        - alias
+        - no-data
+        - group
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: mux_videos
+    field: title
+    type: string
+    meta:
+      collection: mux_videos
+      conditions: null
+      display: null
+      display_options: null
+      field: title
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        placeholder: Video Title
+      readonly: false
+      required: true
+      searchable: true
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: title
+      table: mux_videos
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: mux_videos
+    field: description
+    type: text
+    meta:
+      collection: mux_videos
+      conditions: null
+      display: null
+      display_options: null
+      field: description
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options:
+        placeholder: Video Description
+      readonly: false
+      required: false
+      searchable: true
+      sort: 7
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: description
+      table: mux_videos
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: mux_videos
+    field: location
+    type: string
+    meta:
+      collection: mux_videos
+      conditions: null
+      display: null
+      display_options: null
+      field: location
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        placeholder: Location
+      readonly: false
+      required: false
+      searchable: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: location
+      table: mux_videos
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: mux_videos
+    field: vendors
+    type: json
+    meta:
+      collection: mux_videos
+      conditions: null
+      display: null
+      display_options: null
+      field: vendors
+      group: null
+      hidden: false
+      interface: list
+      note: null
+      options:
+        fields:
+          - field: name
+            meta:
+              field: name
+              interface: input
+              options:
+                placeholder: Name
+                trim: true
+              required: true
+              type: string
+              width: half
+            name: name
+            type: string
+          - field: type
+            meta:
+              field: type
+              interface: input
+              options:
+                placeholder: Type
+                trim: true
+              type: string
+              width: half
+            name: type
+            type: string
+          - field: url
+            meta:
+              field: url
+              interface: input
+              options:
+                iconLeft: html
+                placeholder: Website
+                trim: true
+              required: true
+              type: string
+              width: full
+            name: url
+            type: string
+      readonly: false
+      required: false
+      searchable: true
+      sort: 8
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: vendors
+      table: mux_videos
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: mux_videos
+    field: custom_poster
+    type: uuid
+    meta:
+      collection: mux_videos
+      conditions: null
+      display: null
+      display_options: null
+      field: custom_poster
+      group: null
+      hidden: false
+      interface: file-image
+      note: null
+      options:
+        allowedMimeTypes:
+          - image/webp
+      readonly: false
+      required: false
+      searchable: true
+      sort: 6
+      special:
+        - file
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: custom_poster
+      table: mux_videos
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_files
+      foreign_key_column: id
+  - collection: mux_videos
+    field: slug
+    type: string
+    meta:
+      collection: mux_videos
+      conditions: null
+      display: null
+      display_options: null
+      field: slug
+      group: null
+      hidden: false
+      interface: jpp-permalink-generator
+      note: null
+      options:
+        template: '{{title}}'
+        update:
+          - create
+          - update
+      readonly: false
+      required: false
+      searchable: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: slug
+      table: mux_videos
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: mux_videos
+    field: tags
+    type: alias
+    meta:
+      collection: mux_videos
+      conditions: null
+      display: null
+      display_options: null
+      field: tags
+      group: null
+      hidden: false
+      interface: list-m2m
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 42
+      special:
+        - m2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: mux_videos
+    field: related_films
+    type: alias
+    meta:
+      collection: mux_videos
+      conditions: null
+      display: null
+      display_options: null
+      field: related_films
+      group: null
+      hidden: false
+      interface: list-m2m
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 43
+      special:
+        - m2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: mux_videos
     field: created_at
     type: string
     meta:
@@ -5088,441 +5525,6 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
-  - collection: mux_videos
-    field: mux_uploader
-    type: json
-    meta:
-      collection: mux_videos
-      conditions: null
-      display: null
-      display_options: null
-      field: mux_uploader
-      group: null
-      hidden: false
-      interface: mux-video
-      note: >-
-        Upload to Mux and preview/playback in Directus. Stores
-        upload/asset/playback metadata (extension: jpp-mux-video).
-      options: null
-      readonly: false
-      required: false
-      searchable: true
-      sort: 1
-      special:
-        - cast-json
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: mux_uploader
-      table: mux_videos
-      data_type: json
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: mux_videos
-    field: mux_api
-    type: alias
-    meta:
-      collection: mux_videos
-      conditions: null
-      display: null
-      display_options: null
-      field: mux_api
-      group: null
-      hidden: false
-      interface: group-accordion
-      note: Raw fields from the Mux Asset API response.
-      options:
-        accordionMode: true
-        start: first-opened
-      readonly: false
-      required: false
-      searchable: true
-      sort: 3
-      special:
-        - alias
-        - no-data
-        - group
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-  - collection: mux_videos
-    field: playback_derived
-    type: alias
-    meta:
-      collection: mux_videos
-      conditions: null
-      display: null
-      display_options: null
-      field: playback_derived
-      group: null
-      hidden: false
-      interface: group-accordion
-      note: Derived playback fields used by the Directus UI and player preview.
-      options:
-        accordionMode: true
-        start: all-closed
-      readonly: false
-      required: false
-      searchable: true
-      sort: 4
-      special:
-        - alias
-        - no-data
-        - group
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-  - collection: mux_videos
-    field: title
-    type: string
-    meta:
-      collection: mux_videos
-      conditions: null
-      display: null
-      display_options: null
-      field: title
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options:
-        placeholder: Video Title
-      readonly: false
-      required: true
-      searchable: true
-      sort: 1
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: title
-      table: mux_videos
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: mux_videos
-    field: description
-    type: text
-    meta:
-      collection: mux_videos
-      conditions: null
-      display: null
-      display_options: null
-      field: description
-      group: null
-      hidden: false
-      interface: input-multiline
-      note: null
-      options:
-        placeholder: Video Description
-      readonly: false
-      required: false
-      searchable: true
-      sort: 7
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: description
-      table: mux_videos
-      data_type: text
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: mux_videos
-    field: location
-    type: string
-    meta:
-      collection: mux_videos
-      conditions: null
-      display: null
-      display_options: null
-      field: location
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options:
-        placeholder: Location
-      readonly: false
-      required: false
-      searchable: true
-      sort: 3
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: location
-      table: mux_videos
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: mux_videos
-    field: vendors
-    type: json
-    meta:
-      collection: mux_videos
-      conditions: null
-      display: null
-      display_options: null
-      field: vendors
-      group: null
-      hidden: false
-      interface: list
-      note: null
-      options:
-        fields:
-          - field: name
-            meta:
-              field: name
-              interface: input
-              options:
-                placeholder: Name
-                trim: true
-              required: true
-              type: string
-              width: half
-            name: name
-            type: string
-          - field: type
-            meta:
-              field: type
-              interface: input
-              options:
-                placeholder: Type
-                trim: true
-              type: string
-              width: half
-            name: type
-            type: string
-          - field: url
-            meta:
-              field: url
-              interface: input
-              options:
-                iconLeft: html
-                placeholder: Website
-                trim: true
-              required: true
-              type: string
-              width: full
-            name: url
-            type: string
-      readonly: false
-      required: false
-      searchable: true
-      sort: 8
-      special:
-        - cast-json
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: vendors
-      table: mux_videos
-      data_type: json
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: mux_videos
-    field: custom_poster
-    type: uuid
-    meta:
-      collection: mux_videos
-      conditions: null
-      display: null
-      display_options: null
-      field: custom_poster
-      group: null
-      hidden: false
-      interface: file-image
-      note: null
-      options:
-        allowedMimeTypes:
-          - image/webp
-      readonly: false
-      required: false
-      searchable: true
-      sort: 6
-      special:
-        - file
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: custom_poster
-      table: mux_videos
-      data_type: uuid
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: directus_files
-      foreign_key_column: id
-  - collection: mux_videos
-    field: slug
-    type: string
-    meta:
-      collection: mux_videos
-      conditions: null
-      display: null
-      display_options: null
-      field: slug
-      group: null
-      hidden: false
-      interface: jpp-permalink-generator
-      note: null
-      options:
-        template: '{{title}}'
-        update:
-          - create
-          - update
-      readonly: false
-      required: false
-      searchable: true
-      sort: 2
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: slug
-      table: mux_videos
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_indexed: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: mux_videos
-    field: tags
-    type: alias
-    meta:
-      collection: mux_videos
-      conditions: null
-      display: null
-      display_options: null
-      field: tags
-      group: null
-      hidden: false
-      interface: list-m2m
-      note: null
-      options: null
-      readonly: false
-      required: false
-      searchable: true
-      sort: 42
-      special:
-        - m2m
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-  - collection: mux_videos
-    field: related_films
-    type: alias
-    meta:
-      collection: mux_videos
-      conditions: null
-      display: null
-      display_options: null
-      field: related_films
-      group: null
-      hidden: false
-      interface: list-m2m
-      note: null
-      options: null
-      readonly: false
-      required: false
-      searchable: true
-      sort: 43
-      special:
-        - m2m
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
   - collection: mux_videos_mux_videos
     field: id
     type: integer
@@ -6275,6 +6277,58 @@ fields:
       foreign_key_table: null
       foreign_key_column: null
   - collection: pages
+    field: page_metadata
+    type: alias
+    meta:
+      collection: pages
+      conditions: null
+      display: null
+      display_options: null
+      field: page_metadata
+      group: null
+      hidden: false
+      interface: group-detail
+      note: null
+      options:
+        headerIcon: content_paste_search
+        start: closed
+      readonly: false
+      required: false
+      searchable: true
+      sort: 10
+      special:
+        - alias
+        - no-data
+        - group
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: pages
+    field: page_content
+    type: alias
+    meta:
+      collection: pages
+      conditions: null
+      display: null
+      display_options: null
+      field: page_content
+      group: null
+      hidden: false
+      interface: list-m2a
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 7
+      special:
+        - m2a
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: pages
     field: seo_title
     type: string
     meta:
@@ -6401,58 +6455,6 @@ fields:
       has_auto_increment: false
       foreign_key_table: directus_files
       foreign_key_column: id
-  - collection: pages
-    field: page_metadata
-    type: alias
-    meta:
-      collection: pages
-      conditions: null
-      display: null
-      display_options: null
-      field: page_metadata
-      group: null
-      hidden: false
-      interface: group-detail
-      note: null
-      options:
-        headerIcon: content_paste_search
-        start: closed
-      readonly: false
-      required: false
-      searchable: true
-      sort: 10
-      special:
-        - alias
-        - no-data
-        - group
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-  - collection: pages
-    field: page_content
-    type: alias
-    meta:
-      collection: pages
-      conditions: null
-      display: null
-      display_options: null
-      field: page_content
-      group: null
-      hidden: false
-      interface: list-m2a
-      note: null
-      options: null
-      readonly: false
-      required: false
-      searchable: true
-      sort: 7
-      special:
-        - m2a
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
   - collection: pages_mux_videos
     field: id
     type: integer
