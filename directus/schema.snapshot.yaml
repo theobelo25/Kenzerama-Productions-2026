@@ -12,7 +12,7 @@ collections:
       collection: block_branded_info
       color: null
       display_template: null
-      group: blocks
+      group: null
       hidden: false
       icon: null
       item_duplication_fields: null
@@ -36,7 +36,7 @@ collections:
       collection: block_contact_form
       color: null
       display_template: null
-      group: blocks
+      group: null
       hidden: false
       icon: null
       item_duplication_fields: null
@@ -60,7 +60,7 @@ collections:
       collection: block_cta_banner
       color: null
       display_template: null
-      group: blocks
+      group: null
       hidden: false
       icon: null
       item_duplication_fields: null
@@ -84,7 +84,7 @@ collections:
       collection: block_extras
       color: null
       display_template: null
-      group: blocks
+      group: null
       hidden: false
       icon: null
       item_duplication_fields: null
@@ -132,7 +132,7 @@ collections:
       collection: block_faqs
       color: null
       display_template: null
-      group: blocks
+      group: null
       hidden: false
       icon: null
       item_duplication_fields: null
@@ -156,7 +156,7 @@ collections:
       collection: block_hero_primary
       color: null
       display_template: null
-      group: blocks
+      group: null
       hidden: false
       icon: null
       item_duplication_fields: null
@@ -180,7 +180,7 @@ collections:
       collection: block_hero_secondary
       color: null
       display_template: null
-      group: blocks
+      group: null
       hidden: false
       icon: null
       item_duplication_fields: null
@@ -204,7 +204,7 @@ collections:
       collection: block_info
       color: null
       display_template: null
-      group: blocks
+      group: null
       hidden: false
       icon: null
       item_duplication_fields: null
@@ -228,7 +228,7 @@ collections:
       collection: block_our_teams
       color: null
       display_template: null
-      group: blocks
+      group: null
       hidden: false
       icon: null
       item_duplication_fields: null
@@ -276,7 +276,7 @@ collections:
       collection: block_packages
       color: null
       display_template: null
-      group: blocks
+      group: null
       hidden: false
       icon: null
       item_duplication_fields: null
@@ -348,7 +348,7 @@ collections:
       collection: block_testimonials
       color: null
       display_template: null
-      group: blocks
+      group: null
       hidden: false
       icon: null
       item_duplication_fields: null
@@ -396,7 +396,7 @@ collections:
       collection: block_videos
       color: null
       display_template: null
-      group: blocks
+      group: null
       hidden: false
       icon: null
       item_duplication_fields: null
@@ -434,30 +434,6 @@ collections:
       versioning: false
     schema:
       name: block_videos_mux_videos
-  - collection: blocks
-    meta:
-      accountability: all
-      archive_app_filter: true
-      archive_field: null
-      archive_value: null
-      collapse: open
-      collection: blocks
-      color: null
-      display_template: null
-      group: null
-      hidden: false
-      icon: folder
-      item_duplication_fields: null
-      note: null
-      preview_url: null
-      singleton: false
-      sort: 8
-      sort_field: null
-      translations: null
-      unarchive_value: null
-      versioning: false
-    schema:
-      name: blocks
   - collection: extras
     meta:
       accountability: all
