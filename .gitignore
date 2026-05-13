@@ -52,3 +52,6 @@ posts/*
 data/*
 
 /lib/generated/prisma
+
+# Directus extension build artifacts (installed only inside extension dirs)
+/directus/extensions/migration-bundle/node_modules
