@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
+# CI helper: skip apply if snapshot is missing or still a placeholder, then delegate
+# to scripts/directus/apply-schema.sh (single implementation of docker vs npx apply).
 set -euo pipefail
 
 schema_file="${1:-directus/schema.snapshot.yaml}"
-database_url="${DIRECTUS_DATABASE_URL:-${DATABASE_URL:-}}"
 
 if [[ ! -f "${schema_file}" ]]; then
   echo "Schema snapshot not found at ${schema_file}; skipping apply."
@@ -14,26 +15,11 @@ if head -n 1 "${schema_file}" | grep -q "^# Directus schema snapshot placeholder
   exit 0
 fi
 
-if [[ -z "${database_url}" ]]; then
+export DIRECTUS_DATABASE_URL="${DIRECTUS_DATABASE_URL:-${DATABASE_URL:-}}"
+
+if [[ -z "${DIRECTUS_DATABASE_URL}" ]]; then
   echo "DIRECTUS_DATABASE_URL or DATABASE_URL is required to apply schema."
   exit 1
 fi
 
-echo "Applying Directus schema from ${schema_file}"
-
-if [[ "${GITHUB_ACTIONS:-}" == "true" ]] && command -v docker >/dev/null 2>&1; then
-  schema_abs="$(cd "$(dirname "${schema_file}")" && pwd)/$(basename "${schema_file}")"
-  docker run --rm --network host \
-    -e DB_CLIENT=pg \
-    -e DB_CONNECTION_STRING="${database_url}" \
-    -v "${schema_abs}:/snapshot.yaml:ro" \
-    directus/directus:11 \
-    npx directus schema apply /snapshot.yaml --yes
-else
-  export DB_CLIENT=pg
-  export DB_CONNECTION_STRING="${database_url}"
-  export NPM_CONFIG_LOGLEVEL="${NPM_CONFIG_LOGLEVEL:-error}"
-  npx --yes directus@11 schema apply "${schema_file}" --yes
-fi
-
-echo "Directus schema apply completed"
+exec "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../directus/apply-schema.sh" "${schema_file}"
