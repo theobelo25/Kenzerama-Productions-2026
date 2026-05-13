@@ -15,7 +15,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3000
-      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:postgres@postgres:5432/kenzerama?schema=public}
+      DATABASE_URL: ${INSTA_DATABASE_URL:-${DATABASE_URL:-postgresql://postgres:postgres@postgres:5432/kenzerama?schema=public}}
       DIRECTUS_URL: ${DIRECTUS_URL:-http://directus:8055}
       DIRECTUS_TOKEN: ${DIRECTUS_TOKEN:-}
     depends_on:

@@ -13,9 +13,11 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3000
-      # Prefer the existing app DATABASE_URL (pre-Directus behavior) so Prisma-backed
-      # features like Instagram credentials continue using the original app database.
-      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:postgres@postgres:5432/kenzerama?schema=public}
+      # Prisma (`InstagramCredential`, `OAuthState`). Precedence:
+      #   1) INSTA_DATABASE_URL — hosted `insta` DB (staging parity) while Directus stays on local `kenzerama`
+      #   2) DATABASE_URL
+      #   3) local default (same DB as Directus in this compose file)
+      DATABASE_URL: ${INSTA_DATABASE_URL:-${DATABASE_URL:-postgresql://postgres:postgres@postgres:5432/kenzerama?schema=public}}
       # Uses service name `directus` so app-to-CMS traffic stays in-network.
       DIRECTUS_URL: ${DIRECTUS_URL:-http://directus:8055}
       DIRECTUS_TOKEN: ${DIRECTUS_TOKEN:-}

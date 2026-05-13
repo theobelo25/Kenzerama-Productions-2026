@@ -1,5 +1,7 @@
 # Directus Migration Module
 
+> **Kenzerama vendored copy:** Pulled from [directus-labs/extensions](https://github.com/directus-labs/extensions) (`packages/migration-bundle`), with `@directus/sdk` **^21.3.0** to match this app. Rebuild after dependency changes: `cd directus/extensions/migration-bundle && npm ci && npm run build`. A local `postcss.config.cjs` avoids picking up the repo root Tailwind PostCSS stack during `directus-extension build`.
+
 Migrate the current Directus instance to another location with ease, using this simple module.
 
 ![Migration Module Banner](https://raw.githubusercontent.com/directus-labs/extensions/main/packages/migration-bundle/docs/migration-module.jpg)

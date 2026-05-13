@@ -19,7 +19,12 @@
     "directus:schema:migrate:dry-run": "tsx scripts/directus/schema-migrate.ts migrate --dry-run",
     "directus:schema:migrate:snapshot": "tsx scripts/directus/schema-migrate.ts snapshot",
     "directus:schema:migrate:diff": "tsx scripts/directus/schema-migrate.ts diff",
-    "directus:schema:migrate:apply": "tsx scripts/directus/schema-migrate.ts apply"
+    "directus:schema:migrate:apply": "tsx scripts/directus/schema-migrate.ts apply",
+    "directus:migration-dry-run:seed": "tsx scripts/directus/seed-migration-fixture.ts",
+    "restore:postgres-volume-tar": "tsx scripts/restore-postgres-volume-from-tar.ts",
+    "restore:directus-uploads-tar": "tsx scripts/restore-directus-uploads-from-tar.ts",
+    "check:directus-uploads-volume": "tsx scripts/check-directus-uploads-volume.ts",
+    "directus:extensions:build-migration-bundle": "npm run build --prefix directus/extensions/migration-bundle"
   },
   "engines": {
     "node": ">=24.0.0"
