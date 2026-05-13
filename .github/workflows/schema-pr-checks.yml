@@ -7,6 +7,7 @@ on:
     paths:
       - directus/schema.snapshot.yaml
       - scripts/directus/apply-schema.sh
+      - scripts/ci/apply-directus-schema.sh
       - .github/workflows/schema-pr-checks.yml
 
 jobs:
