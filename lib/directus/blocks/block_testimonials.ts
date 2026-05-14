@@ -1,5 +1,5 @@
 import type { DirectusTestimonial } from "@/lib/directus/types";
-import { directusAssetsBaseUrl } from "@/lib/directus/custom-poster";
+import { directusFileAssetUrl } from "@/lib/directus/custom-poster";
 
 /** Normalized row for UI (matches {@link PageTestimonial} in `lib/directus/types`). */
 export type Testimonial = {
@@ -38,17 +38,13 @@ function resolveTestimonialImageUrl(raw: unknown): string | undefined {
     const s = raw.trim();
     if (!s) return undefined;
     if (/^https?:\/\//i.test(s)) return s;
-    const base = directusAssetsBaseUrl();
-    if (!base) return undefined;
-    return `${base.replace(/\/$/, "")}/assets/${s}`;
+    return directusFileAssetUrl(s);
   }
 
   if (typeof raw === "object" && raw !== null && "id" in raw) {
     const id = (raw as { id: unknown }).id;
     if (typeof id !== "string" || !id.trim()) return undefined;
-    const base = directusAssetsBaseUrl();
-    if (!base) return undefined;
-    return `${base.replace(/\/$/, "")}/assets/${id.trim()}`;
+    return directusFileAssetUrl(id.trim());
   }
 
   return undefined;

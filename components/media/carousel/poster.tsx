@@ -2,13 +2,13 @@ import Image from "next/image";
 import type { Film } from "@/types";
 import Link from "@/components/navigation/link-component";
 import type { StaticImageData } from "next/image";
-import { directusAssetsBaseUrl } from "@/lib/directus/custom-poster";
+import { directusFileAssetUrl } from "@/lib/directus/custom-poster";
 
 /** Prefer uploaded poster, then Mux thumbnail, then legacy static import. */
 function resolvePosterSrc(film: Film): StaticImageData | string | null {
-  const base = directusAssetsBaseUrl();
-  if (film.customPosterId && base) {
-    return `${base.replace(/\/$/, "")}/assets/${film.customPosterId}`;
+  if (film.customPosterId) {
+    const url = directusFileAssetUrl(film.customPosterId);
+    if (url) return url;
   }
   if (film.posterUrl) return film.posterUrl;
   if (film.poster?.image) return film.poster.image;

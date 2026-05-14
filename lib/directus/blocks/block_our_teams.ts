@@ -1,4 +1,4 @@
-import { directusAssetsBaseUrl } from "@/lib/directus/custom-poster";
+import { directusFileAssetUrl } from "@/lib/directus/custom-poster";
 
 /** One team row from Directus (or nested under a junction). */
 export type DirectusTeam = {
@@ -57,22 +57,16 @@ function resolveImageUrl(raw: unknown): string | null {
     const s = raw.trim();
     if (!s) return null;
     if (/^https?:\/\//i.test(s)) return s;
-    const base = directusAssetsBaseUrl();
-    if (!base) return null;
-    return `${base.replace(/\/$/, "")}/assets/${s}`;
+    return directusFileAssetUrl(s) ?? null;
   }
 
   if (typeof raw === "number" && Number.isFinite(raw)) {
-    const base = directusAssetsBaseUrl();
-    if (!base) return null;
-    return `${base.replace(/\/$/, "")}/assets/${raw}`;
+    return directusFileAssetUrl(String(raw)) ?? null;
   }
 
   const id = fileIdFromRef(raw);
   if (id) {
-    const base = directusAssetsBaseUrl();
-    if (!base) return null;
-    return `${base.replace(/\/$/, "")}/assets/${id}`;
+    return directusFileAssetUrl(id) ?? null;
   }
 
   return null;
