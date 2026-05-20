@@ -2,6 +2,7 @@ import { withNextVideo } from "next-video/process";
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 import bundleAnalyzer from "@next/bundle-analyzer";
+import { directusImageAllowlistRawUrls } from "./lib/directus/env-urls";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
@@ -18,12 +19,7 @@ function patternKey(p: RemotePattern): string {
 
 /** Parse Directus base URL(s) into `remotePatterns` for the image optimizer. */
 function directusImageRemotePatterns(): RemotePattern[] {
-  const raws = [
-    process.env.NEXT_PUBLIC_DIRECTUS_URL,
-    process.env.DIRECTUS_URL,
-    /** Optional extra origin(s) only for image allowlist (e.g. internal Docker URL at build time). */
-    process.env.DIRECTUS_IMAGE_ORIGIN,
-  ].filter((s): s is string => Boolean(s?.trim()));
+  const raws = directusImageAllowlistRawUrls();
 
   const patterns: RemotePattern[] = [];
   const seen = new Set<string>();

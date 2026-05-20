@@ -2,6 +2,12 @@ import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
+/**
+ * Directus schema tooling: Directus 11 CLI against PostgreSQL (`schema snapshot` /
+ * `schema apply`), optional Docker exec for snapshots. Writes and promotes
+ * `directus/schema.snapshot.yaml`.
+ */
+
 const DEFAULT_SNAPSHOT_PATH = "directus/schema.snapshot.yaml";
 const DIRECTUS_CLI = "directus@11";
 const DOCKER_SNAPSHOT_PATH = "/tmp/directus-schema-snapshot.yaml";

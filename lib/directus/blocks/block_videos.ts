@@ -1,6 +1,6 @@
 import type { DirectusMuxVideo } from "@/lib/directus/types";
 import {
-  directusAssetsBaseUrl,
+  directusFileAssetUrl,
   extractCustomPosterIdFromMuxRow,
 } from "@/lib/directus/custom-poster";
 
@@ -110,9 +110,9 @@ function muxThumbnailFromPlaybackId(playbackId: string): string {
 /** Prefer Directus `custom_poster`, then mux `poster`, then generated Mux thumbnail. */
 function posterUrlForMuxRow(mux: DirectusMuxVideo): string | null {
   const customId = extractCustomPosterIdFromMuxRow(mux);
-  const base = directusAssetsBaseUrl();
-  if (customId && base) {
-    return `${base.replace(/\/$/, "")}/assets/${customId}`;
+  if (customId) {
+    const url = directusFileAssetUrl(customId);
+    if (url) return url;
   }
   const muxPoster = mux.poster?.trim();
   if (muxPoster) return muxPoster;

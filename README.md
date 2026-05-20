@@ -15,7 +15,19 @@ Open [http://localhost:3000](http://localhost:3000).
 
 Paths are from the **repository root**. On Windows, prefer **`npm run …`** and **`tsx`** scripts so native CLI addons (for example `isolated-vm`) are not loaded on the host Node version.
 
-### Take a schema snapshot (`directus/schema.snapshot.yaml`)
+### Canonical Directus schema workflow (CLI + YAML + DB)
+
+**Contributors and CI:** use the official **Directus 11 CLI** against PostgreSQL, with **`directus/schema.snapshot.yaml`** as the committed artifact. This matches GitHub Actions.
+
+| Step | What to run |
+| --- | --- |
+| Export schema from an environment | `npm run directus:schema:snapshot` (`scripts/directus/schema-promotion.ts` → `npx directus@11 schema snapshot`) |
+| Apply the committed file to a DB | `bash scripts/directus/apply-schema.sh directus/schema.snapshot.yaml` (requires `DIRECTUS_DATABASE_URL`, or `DIRECTUS_SCHEMA_APPLY_CMD`) |
+| Backup staging + apply snapshot (machine) | `npm run directus:schema:promote-staging` (same script family; `pg_dump` then CLI apply) |
+
+Do not hand-edit `directus/schema.snapshot.yaml`; export, review the diff, commit.
+
+### Export the snapshot file (`directus/schema.snapshot.yaml`)
 
 This file is what CI applies to staging/production and what you should commit when the data model changes.
 
@@ -30,16 +42,6 @@ npm run directus:schema:snapshot
 - Otherwise set **`DIRECTUS_DATABASE_URL`** or **`DATABASE_URL`** to a PostgreSQL URL Directus uses, and the script runs the CLI against that DB.
 
 Optional: **`DIRECTUS_SCHEMA_DOCKER=true`** forces the Docker path.
-
-**Alternative (HTTP, no DB URL):** pull a snapshot from a running instance with admin token:
-
-```bash
-set SOURCE_DIRECTUS_URL=http://localhost:8055
-set DIRECTUS_TOKEN=your-static-token
-npm run directus:schema:migrate:snapshot -- --out directus/schema.snapshot.yaml
-```
-
-(`scripts/directus/schema-migrate.ts` — uses `@directus/sdk`, not `pg_dump`.)
 
 ---
 
@@ -66,18 +68,6 @@ bash scripts/directus/apply-schema.sh directus/schema.snapshot.yaml
 
 Custom apply command (tunnel, bastion, etc.): set **`DIRECTUS_SCHEMA_APPLY_CMD`**; `apply-schema.sh` runs it instead of `npx directus schema apply`.
 
-**Alternative (HTTP API diff/apply):** two Directus URLs + tokens — good for hosts where you only have the REST API:
-
-```bash
-set SOURCE_DIRECTUS_URL=https://source.example.com
-set TARGET_DIRECTUS_URL=https://staging.example.com
-set DIRECTUS_TOKEN=...
-set TARGET_DIRECTUS_TOKEN=...
-npm run directus:schema:migrate
-```
-
-Add **`--dry-run`** or set **`DIRECTUS_SCHEMA_DRY_RUN=true`** to diff without applying. See `tsx scripts/directus/schema-migrate.ts` (no args) for flags.
-
 ---
 
 ### Migrate schema snapshot to **local**
@@ -89,7 +79,7 @@ set DIRECTUS_DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:5432/kenzeram
 bash scripts/directus/apply-schema.sh directus/schema.snapshot.yaml
 ```
 
-Restart Directus after apply if it does not reload schema. Or use **`npm run directus:schema:migrate`** with **`TARGET_DIRECTUS_URL=http://localhost:8055`** and a static token if you prefer API apply.
+Restart Directus after apply if it does not reload schema.
 
 ---
 
@@ -148,7 +138,6 @@ For **business data** SQL/CSV style exports (not the migration bundle), see **`s
 | `npm run directus:schema:promote-staging` | `pg_dump` staging + apply snapshot to staging DB. |
 | `scripts/directus/apply-schema.sh` | `directus schema apply` (Docker on GHA, else `npx`); honors `DIRECTUS_SCHEMA_APPLY_CMD`. |
 | `scripts/ci/apply-directus-schema.sh` | CI: skip if snapshot missing/placeholder; else delegates to `apply-schema.sh`. |
-| `npm run directus:schema:migrate*` | SDK: snapshot/diff/apply/migrate between two HTTP Directus instances. |
 | `npm run restore:postgres-volume-tar` | Replace local Compose Postgres volume from PGDATA `.tgz`. |
 | `npm run restore:directus-uploads-tar` | Restore uploads volume from `.tar`. |
 | `npm run directus:extensions:build-migration-bundle` | Build vendored migration bundle `dist/`. |

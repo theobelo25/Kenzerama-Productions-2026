@@ -1,4 +1,4 @@
-import { directusAssetsBaseUrl } from "@/lib/directus/custom-poster";
+import { directusFileAssetUrl } from "@/lib/directus/custom-poster";
 
 /** Raw `block_hero_secondary` row — `hero_image` is usually a Directus files M2O. */
 export type DirectusBlockHeroSecondary = {
@@ -28,17 +28,13 @@ function resolveHeroImageUrl(raw: unknown): string | null {
     const s = raw.trim();
     if (!s) return null;
     if (/^https?:\/\//i.test(s)) return s;
-    const base = directusAssetsBaseUrl();
-    if (!base) return null;
-    return `${base.replace(/\/$/, "")}/assets/${s}`;
+    return directusFileAssetUrl(s) ?? null;
   }
 
   if (typeof raw === "object" && raw !== null && "id" in raw) {
     const id = (raw as { id: unknown }).id;
     if (typeof id !== "string" || !id.trim()) return null;
-    const base = directusAssetsBaseUrl();
-    if (!base) return null;
-    return `${base.replace(/\/$/, "")}/assets/${id.trim()}`;
+    return directusFileAssetUrl(id.trim()) ?? null;
   }
 
   return null;

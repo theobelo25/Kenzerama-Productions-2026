@@ -1,5 +1,6 @@
 import "server-only";
 
+import { requireDirectusServerUrl } from "@/lib/directus/env-urls";
 import {
   createDirectus,
   readItem,
@@ -21,12 +22,7 @@ let directusClient: RestClient<unknown> | null = null;
 function getDirectusClient(): RestClient<unknown> {
   if (directusClient) return directusClient;
 
-  const url = process.env.DIRECTUS_URL;
-  if (!url) {
-    throw new Error("Missing DIRECTUS_URL");
-  }
-
-  const normalized = url.replace(/\/$/, "");
+  const normalized = requireDirectusServerUrl();
   let client = createDirectus(normalized).with(rest());
 
   const token = process.env.DIRECTUS_TOKEN;
@@ -84,9 +80,4 @@ export async function directusItem<T>(
   return client.request(
     withOptions(command, (init) => mergeFetchInit(init, { next, cache })),
   ) as Promise<T>;
-}
-
-export function directusFileUrl(fileId: string) {
-  const base = process.env.NEXT_PUBLIC_DIRECTUS_URL!;
-  return `${base.replace(/\/$/, "")}/assets/${fileId}`;
 }

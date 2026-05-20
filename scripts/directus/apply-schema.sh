@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Apply committed schema: Directus 11 CLI against DIRECTUS_DATABASE_URL or
+# DIRECTUS_SCHEMA_APPLY_CMD.
 set -euo pipefail
 
 if [[ $# -ne 1 ]]; then

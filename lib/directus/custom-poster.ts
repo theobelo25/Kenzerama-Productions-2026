@@ -1,16 +1,17 @@
+import { resolveDirectusPublicAssetBaseUrl } from "@/lib/directus/env-urls";
+
 /** Base origin for Directus file assets (`/assets/:id`) used by `next/image`. */
 export function directusAssetsBaseUrl(): string | undefined {
-  const raw =
-    process.env.NEXT_PUBLIC_DIRECTUS_URL?.trim() ||
-    process.env.DIRECTUS_IMAGE_ORIGIN?.trim() ||
-    process.env.DIRECTUS_URL?.trim();
-  if (!raw) return undefined;
-  try {
-    const u = new URL(raw);
-    return `${u.origin}${u.pathname.replace(/\/$/, "")}`;
-  } catch {
-    return raw.replace(/\/$/, "");
-  }
+  return resolveDirectusPublicAssetBaseUrl();
+}
+
+/** Public asset URL for a Directus file id (`/assets/:id`), or undefined if base env is missing. */
+export function directusFileAssetUrl(fileId: string): string | undefined {
+  const id = fileId.trim();
+  if (!id) return undefined;
+  const base = directusAssetsBaseUrl();
+  if (!base) return undefined;
+  return `${base.replace(/\/$/, "")}/assets/${id}`;
 }
 
 function fileRefToId(ref: unknown): string | undefined {
