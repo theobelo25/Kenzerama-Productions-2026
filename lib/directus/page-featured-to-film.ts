@@ -32,7 +32,10 @@ function muxVendorsJsonToVendors(raw: unknown): Vendor[] | undefined {
       typeof rec.name === "string" ? rec.name.trim() : String(rec.name ?? "").trim();
     if (!name) continue;
     const url = typeof rec.url === "string" ? rec.url.trim() : "";
-    const title = typeof rec.title === "string" ? rec.title.trim() : "";
+    const title =
+      typeof rec.type === "string"
+        ? rec.type.trim()
+        : String(rec.type ?? "").trim();
     out.push({ name, url, title });
   }
   return out.length ? out : undefined;

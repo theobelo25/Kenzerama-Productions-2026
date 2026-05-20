@@ -31,7 +31,9 @@ const Vendors = ({ vendors }: { vendors: Vendor[] }) => {
                   variant={"outline"}
                   className="h-auto w-full !px-7 py-3 sm:w-auto"
                 >
-                  {vendor.name}
+                  {vendor.title
+                    ? `${vendor.name} - ${vendor.title}`
+                    : vendor.name}
                 </Button>
               )}
             </li>
