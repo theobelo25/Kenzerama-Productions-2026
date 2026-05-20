@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { OurTeamsProps } from "@/lib/directus/blocks/block_our_teams";
+import { cn } from "@/lib/utils";
 
 type Props = {
   data?: OurTeamsProps | null;
@@ -18,7 +19,12 @@ const OurTeams = ({ data }: Props) => {
           key={team.id}
           className="grid grid-cols-1 md:grid-cols-7 gap-20 [--order:1] even:[--order:-1]"
         >
-          <div className="relative col-span-1 aspect-[3/4] w-full md:col-span-3 lg:col-span-2 order-(--order) md:min-h-0">
+          <div
+            className={cn(
+              "relative col-span-1 aspect-[3/4] w-full md:col-span-3 lg:col-span-2 order-(--order) md:min-h-0",
+              index === 1 && "hidden md:block",
+            )}
+          >
             <Image
               src={team.imageSrc}
               alt={team.name}
