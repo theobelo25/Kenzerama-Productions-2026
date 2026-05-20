@@ -208,6 +208,6 @@ export const muxVideosFields: RawField[] = [
   str("thumbnail_token", "Signed JWT for poster/thumbnail (signed policy only)."),
   jsonField(
     "vendors",
-    "Film detail credits: JSON array of { name, url?, title? } for the public film page.",
+    "Film detail credits: JSON array of { name, type?, url? } for the public film page.",
   ),
 ];

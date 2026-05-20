@@ -11,6 +11,7 @@ export type Venue = {
 export type Vendor = {
   name: string;
   url: string;
+  /** Vendor role/type from Directus `vendors[].type`. */
   title: string;
 };
 
