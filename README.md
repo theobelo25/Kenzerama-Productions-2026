@@ -162,6 +162,6 @@ For **business data** SQL/CSV style exports (not the migration bundle), see **`s
 
 - **PR → `development`:** `schema-pr-checks.yml` validates `directus/schema.snapshot.yaml`.
 - **Push `development`:** `promote-dev-to-staging.yml` — backup, apply schema, extension build, health checks.
-- **Push `main`:** `promote-staging-to-production.yml` — same pattern for production secrets (`PROD_DB_URL`, `PROD_DIRECTUS_DATABASE_URL` or apply cmd).
+- **Production schema:** use the **Migration bundle** Directus extension (not CI on push to `main`).
 
 Do not edit schema only in staging/production; export from the canonical environment and commit the YAML.
