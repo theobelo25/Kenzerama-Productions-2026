@@ -1,0 +1,82 @@
+# Isolated Directus + Postgres for migration-bundle practice (acts as SOURCE).
+# Your main stack stays on docker-compose.yml (8055). This scratch stack uses 8057.
+#
+# SCHEMA WARNING (migration-bundle upstream behavior):
+# The job always runs schemaDiff + schemaApply on the DESTINATION using the SOURCE
+# instance's full schema snapshot. If the source is "smaller" than the destination
+# (e.g. scratch with only a fixture collection), the destination will be reshaped to
+# match the source — collections/data models on the destination can be removed or
+# altered. README "existing content is skipped" refers mainly to re-running item/file
+# migration, not to preserving extra schema on the destination.
+# Safe practice: point migration at a disposable / empty Directus, or run the module
+# on the instance that already has the full schema you want, with destination = empty.
+#
+# Bring up (use a dedicated project name so volumes never touch your main stack):
+#   docker compose -f docker-compose.migration-dry-run.yml -p kenzerama-scratch up -d --build
+#
+# Seed fixture collections/items on scratch (from repo root, after Directus is up):
+#   npm run directus:migration-dry-run:seed
+#
+# In browser: http://localhost:8057/admin/migration
+#   Destination URL: http://host.docker.internal:8055
+#   Token: a static admin access token from main Directus (Settings → Access Tokens)
+#   Check → (optional Dry Run) → Start
+#
+# Data flows scratch (8057) → main (8055). Do NOT use a real dev DB on 8055 as the
+# destination unless you accept it being aligned to the scratch schema (see warning
+# above). Prefer a throwaway Directus on another port/volume for the destination.
+# Tear down scratch when done:
+#   docker compose -f docker-compose.migration-dry-run.yml -p kenzerama-scratch down -v
+#
+# If the migration job cannot reach your host from Linux Docker, `extra_hosts` below
+# maps host.docker.internal. On Docker Desktop (Windows/macOS) this is usually redundant
+# but harmless.
+
+services:
+  postgres_scratch:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: kenzerama_migration_scratch
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_scratch_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U postgres -d kenzerama_migration_scratch",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  directus_scratch:
+    build:
+      context: .
+      dockerfile: Dockerfile.directus
+    ports:
+      - "8057:8055"
+    volumes:
+      - directus_scratch_uploads:/directus/uploads
+    environment:
+      DB_CLIENT: pg
+      DB_HOST: postgres_scratch
+      DB_PORT: "5432"
+      DB_DATABASE: kenzerama_migration_scratch
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      ADMIN_EMAIL: ${SCRATCH_DIRECTUS_ADMIN_EMAIL:-admin@example.com}
+      ADMIN_PASSWORD: ${SCRATCH_DIRECTUS_ADMIN_PASSWORD:-admin}
+      KEY: ${SCRATCH_DIRECTUS_KEY:-scratch-directus-key-change-me}
+      SECRET: ${SCRATCH_DIRECTUS_SECRET:-scratch-directus-secret-change-me}
+      REDIS_ENABLED: "false"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      postgres_scratch:
+        condition: service_healthy
+
+volumes:
+  postgres_scratch_data:
+  directus_scratch_uploads:

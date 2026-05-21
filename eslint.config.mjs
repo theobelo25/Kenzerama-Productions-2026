@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "directus/**/dist/**",
+    "directus/**/node_modules/**",
+    // Vendored upstream extension (third-party style)
+    "directus/extensions/migration-bundle/src/**",
   ]),
 ]);
 

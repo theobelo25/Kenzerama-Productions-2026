@@ -1,0 +1,147 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - development
+      - main
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+  build:
+    name: Production build
+    runs-on: ubuntu-latest
+    env:
+      DIRECTUS_URL: ${{ secrets.DIRECTUS_URL }}
+      DIRECTUS_TOKEN: ${{ secrets.DIRECTUS_TOKEN }}
+      NEXT_PUBLIC_DIRECTUS_URL: ${{ secrets.NEXT_PUBLIC_DIRECTUS_URL }}
+      DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/kenzerama?schema=public
+      DIRECTUS_DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/kenzerama
+      NEXT_PUBLIC_SERVER_URL: http://localhost:3000
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: kenzerama
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d kenzerama"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Make CI scripts executable
+        run: chmod +x scripts/ci/*.sh scripts/directus/*.sh scripts/db/*.sh
+
+      - name: Configure local CMS endpoints
+        if: env.DIRECTUS_URL == ''
+        run: |
+          echo "DIRECTUS_URL=http://127.0.0.1:8055" >> "$GITHUB_ENV"
+          echo "NEXT_PUBLIC_DIRECTUS_URL=http://127.0.0.1:8055" >> "$GITHUB_ENV"
+
+      - name: Align public Directus URL
+        if: env.NEXT_PUBLIC_DIRECTUS_URL == ''
+        run: echo "NEXT_PUBLIC_DIRECTUS_URL=${DIRECTUS_URL}" >> "$GITHUB_ENV"
+
+      - name: Apply Directus schema
+        if: env.DIRECTUS_URL == 'http://127.0.0.1:8055'
+        run: ./scripts/ci/apply-directus-schema.sh directus/schema.snapshot.yaml
+
+      - name: Build Directus extension artifacts
+        if: env.DIRECTUS_URL == 'http://127.0.0.1:8055'
+        run: bash scripts/ci/build-directus-extensions.sh
+
+      - name: Build Directus image
+        if: env.DIRECTUS_URL == 'http://127.0.0.1:8055'
+        run: docker build -t ci-directus -f Dockerfile.directus .
+
+      - name: Start Directus
+        if: env.DIRECTUS_URL == 'http://127.0.0.1:8055'
+        run: |
+          docker run -d --name ci-directus \
+            --add-host=host.docker.internal:host-gateway \
+            -e DB_CLIENT=pg \
+            -e DB_HOST=host.docker.internal \
+            -e DB_PORT=5432 \
+            -e DB_DATABASE=kenzerama \
+            -e DB_USER=postgres \
+            -e DB_PASSWORD=postgres \
+            -e ADMIN_EMAIL=admin@example.com \
+            -e ADMIN_PASSWORD=ci-admin-password \
+            -e KEY=ci-directus-key \
+            -e SECRET=ci-directus-secret \
+            -p 8055:8055 \
+            ci-directus
+
+      - name: Wait for Directus
+        if: env.DIRECTUS_URL == 'http://127.0.0.1:8055'
+        run: npm run ci:directus:wait
+
+      - name: Mint Directus build token
+        if: env.DIRECTUS_TOKEN == ''
+        env:
+          DIRECTUS_ADMIN_EMAIL: admin@example.com
+          DIRECTUS_ADMIN_PASSWORD: ci-admin-password
+        run: npm run ci:directus:token
+
+      - name: Validate Directus build credentials
+        run: |
+          if [ -z "${DIRECTUS_URL}" ] || [ -z "${DIRECTUS_TOKEN}" ] || [ -z "${NEXT_PUBLIC_DIRECTUS_URL}" ]; then
+            echo "DIRECTUS_URL, DIRECTUS_TOKEN, and NEXT_PUBLIC_DIRECTUS_URL must be set before build."
+            exit 1
+          fi
+
+      - name: Build Next.js app
+        run: |
+          set -o pipefail
+          npx prisma generate
+          npm run build 2>&1 | tee build.log
+          if grep -F 'fetch failed' build.log; then
+            echo "Build completed but Directus was unreachable during prerender."
+            exit 1
+          fi
+
+      - name: Build production Docker image
+        run: ./scripts/ci/build-docker-image.sh kenzerama-web:ci
+
+      - name: Stop Directus
+        if: always() && env.DIRECTUS_URL == 'http://127.0.0.1:8055'
+        run: docker rm -f ci-directus || true

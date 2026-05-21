@@ -25,7 +25,7 @@ export const PACKAGES = [
       "Customized Box",
       "All raw footage provided on an external hard drive",
     ],
-    price: "4,350.00",
+    price: "4,145.00",
   },
   {
     title: "Package C",
@@ -39,7 +39,7 @@ export const PACKAGES = [
       "Customized Box",
       "All raw footage provided on an external hard drive",
     ],
-    price: "4,950.00",
+    price: "4,850.00",
   },
   {
     title: "Package D",
@@ -54,24 +54,24 @@ export const PACKAGES = [
       "Customized Box",
       "All raw footage provided on an external hard drive",
     ],
-    price: "5,845.00",
+    price: "5,545.00",
   },
 ];
 export const EXTRAS = [
+  {
+    title: "Same-Day Edit",
+    price: "$1,200.00",
+  },
   {
     title: "Extra Hours",
     price: "$500.00/hr",
   },
   {
     title: "Engagement Video",
-    price: "$550.00",
+    price: "$650.00",
   },
   {
     title: "Next-Day Edit (3min)",
     price: "$650",
-  },
-  {
-    title: "Same-Day Edit",
-    price: "$1,200.00",
   },
 ];
