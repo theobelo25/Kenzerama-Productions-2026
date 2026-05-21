@@ -9,6 +9,20 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+### Docker Compose port layouts
+
+| Stack | Compose file | Web | Postgres | Directus | Redis |
+| --- | --- | --- | --- | --- | --- |
+| Local dev | `docker-compose.yml` | 3000 | 5432 | 8055 | 6379 |
+| Staging (+1) | `docker-compose.staging.yml` | 3001 | 5433 | 8056 | 6380 |
+| Production / Dokploy (+2) | `docker-compose.production.yml` | 3002 | 5434 | 8057 | 6381 |
+
+Container-internal ports are unchanged; only **host** bindings differ. For **Dokploy** on the same machine as local dev, set **Compose file** to `docker-compose.production.yml` (not the default `docker-compose.yml`).
+
+```bash
+docker compose -f docker-compose.production.yml up -d --build
+```
+
 ---
 
 ## Backup, schema snapshots, and migrations

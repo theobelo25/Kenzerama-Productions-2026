@@ -1,0 +1,95 @@
+# Production / Dokploy stack: host ports are +2 vs docker-compose.yml (local dev)
+# so web, Postgres, Directus, and Redis can run alongside local compose on one machine.
+#
+#   docker compose -f docker-compose.production.yml up -d --build
+#
+# In Dokploy, set Compose file to: docker-compose.production.yml
+#
+# Host ports: web 3002, postgres 5434, directus 8057, redis 6381 (with profile redis)
+
+name: kenzerama-production
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DIRECTUS_URL: ${DIRECTUS_URL:-http://directus:8055}
+        DIRECTUS_TOKEN: ${DIRECTUS_TOKEN:-}
+        NEXT_PUBLIC_DIRECTUS_URL: ${NEXT_PUBLIC_DIRECTUS_URL:-${DIRECTUS_URL:-http://directus:8055}}
+        NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL:-http://localhost:3002}
+    ports:
+      - "3002:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: ${INSTA_DATABASE_URL:-${DATABASE_URL:-postgresql://postgres:postgres@postgres:5432/kenzerama?schema=public}}
+      DIRECTUS_URL: ${DIRECTUS_URL:-http://directus:8055}
+      DIRECTUS_TOKEN: ${DIRECTUS_TOKEN:-}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      directus:
+        condition: service_started
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-kenzerama}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - postgres_production_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-kenzerama}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  directus:
+    build:
+      context: .
+      dockerfile: Dockerfile.directus
+    ports:
+      - "8057:8055"
+    volumes:
+      - directus_production_uploads:/directus/uploads
+    environment:
+      DB_CLIENT: ${DIRECTUS_DB_CLIENT:-pg}
+      DB_HOST: ${DIRECTUS_DB_HOST:-postgres}
+      DB_PORT: ${DIRECTUS_DB_PORT:-5432}
+      DB_DATABASE: ${DIRECTUS_DB_DATABASE:-kenzerama}
+      DB_USER: ${DIRECTUS_DB_USER:-postgres}
+      DB_PASSWORD: ${DIRECTUS_DB_PASSWORD:-postgres}
+      ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL:-admin@example.com}
+      ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD:-admin}
+      KEY: ${DIRECTUS_KEY:-replace-me-directus-key}
+      SECRET: ${DIRECTUS_SECRET:-replace-me-directus-secret}
+      REDIS_ENABLED: ${DIRECTUS_REDIS_ENABLED:-false}
+      REDIS: ${DIRECTUS_REDIS:-redis://redis:6379}
+      MUX_TOKEN_ID: ${MUX_TOKEN_ID:-}
+      MUX_TOKEN_SECRET: ${MUX_TOKEN_SECRET:-}
+      CONTENT_SECURITY_POLICY_DIRECTIVES__IMG_SRC: "'self' data: blob: https://raw.githubusercontent.com https://avatars.githubusercontent.com https://image.mux.com"
+      CONTENT_SECURITY_POLICY_DIRECTIVES__SCRIPT_SRC: "'self' 'unsafe-eval' https://www.gstatic.com http://www.gstatic.com"
+      CONTENT_SECURITY_POLICY_DIRECTIVES__MEDIA_SRC: "'self' blob: data: https://stream.mux.com https://image.mux.com https://*.edgemv.mux.com https://*.cfcdn.mux.com"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6381:6379"
+    profiles:
+      - redis
+    restart: unless-stopped
+
+volumes:
+  postgres_production_data:
+  directus_production_uploads:
