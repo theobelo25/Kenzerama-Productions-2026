@@ -17,7 +17,11 @@ Open [http://localhost:3000](http://localhost:3000).
 | Staging (+1) | `docker-compose.staging.yml` | 3001 | 5433 | 8056 | 6380 |
 | Production / Dokploy (+2) | `docker-compose.production.yml` | 3002 | 5434 | 8057 | 6381 |
 
-Container-internal ports are unchanged; only **host** bindings differ. For **Dokploy** on the same machine as local dev, set **Compose file** to `docker-compose.production.yml` (not the default `docker-compose.yml`).
+Container-internal ports are unchanged; only **host** bindings differ.
+
+**Dokploy (staging + production on one host):** staging compose uses suffixed service names (`directus-staging`, `postgres-staging`, `redis-staging`) so they do not share DNS with production (`directus`, `postgres`, `redis`) on Dokploy’s shared network. Staging defaults `DIRECTUS_URL` to `http://directus-staging:8055`; production stays `http://directus:8055`. If `.env.staging` sets `DIRECTUS_URL`, use the `-staging` hostname (or omit it to use the compose default).
+
+For **Dokploy** production, set **Compose file** to `docker-compose.production.yml` (not the default `docker-compose.yml`).
 
 ```bash
 docker compose -f docker-compose.production.yml up -d --build

@@ -45,7 +45,7 @@ export default function BrandedInfoBlock({ data }: { data: BrandedInfoProps }) {
         <p>{content}</p>
         {button_text && button_href ? (
           <div className="flex justify-center">
-            <CtaLink href={`/${button_href}`}>{button_text}</CtaLink>
+            <CtaLink href={button_href}>{button_text}</CtaLink>
           </div>
         ) : null}
       </div>
