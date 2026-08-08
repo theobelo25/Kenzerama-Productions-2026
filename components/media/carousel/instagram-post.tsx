@@ -31,6 +31,8 @@ const InstagramPostComponent = ({
   // Otherwise use the normal media URL.
   const previewImageSrc = post.thumbnail_url ?? post.media_url;
 
+  console.log(previewImageSrc);
+
   if (!previewImageSrc) {
     return null;
   }
