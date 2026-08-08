@@ -30,7 +30,9 @@ export const getInstagramPosts = async (): Promise<InstagramPostsResult> => {
     const response = await fetch(
       `https://graph.instagram.com/me/media?fields=media_type,media_url,permalink,thumbnail_url,caption,timestamp&access_token=${token}`,
       {
-        cache: "no-store",
+        next: {
+          revalidate: 300,
+        },
       },
     );
 
