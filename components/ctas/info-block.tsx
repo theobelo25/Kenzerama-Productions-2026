@@ -16,7 +16,7 @@ export default function InfoBlock({ data, className }: Props) {
 
   return (
     <section
-      className={cn("bg-background landing-section-y", className)}
+      className={cn("bg-background py-6 md:py-8", className)}
       aria-labelledby={id}
     >
       <div className="wrapper flex flex-col items-center space-y-5 md:space-y-8">
