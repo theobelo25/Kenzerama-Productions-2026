@@ -43,6 +43,15 @@ export const getInstagramPosts = async (): Promise<InstagramPostsResult> => {
 
     const { data } = (await response.json()) as { data: InstagramPost[] };
 
+    console.log(
+      data.map((post) => ({
+        type: post.media_type,
+        permalink: post.permalink,
+        hasThumbnail: !!post.thumbnail_url,
+        mediaUrl: post.media_url,
+      })),
+    );
+
     return {
       success: true,
       message: "Successfully retrieved instagram posts",

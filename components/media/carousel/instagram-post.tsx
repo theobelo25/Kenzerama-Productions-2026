@@ -16,6 +16,13 @@ const InstagramPostComponent = ({
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [isVideoReady, setIsVideoReady] = useState(false);
 
+  console.log(
+    post.media_type,
+    post.media_url,
+    post.thumbnail_url,
+    post.permalink,
+  );
+
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
