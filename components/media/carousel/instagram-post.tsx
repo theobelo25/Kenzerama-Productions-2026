@@ -37,9 +37,12 @@ const InstagramPostComponent = ({
   const imageAlt = shortCaption
     ? `Instagram post preview: ${shortCaption}`
     : "Instagram post preview";
-  const isVideoPost = post.media_type === "VIDEO" || post.media_type === "REELS";
-  const previewImageSrc = post.thumbnail_url || (!isVideoPost ? post.media_url : undefined);
-  const shouldPlayPreviewVideo = isVideoPost && isPreviewActive && !prefersReducedMotion;
+  const isVideoPost =
+    post.media_type === "VIDEO" || post.media_type === "REELS";
+  const previewImageSrc =
+    post.thumbnail_url || (!isVideoPost ? post.media_url : undefined);
+  const shouldPlayPreviewVideo =
+    isVideoPost && isPreviewActive && !prefersReducedMotion;
   const showVideoLayer = shouldPlayPreviewVideo && isVideoReady;
 
   if (post)
@@ -71,8 +74,9 @@ const InstagramPostComponent = ({
                 sizes="(min-width: 1024px) 20vw, 33vw"
                 className={cn(
                   "object-cover transition-opacity duration-150",
-                  showVideoLayer ? "opacity-0" : "opacity-100"
+                  showVideoLayer ? "opacity-0" : "opacity-100",
                 )}
+                unoptimized
               />
             ) : null}
 
@@ -81,7 +85,7 @@ const InstagramPostComponent = ({
                 src={post.media_url}
                 className={cn(
                   "absolute inset-0 h-full w-full object-cover transition-opacity duration-150",
-                  showVideoLayer ? "opacity-100" : "opacity-0"
+                  showVideoLayer ? "opacity-100" : "opacity-0",
                 )}
                 autoPlay
                 muted
