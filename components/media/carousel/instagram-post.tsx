@@ -31,8 +31,6 @@ const InstagramPostComponent = ({
   // Otherwise use the normal media URL.
   const previewImageSrc = post.thumbnail_url ?? post.media_url;
 
-  console.log(previewImageSrc);
-
   if (!previewImageSrc) {
     return null;
   }
@@ -45,7 +43,7 @@ const InstagramPostComponent = ({
       aria-label={linkLabel}
       className={cn("", className)}
     >
-      <Card className="relative h-full w-full overflow-hidden">
+      <Card className="relative aspect-square w-full overflow-hidden">
         <CardContent className="relative h-full w-full p-0">
           <Image
             src={previewImageSrc}

@@ -49,8 +49,6 @@ async function InstagramPosts(props: InstagramProps) {
       ? result.data.slice(0, INSTAGRAM_POST_LIMIT)
       : null;
 
-  console.log(posts);
-
   return (
     <InstagramSectionShell {...props}>
       {posts ? (
