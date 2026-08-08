@@ -43,7 +43,7 @@ const InstagramPostComponent = ({
       aria-label={linkLabel}
       className={cn("", className)}
     >
-      <Card className="relative aspect-square w-full overflow-hidden">
+      <Card className="relative aspect-square w-full overflow-hidden py-0">
         <CardContent className="relative h-full w-full p-0">
           <Image
             src={previewImageSrc}
