@@ -10,7 +10,7 @@ type InstagramProps = {
   tightTop?: boolean;
 };
 
-const INSTAGRAM_POST_LIMIT = 5;
+const INSTAGRAM_POST_LIMIT = 15;
 
 function InstagramSectionShell({
   compactSpacing = false,
