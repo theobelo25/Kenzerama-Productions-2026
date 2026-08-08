@@ -19,15 +19,19 @@ type InstagramPostsFailure = {
   data?: undefined;
 };
 
-export type InstagramPostsResult = InstagramPostsSuccess | InstagramPostsFailure;
+export type InstagramPostsResult =
+  | InstagramPostsSuccess
+  | InstagramPostsFailure;
 
-export const getInstagramPosts = cache(async (): Promise<InstagramPostsResult> => {
+export const getInstagramPosts = async (): Promise<InstagramPostsResult> => {
   try {
     const token = await getValidInstagramAccessToken();
 
     const response = await fetch(
       `https://graph.instagram.com/me/media?fields=media_type,media_url,permalink,thumbnail_url,caption,timestamp&access_token=${token}`,
-      { next: { revalidate: INSTAGRAM_MEDIA_REVALIDATE_SECONDS } },
+      {
+        cache: "no-store",
+      },
     );
 
     if (!response.ok) {
@@ -48,7 +52,7 @@ export const getInstagramPosts = cache(async (): Promise<InstagramPostsResult> =
       message: formatError(error),
     };
   }
-});
+};
 
 export async function getLatestPost() {
   try {

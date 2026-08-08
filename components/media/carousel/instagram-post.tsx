@@ -76,7 +76,6 @@ const InstagramPostComponent = ({
                   "object-cover transition-opacity duration-150",
                   showVideoLayer ? "opacity-0" : "opacity-100",
                 )}
-                unoptimized
               />
             ) : null}
 
