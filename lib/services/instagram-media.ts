@@ -48,6 +48,7 @@ export const getInstagramPosts = async (): Promise<InstagramPostsResult> => {
         type: post.media_type,
         permalink: post.permalink,
         hasThumbnail: !!post.thumbnail_url,
+        thumbnailurl: post.thumbnail_url,
         mediaUrl: post.media_url,
       })),
     );
