@@ -27,10 +27,9 @@ const InstagramPostComponent = ({
     ? `Instagram post preview: ${shortCaption}`
     : "Instagram post preview";
 
-  const isVideoPost =
-    post.media_type === "VIDEO" || post.media_type === "REELS";
-
-  const previewImageSrc = isVideoPost ? post.thumbnail_url : post.media_url;
+  // Prefer Instagram's thumbnail when available.
+  // Otherwise use the normal media URL.
+  const previewImageSrc = post.thumbnail_url ?? post.media_url;
 
   if (!previewImageSrc) {
     return null;
